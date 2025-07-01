@@ -68,7 +68,7 @@
       }
     }
 
-    #greeting, #clock {
+    #greeting, #clock, #quote {
       text-align: center;
       font-weight: normal;
     }
@@ -76,6 +76,12 @@
     #clock {
       font-family: monospace;
       font-size: 18px;
+    }
+
+    #quote {
+      font-style: italic;
+      font-size: 16px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -86,6 +92,7 @@
   <h1 id="typewriter"></h1>
   <h2 id="greeting"></h2>
   <h3 id="clock"></h3>
+  <p id="quote"></p>
 
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
@@ -136,11 +143,24 @@
       document.getElementById("clock").innerText = `🕒 ${h}:${m}:${s}`;
     }
 
+    function showRandomQuote() {
+      const quotes = [
+        "💡 Hôm nay bạn học được gì mới không?",
+        "🚀 Code là một chuyến phiêu lưu thú vị!",
+        "🌈 Mỗi ngày một bước tiến!",
+        "🤔 Hãy để ý tưởng dẫn lối!",
+        "💪 Bạn đang làm rất tốt!"
+      ];
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById("quote").innerText = quotes[randomIndex];
+    }
+
     window.onload = function () {
       type();
       getGreeting();
       updateClock();
       setInterval(updateClock, 1000);
+      showRandomQuote();
     };
   </script>
 </body>
