@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>🌐 Web của Phúc</title>
+  <title>Web đầu tiên của Phúc</title>
   <style>
     body {
       margin: 0;
@@ -11,7 +11,7 @@
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      transition: all 0.5s ease;
+      transition: background 0.3s ease;
     }
 
     @keyframes gradientBG {
@@ -20,16 +20,38 @@
       100% { background-position: 0% 50%; }
     }
 
-    .dark-mode {
-      background: #121212 !important;
-      color: #f0f0f0;
+    /* 👇 Hiệu ứng chào mừng */
+    .welcome-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28px;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      animation: fadeOutZoom 2.5s ease-out forwards;
+      z-index: 9999;
     }
 
-    .dark-mode section {
-      background: rgba(255, 255, 255, 0.05);
-      color: #f0f0f0;
+    @keyframes fadeOutZoom {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      60% {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+        display: none;
+      }
     }
 
+    /* 👇 Nút chuyển chế độ */
     .toggle-btn {
       position: fixed;
       top: 10px;
@@ -42,14 +64,29 @@
       font-weight: bold;
       z-index: 999;
     }
+
+    /* 👇 Chế độ tối */
+    .dark-mode {
+      background: #1e1e1e;
+      color: #f1f1f1;
+    }
   </style>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
 </head>
 <body>
-  <!-- Nút chuyển chế độ sáng/tối -->
+  <!-- 🌗 Nút chuyển chế độ sáng/tối -->
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
 
-  <h1 id="typewriter"></h1>
+  <!-- 👋 Hiệu ứng chào -->
+  <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
 
+  <!-- 🎉 Hiệu ứng gõ chữ -->
+  <h1 id="typewriter"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
@@ -63,51 +100,10 @@
     }
 
     window.onload = type;
-
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
-    }
   </script>
 
-  <!-- Bộ đếm khách truy cập -->
-  <div style="text-align: center; margin-top: 20px;">
-    <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
-      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
-           border="0" 
-           title="Visitor Counter" 
-           alt="Visitor Counter" 
-           style="width: 150px;">
-    </a>
-    <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
-  </div>
-
-  <p>
-    👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
-  </p>
-
-  <h2>💬 Góp ý cho mình nhé!</h2>
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
-    width="100%" 
-    height="520" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0">
-    Đang tải biểu mẫu…
-  </iframe>
-
-  <section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <h2>🧒 Giới thiệu về mình</h2>
-    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
-    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
-    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
-  </section>
-
-  <!-- 🎵 Nhạc nền piano -->
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ âm thanh.
-  </audio>
-
+  <!-- ... CÁC PHẦN CÒN LẠI TRONG WEB CỦA PHÚC ... -->
 </body>
 </html>
+
+    
