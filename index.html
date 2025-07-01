@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-  }
+  <meta charset="UTF-8">
+  <title>🌐 Web của Phúc</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      transition: all 0.5s ease;
+    }
 
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-</style>  
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .dark-mode {
+      background: #121212 !important;
+      color: #f0f0f0;
+    }
+
+    .dark-mode section {
+      background: rgba(255, 255, 255, 0.05);
+      color: #f0f0f0;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #ffffffcc;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 999;
+    }
+  </style>
 </head>
-  <script>
-  function toggleMode() {
-    document.body.classList.toggle("dark-mode");
-  }
-</script><script>
-  function toggleMode() {
-    document.body.classList.toggle("dark-mode");
-  }
-</script>
-  <script>
-  function toggleMode() {
-    document.body.classList.toggle("dark-mode");
-  }
-</script>
 <body>
-  <audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mpeg">
-  Trình duyệt của bạn không hỗ trợ âm thanh.
-</audio>
+  <!-- Nút chuyển chế độ sáng/tối -->
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
+
   <h1 id="typewriter"></h1>
 
   <script>
@@ -52,9 +63,13 @@
     }
 
     window.onload = type;
+
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
   </script>
 
-  <!-- BỘ ĐẾM KHÁCH TRUY CẬP - by ChatGPT -->
+  <!-- Bộ đếm khách truy cập -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
       <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
@@ -65,9 +80,11 @@
     </a>
     <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
-<p>
-  👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
-</p>
+
+  <p>
+    👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
+  </p>
+
   <h2>💬 Góp ý cho mình nhé!</h2>
   <iframe 
     src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
@@ -75,3 +92,22 @@
     height="520" 
     frameborder="0" 
     marginheight="0" 
+    marginwidth="0">
+    Đang tải biểu mẫu…
+  </iframe>
+
+  <section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2>🧒 Giới thiệu về mình</h2>
+    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
+    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
+    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
+  </section>
+
+  <!-- 🎵 Nhạc nền piano -->
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-tomorrow.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ âm thanh.
+  </audio>
+
+</body>
+</html>
