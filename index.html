@@ -11,7 +11,6 @@
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      transition: background 0.3s ease;
     }
 
     @keyframes gradientBG {
@@ -33,71 +32,23 @@
       z-index: 999;
     }
 
-    .dark-mode {
-      background: #1e1e1e;
-      color: #f1f1f1;
-    }
-
     .welcome-message {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 28px;
-      font-weight: bold;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 20px 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      animation: fadeOutZoom 2.5s ease-out forwards;
-      z-index: 9999;
-    }
-
-    @keyframes fadeOutZoom {
-      0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      60% {
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.9);
-        display: none;
-      }
-    }
-
-    #greeting, #clock, #quote {
       text-align: center;
-      font-weight: normal;
-    }
-
-    #clock {
-      font-family: monospace;
-      font-size: 18px;
-    }
-
-    #quote {
-      font-style: italic;
-      font-size: 16px;
-      margin-top: 10px;
+      font-size: 20px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleMode()" id="modeBtn">🌗 Chuyển chế độ tối</button>
+  <!-- Nút chuyển chế độ sáng/tối -->
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
   <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
 
-  <h1 id="typewriter"></h1>
-  <h2 id="greeting"></h2>
-  <h3 id="clock"></h3>
-  <p id="quote"></p>
-
+  <!-- Gõ chữ từng chữ -->
+  <h1 id="typewriter" style="text-align: center;"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
-
     function type() {
       if (index < text.length) {
         document.getElementById("typewriter").innerHTML += text.charAt(index);
@@ -105,63 +56,51 @@
         setTimeout(type, 80);
       }
     }
+    window.onload = type;
+  </script>
 
+  <!-- Bộ đếm truy cập -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
+      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
+           border="0" 
+           title="Visitor Counter" 
+           alt="Visitor Counter" 
+           style="width: 150px;">
+    </a>
+    <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
+  </div>
+
+  <!-- Liên kết game -->
+  <p style="text-align: center;">
+    👉 <a href="caro.html" style="font-size: 18px; color: green;">Chơi Caro 3x3 🎯</a>
+  </p>
+
+  <!-- Góp ý -->
+  <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
+    width="100%" 
+    height="520" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0">
+    Đang tải biểu mẫu…
+  </iframe>
+
+  <!-- Giới thiệu -->
+  <section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2>🧒 Giới thiệu về mình</h2>
+    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
+    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
+    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
+  </section>
+
+  <!-- Toggle chế độ -->
+  <script>
     function toggleMode() {
-      const body = document.body;
-      const btn = document.getElementById("modeBtn");
-
-      body.classList.toggle("dark-mode");
-
-      if (body.classList.contains("dark-mode")) {
-        btn.innerHTML = "☀️ Chuyển chế độ sáng";
-      } else {
-        btn.innerHTML = "🌗 Chuyển chế độ tối";
-      }
+      document.body.classList.toggle("dark-mode");
     }
-
-    function getGreeting() {
-      const now = new Date();
-      const hour = now.getHours();
-      let greeting = "";
-
-      if (hour < 11) {
-        greeting = "🌞 Chào buổi sáng, Phúc!";
-      } else if (hour < 17) {
-        greeting = "🌤️ Chúc buổi trưa vui vẻ!";
-      } else {
-        greeting = "🌙 Chúc buổi tối thư giãn!";
-      }
-
-      document.getElementById("greeting").innerText = greeting;
-    }
-
-    function updateClock() {
-      const now = new Date();
-      let h = now.getHours().toString().padStart(2, '0');
-      let m = now.getMinutes().toString().padStart(2, '0');
-      let s = now.getSeconds().toString().padStart(2, '0');
-      document.getElementById("clock").innerText = `🕒 ${h}:${m}:${s}`;
-    }
-
-    function showRandomQuote() {
-      const quotes = [
-        "💡 Hôm nay bạn học được gì mới không?",
-        "🚀 Code là một chuyến phiêu lưu thú vị!",
-        "🌈 Mỗi ngày một bước tiến!",
-        "🤔 Hãy để ý tưởng dẫn lối!",
-        "💪 Bạn đang làm rất tốt!"
-      ];
-      const randomIndex = Math.floor(Math.random() * quotes.length);
-      document.getElementById("quote").innerText = quotes[randomIndex];
-    }
-
-    window.onload = function () {
-      type();
-      getGreeting();
-      updateClock();
-      setInterval(updateClock, 1000);
-      showRandomQuote();
-    };
   </script>
 </body>
 </html>
