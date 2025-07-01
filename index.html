@@ -68,17 +68,24 @@
       }
     }
 
-    #greeting {
+    #greeting, #clock {
       text-align: center;
       font-weight: normal;
+    }
+
+    #clock {
+      font-family: monospace;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
   <button class="toggle-btn" onclick="toggleMode()" id="modeBtn">🌗 Chuyển chế độ tối</button>
   <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
+
   <h1 id="typewriter"></h1>
   <h2 id="greeting"></h2>
+  <h3 id="clock"></h3>
 
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
@@ -121,9 +128,19 @@
       document.getElementById("greeting").innerText = greeting;
     }
 
+    function updateClock() {
+      const now = new Date();
+      let h = now.getHours().toString().padStart(2, '0');
+      let m = now.getMinutes().toString().padStart(2, '0');
+      let s = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById("clock").innerText = `🕒 ${h}:${m}:${s}`;
+    }
+
     window.onload = function () {
       type();
       getGreeting();
+      updateClock();
+      setInterval(updateClock, 1000);
     };
   </script>
 </body>
