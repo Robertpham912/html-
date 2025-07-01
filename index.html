@@ -20,7 +20,7 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* 👇 Hiệu ứng chào mừng */
+    /* Hiệu ứng chào mừng */
     .welcome-message {
       position: fixed;
       top: 50%;
@@ -51,7 +51,7 @@
       }
     }
 
-    /* 👇 Nút chuyển chế độ */
+    /* Nút chế độ sáng/tối */
     .toggle-btn {
       position: fixed;
       top: 10px;
@@ -65,29 +65,24 @@
       z-index: 999;
     }
 
-    /* 👇 Chế độ tối */
     .dark-mode {
       background: #1e1e1e;
       color: #f1f1f1;
     }
   </style>
-
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
-    }
-  </script>
 </head>
 <body>
-  <!-- 🌗 Nút chuyển chế độ sáng/tối -->
-  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
+  <!-- Nút đổi chế độ -->
+  <button class="toggle-btn" onclick="toggleMode()" id="modeBtn">🌗 Chuyển chế độ tối</button>
 
-  <!-- 👋 Hiệu ứng chào -->
+  <!-- Hiệu ứng chào -->
   <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
 
-  <!-- 🎉 Hiệu ứng gõ chữ -->
+  <!-- Hiệu ứng gõ chữ -->
   <h1 id="typewriter"></h1>
+
   <script>
+    // Hiệu ứng gõ từng chữ
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
 
@@ -100,10 +95,20 @@
     }
 
     window.onload = type;
-  </script>
 
-  <!-- ... CÁC PHẦN CÒN LẠI TRONG WEB CỦA PHÚC ... -->
+    // Đổi chế độ sáng/tối
+    function toggleMode() {
+      const body = document.body;
+      const btn = document.getElementById("modeBtn");
+
+      body.classList.toggle("dark-mode");
+
+      if (body.classList.contains("dark-mode")) {
+        btn.innerHTML = "☀️ Chuyển chế độ sáng";
+      } else {
+        btn.innerHTML = "🌗 Chuyển chế độ tối";
+      }
+    }
+  </script>
 </body>
 </html>
-
-    
