@@ -20,7 +20,24 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* Hiệu ứng chào mừng */
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #ffffffcc;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 999;
+    }
+
+    .dark-mode {
+      background: #1e1e1e;
+      color: #f1f1f1;
+    }
+
     .welcome-message {
       position: fixed;
       top: 50%;
@@ -51,38 +68,19 @@
       }
     }
 
-    /* Nút chế độ sáng/tối */
-    .toggle-btn {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #ffffffcc;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 999;
-    }
-
-    .dark-mode {
-      background: #1e1e1e;
-      color: #f1f1f1;
+    #greeting {
+      text-align: center;
+      font-weight: normal;
     }
   </style>
 </head>
 <body>
-  <!-- Nút đổi chế độ -->
   <button class="toggle-btn" onclick="toggleMode()" id="modeBtn">🌗 Chuyển chế độ tối</button>
-
-  <!-- Hiệu ứng chào -->
   <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
-
-  <!-- Hiệu ứng gõ chữ -->
   <h1 id="typewriter"></h1>
+  <h2 id="greeting"></h2>
 
   <script>
-    // Hiệu ứng gõ từng chữ
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
 
@@ -94,9 +92,6 @@
       }
     }
 
-    window.onload = type;
-
-    // Đổi chế độ sáng/tối
     function toggleMode() {
       const body = document.body;
       const btn = document.getElementById("modeBtn");
@@ -109,6 +104,27 @@
         btn.innerHTML = "🌗 Chuyển chế độ tối";
       }
     }
+
+    function getGreeting() {
+      const now = new Date();
+      const hour = now.getHours();
+      let greeting = "";
+
+      if (hour < 11) {
+        greeting = "🌞 Chào buổi sáng, Phúc!";
+      } else if (hour < 17) {
+        greeting = "🌤️ Chúc buổi trưa vui vẻ!";
+      } else {
+        greeting = "🌙 Chúc buổi tối thư giãn!";
+      }
+
+      document.getElementById("greeting").innerText = greeting;
+    }
+
+    window.onload = function () {
+      type();
+      getGreeting();
+    };
   </script>
 </body>
 </html>
