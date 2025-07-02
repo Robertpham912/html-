@@ -221,5 +221,21 @@
       isPlaying = !isPlaying;
     }
   </script>
+  <!-- 💡 Câu nói truyền cảm hứng -->
+<div id="quote-box" style="max-width: 600px; margin: 40px auto; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 10px; font-style: italic; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center;">
+  <p id="quote-text">Đang tải câu nói...</p>
+</div>
+
+<script>
+  const quotes = [
+    "“Học hôm nay, làm chủ ngày mai.” 💪",
+    "“Thất bại là mẹ thành công.” 🌱",
+    "“Mọi hành trình lớn đều bắt đầu từ bước đầu tiên.” 🚶‍♂️",
+    "“Học không bao giờ là đủ.” 📚",
+    "“Code là ngôn ngữ của tương lai.” 💻"
+  ];
+  document.getElementById("quote-text").innerText =
+    quotes[Math.floor(Math.random() * quotes.length)];
+</script>
 </body>
 </html>
