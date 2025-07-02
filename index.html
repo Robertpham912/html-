@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Trang web của Phúc</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" type="image/png">
+  <meta charset="UTF-8" />
+  <title>Web đầu tiên của Phúc</title>
   <style>
     body {
       margin: 0;
@@ -12,13 +11,18 @@
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      transition: opacity 0.5s ease;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    .dark-mode {
+      background: #121212;
+      color: white;
     }
 
     .toggle-btn {
@@ -33,24 +37,12 @@
       font-weight: bold;
       z-index: 999;
     }
-
-    section {
-      background: rgba(255,255,255,0.8);
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 30px auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
   </style>
 </head>
-
 <body>
-  <!-- Nút chuyển chế độ nếu cần -->
-  <!-- <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button> -->
-
-  <!-- Hiệu ứng gõ chữ -->
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
   <h1 id="typewriter"></h1>
+
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
@@ -62,11 +54,13 @@
         setTimeout(type, 80);
       }
     }
-
     window.onload = type;
+
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
   </script>
 
-  <!-- Bộ đếm -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
       <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
@@ -78,13 +72,14 @@
     <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
 
-  <!-- Link mini game -->
-  <p style="text-align: center;">
+  <p>
     👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
   </p>
+  <p>
+    👉 <a href="blog.html" style="font-size: 18px; color: green;">Xem blog học lập trình của mình ✍️</a>
+  </p>
 
-  <!-- Góp ý -->
-  <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
+  <h2>💬 Góp ý cho mình nhé!</h2>
   <iframe 
     src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
     width="100%" 
@@ -95,26 +90,11 @@
     Đang tải biểu mẫu…
   </iframe>
 
-  <!-- Giới thiệu -->
-  <section>
+  <section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     <h2>🧒 Giới thiệu về mình</h2>
     <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
     <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
     <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
   </section>
-
-  <!-- Hiệu ứng chuyển trang -->
-  <script>
-    document.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href && !href.startsWith('#') && !href.startsWith('javascript')) {
-          e.preventDefault();
-          document.body.classList.add('fade-out');
-          setTimeout(() => window.location = href, 500);
-        }
-      });
-    });
-  </script>
 </body>
 </html>
