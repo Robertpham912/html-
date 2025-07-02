@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>🌐 Web của Phúc</title>
+  <title>Web của Phúc 🧒</title>
   <style>
     body {
       margin: 0;
@@ -11,6 +11,7 @@
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
+      transition: background 1s, color 1s;
     }
 
     @keyframes gradientBG {
@@ -19,21 +20,117 @@
       100% { background-position: 0% 50%; }
     }
 
-    .section {
-      background: rgba(255,255,255,0.85);
+    .dark-mode {
+      background: #111 !important;
+      color: #eee;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #ffffffcc;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 999;
+    }
+
+    .clock {
+      text-align: center;
+      font-size: 18px;
+      color: #fff;
+      margin-top: 10px;
+    }
+
+    h1, h2, p {
+      text-align: center;
+    }
+
+    section {
+      background: rgba(255,255,255,0.8);
       padding: 20px;
       border-radius: 12px;
       max-width: 600px;
       margin: 30px auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
+    /* Caro Game */
+    .caro-container {
+      text-align: center;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      grid-gap: 5px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    .cell {
+      width: 80px;
+      height: 80px;
+      font-size: 32px;
+      background: #fff;
+      border: 2px solid #ccc;
+      cursor: pointer;
+    }
+
+    #caro-status {
+      font-size: 20px;
+    }
   </style>
 </head>
 <body>
-
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
   <h1 id="typewriter"></h1>
+  <div class="clock" id="clock"></div>
 
+  <!-- Đếm lượt truy cập -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="https://www.freecounterstat.com" target="_blank">
+      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" border="0" style="width: 150px;">
+    </a>
+    <p>👁️ Số người đã ghé thăm web của Phúc</p>
+  </div>
+
+  <p>
+    👉 <a href="https://scratch.mit.edu/users/robert_pham/" style="font-size: 18px; color: blue;" target="_blank">Xem dự án Scratch của tớ 🐱</a>
+  </p>
+
+  <!-- Mini Game: Caro -->
+  <section class="caro-container">
+    <h2>🎮 Mini Game: Caro</h2>
+    <div class="board" id="board"></div>
+    <p id="caro-status"></p>
+    <button onclick="resetBoard()">🔄 Chơi lại</button>
+  </section>
+
+  <!-- Góp ý -->
+  <h2>💬 Góp ý cho mình nhé!</h2>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Đang tải biểu mẫu…</iframe>
+
+  <!-- Giới thiệu -->
+  <section>
+    <h2>🧒 Giới thiệu về mình</h2>
+    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
+    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và JavaScript.</p>
+    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
+  </section>
+
+  <!-- Nhạc nền tự động -->
+  <audio autoplay loop hidden>
+    <source src="https://vgmsite.com/soundtracks/super-mario-bros/rzafpjyb/01%20Ground%20Theme.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ âm thanh.
+  </audio>
+
+  <!-- Script -->
   <script>
+    // Typewriter
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
     function type() {
@@ -44,68 +141,69 @@
       }
     }
     window.onload = type;
+
+    // Toggle chế độ tối
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Đồng hồ
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerHTML = now.toLocaleTimeString() + " - " + now.toLocaleDateString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Game Caro
+    let currentPlayer = "X";
+    let board = ["", "", "", "", "", "", "", "", ""];
+    const boardDiv = document.getElementById("board");
+    const statusDiv = document.getElementById("caro-status");
+
+    function renderBoard() {
+      boardDiv.innerHTML = "";
+      board.forEach((cell, i) => {
+        const btn = document.createElement("button");
+        btn.className = "cell";
+        btn.innerText = cell;
+        btn.onclick = () => handleClick(i);
+        boardDiv.appendChild(btn);
+      });
+    }
+
+    function handleClick(i) {
+      if (board[i] === "") {
+        board[i] = currentPlayer;
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        renderBoard();
+        checkWinner();
+      }
+    }
+
+    function checkWinner() {
+      const winPatterns = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      for (const [a,b,c] of winPatterns) {
+        if (board[a] && board[a] === board[b] && board[b] === board[c]) {
+          statusDiv.innerText = `🎉 Người thắng: ${board[a]}`;
+          boardDiv.innerHTML = ""; return;
+        }
+      }
+      if (!board.includes("")) statusDiv.innerText = "⚖️ Hòa rồi!";
+    }
+
+    function resetBoard() {
+      board = ["", "", "", "", "", "", "", "", ""];
+      currentPlayer = "X";
+      statusDiv.innerText = "";
+      renderBoard();
+    }
+
+    renderBoard();
   </script>
-
-  <!-- BỘ ĐẾM TRUY CẬP -->
-  <div style="text-align: center; margin-top: 20px;">
-    <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
-      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
-           border="0" 
-           title="Visitor Counter" 
-           alt="Visitor Counter" 
-           style="width: 150px;">
-    </a>
-    <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
-  </div>
-
-  <!-- MINI GAME LINK -->
-  <p style="text-align: center;">
-    👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
-  </p>
-
-  <!-- GÓP Ý -->
-  <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
-    width="100%" 
-    height="520" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0">Đang tải biểu mẫu…
-  </iframe>
-
-  <!-- GIỚI THIỆU -->
-  <section class="section">
-    <h2>🧒 Giới thiệu về mình</h2>
-    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
-    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
-    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
-  </section>
-
-  <!-- KỸ NĂNG ĐANG HỌC -->
-  <section class="section">
-    <h2>📘 Kỹ năng mình đang học</h2>
-
-    <p>🔹 HTML: 90%</p>
-    <div style="background: #ddd; border-radius: 10px;">
-      <div style="width: 90%; background: #4CAF50; color: white; text-align: center; padding: 5px 0; border-radius: 10px;">90%</div>
-    </div>
-
-    <p>🔹 CSS: 70%</p>
-    <div style="background: #ddd; border-radius: 10px;">
-      <div style="width: 70%; background: #2196F3; color: white; text-align: center; padding: 5px 0; border-radius: 10px;">70%</div>
-    </div>
-
-    <p>🔹 JavaScript: 40%</p>
-    <div style="background: #ddd; border-radius: 10px;">
-      <div style="width: 40%; background: #FF9800; color: white; text-align: center; padding: 5px 0; border-radius: 10px;">40%</div>
-    </div>
-
-    <p>🔹 GitHub: 20%</p>
-    <div style="background: #ddd; border-radius: 10px;">
-      <div style="width: 20%; background: #9C27B0; color: white; text-align: center; padding: 5px 0; border-radius: 10px;">20%</div>
-    </div>
-  </section>
-
 </body>
 </html>
