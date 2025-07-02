@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Caro ✖️⭕</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ffe259, #ffa751);
+      padding-top: 30px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 5px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      font-size: 36px;
+      background: white;
+      border: 2px solid #333;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #status {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Game Caro ✖️⭕</h1>
+  <div id="board"></div>
+  <div id="status">Lượt của: ❌</div>
+  <button onclick="resetGame()">🔁 Chơi lại</button>
+
+  <script>
+    const board = document.getElementById('board');
+    const status = document.getElementById('status');
+    let currentPlayer = '❌';
+    let cells = Array(9).fill('');
+    let gameOver = false;
+
+    function createBoard() {
+      board.innerHTML = '';
+      cells.forEach((cell, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cell');
+        div.dataset.index = index;
+        div.textContent = cell;
+        div.addEventListener('click', cellClick);
+        board.appendChild(div);
+      });
+    }
+
+    function cellClick(e) {
+      const index = e.target.dataset.index;
+      if (cells[index] || gameOver) return;
+
+      cells[index] = currentPlayer;
+      e.target.textContent = currentPlayer;
+      if (checkWin()) {
+        status.textContent = `${currentPlayer} thắng rồi! 🎉`;
+        gameOver = true;
+        return;
+      }
+      if (!cells.includes('')) {
+        status.textContent = "Hòa rồi nhé! 🤝";
+        gameOver = true;
+        return;
+      }
+      currentPlayer = currentPlayer === '❌' ? '⭕' : '❌';
+      status.textContent = `Lượt của: ${currentPlayer}`;
+    }
+
+    function checkWin() {
+      const winPatterns = [
+        [0,1,2], [3,4,5], [6,7,8],
+        [0,3,6], [1,4,7], [2,5,8],
+        [0,4,8], [2,4,6]
+      ];
+      return winPatterns.some(pattern => {
+        const [a, b, c] = pattern;
+        return cells[a] && cells[a] === cells[b] && cells[a] === cells[c];
+      });
+    }
+
+    function resetGame() {
+      cells = Array(9).fill('');
+      currentPlayer = '❌';
+      gameOver = false;
+      status.textContent = `Lượt của: ${currentPlayer}`;
+      createBoard();
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>
