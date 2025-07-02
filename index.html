@@ -37,13 +37,35 @@
       margin: 30px auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+    #clock {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #ffffffcc;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      z-index: 998;
+      font-family: monospace;
+    }
+    #musicControl {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background: #ffffffcc;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      z-index: 998;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <!-- Nút chuyển chế độ tối (nếu muốn mở rộng sau này) -->
+  <!-- Nút đổi chế độ (dự phòng) -->
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
 
-  <!-- Tiêu đề gõ máy -->
+  <!-- Gõ chữ -->
   <h1 id="typewriter"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
@@ -61,7 +83,7 @@
     }
   </script>
 
-  <!-- Bộ đếm khách truy cập -->
+  <!-- Đếm khách -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
       <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
@@ -73,15 +95,10 @@
     <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
 
-  <!-- Link chơi game nếu sau này thêm -->
-  <p style="text-align: center;">
-    👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
-  </p>
-
   <!-- Góp ý -->
   <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
   <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?usp=dialog" 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
     width="100%" 
     height="520" 
     frameborder="0" 
@@ -98,7 +115,43 @@
     <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
   </section>
 
-  <!-- Hiệu ứng sao rơi -->
+  <!-- Đồng hồ -->
+  <div id="clock">00:00:00</div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+  <!-- Nhạc nền -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a8e2207283.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ âm thanh.
+  </audio>
+  <div id="musicControl" onclick="toggleMusic()">🎵 Tắt nhạc</div>
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const musicControl = document.getElementById("musicControl");
+    let isPlaying = true;
+    function toggleMusic() {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicControl.textContent = "🔇 Bật nhạc";
+      } else {
+        bgMusic.play();
+        musicControl.textContent = "🎵 Tắt nhạc";
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
+
+  <!-- Sao rơi -->
   <canvas id="starCanvas" style="position:fixed; top:0; left:0; z-index:-1;"></canvas>
   <script>
     const canvas = document.getElementById("starCanvas");
