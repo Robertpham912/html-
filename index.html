@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Web của Phúc 🧒</title>
+  <title>👨‍💻 Web đầu tiên của Phúc</title>
   <style>
     body {
       margin: 0;
@@ -11,7 +11,7 @@
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      transition: background 1s, color 1s;
+      color: #000;
     }
 
     @keyframes gradientBG {
@@ -21,8 +21,8 @@
     }
 
     .dark-mode {
-      background: #111 !important;
-      color: #eee;
+      background: #121212;
+      color: #ffffff;
     }
 
     .toggle-btn {
@@ -38,180 +38,176 @@
       z-index: 999;
     }
 
-    .clock {
-      text-align: center;
-      font-size: 18px;
-      color: #fff;
-      margin-top: 10px;
-    }
-
-    h1, h2, p {
-      text-align: center;
-    }
-
-    section {
-      background: rgba(255,255,255,0.8);
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 30px auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    /* Caro Game */
-    .caro-container {
-      text-align: center;
-    }
-
-    .board {
-      display: grid;
-      grid-template-columns: repeat(3, 80px);
-      grid-gap: 5px;
-      justify-content: center;
-      margin: 20px auto;
-    }
-
-    .cell {
-      width: 80px;
-      height: 80px;
-      font-size: 32px;
-      background: #fff;
-      border: 2px solid #ccc;
-      cursor: pointer;
-    }
-
-    #caro-status {
-      font-size: 20px;
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -1;
     }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
-  <h1 id="typewriter"></h1>
-  <div class="clock" id="clock"></div>
+<!-- 🌗 Nút chuyển chế độ -->
+<button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
 
-  <!-- Đếm lượt truy cập -->
-  <div style="text-align: center; margin-top: 20px;">
-    <a href="https://www.freecounterstat.com" target="_blank">
-      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" border="0" style="width: 150px;">
-    </a>
-    <p>👁️ Số người đã ghé thăm web của Phúc</p>
-  </div>
+<!-- 🌠 Sao rơi -->
+<canvas id="stars"></canvas>
+<script>
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+let stars = [];
 
-  <p>
-    👉 <a href="https://scratch.mit.edu/users/robert_pham/" style="font-size: 18px; color: blue;" target="_blank">Xem dự án Scratch của tớ 🐱</a>
-  </p>
+for (let i = 0; i < 100; i++) {
+  stars.push({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    radius: Math.random() * 1.5,
+    vx: -0.5 + Math.random(),
+    vy: -0.5 + Math.random()
+  });
+}
 
-  <!-- Mini Game: Caro -->
-  <section class="caro-container">
-    <h2>🎮 Mini Game: Caro</h2>
-    <div class="board" id="board"></div>
-    <p id="caro-status"></p>
-    <button onclick="resetBoard()">🔄 Chơi lại</button>
-  </section>
-
-  <!-- Góp ý -->
-  <h2>💬 Góp ý cho mình nhé!</h2>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Đang tải biểu mẫu…</iframe>
-
-  <!-- Giới thiệu -->
-  <section>
-    <h2>🧒 Giới thiệu về mình</h2>
-    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
-    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và JavaScript.</p>
-    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
-  </section>
-
-  <!-- Nhạc nền tự động -->
-  <audio autoplay loop hidden>
-    <source src="https://vgmsite.com/soundtracks/super-mario-bros/rzafpjyb/01%20Ground%20Theme.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ âm thanh.
-  </audio>
-
-  <!-- Script -->
-  <script>
-    // Typewriter
-    const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
-    let index = 0;
-    function type() {
-      if (index < text.length) {
-        document.getElementById("typewriter").innerHTML += text.charAt(index);
-        index++;
-        setTimeout(type, 80);
-      }
+function drawStars() {
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = 'white';
+  for (let i = 0; i < stars.length; i++) {
+    let s = stars[i];
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+    ctx.fill();
+    s.x += s.vx;
+    s.y += s.vy;
+    if (s.x < 0 || s.x > w || s.y < 0 || s.y > h) {
+      s.x = Math.random() * w;
+      s.y = Math.random() * h;
     }
-    window.onload = type;
+  }
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+</script>
 
-    // Toggle chế độ tối
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
-    }
+<!-- ⌨️ Typewriter -->
+<h1 id="typewriter"></h1>
+<script>
+const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
+let index = 0;
+function type() {
+  if (index < text.length) {
+    document.getElementById("typewriter").innerHTML += text.charAt(index);
+    index++;
+    setTimeout(type, 80);
+  }
+}
+window.onload = type;
+</script>
 
-    // Đồng hồ
-    function updateClock() {
-      const now = new Date();
-      document.getElementById("clock").innerHTML = now.toLocaleTimeString() + " - " + now.toLocaleDateString();
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+<!-- ⏰ Đồng hồ -->
+<p id="clock" style="text-align:center; font-size: 24px;"></p>
+<script>
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clock").innerHTML =
+    now.toLocaleTimeString('vi-VN') + " - " + now.toLocaleDateString('vi-VN');
+}
+setInterval(updateClock, 1000);
+updateClock();
+</script>
 
-    // Game Caro
-    let currentPlayer = "X";
-    let board = ["", "", "", "", "", "", "", "", ""];
-    const boardDiv = document.getElementById("board");
-    const statusDiv = document.getElementById("caro-status");
+<!-- 👁️ Bộ đếm -->
+<div style="text-align: center; margin-top: 20px;">
+  <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
+    <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" border="0">
+  </a>
+  <p>👁️ Số người đã ghé thăm web của Phúc</p>
+</div>
 
-    function renderBoard() {
-      boardDiv.innerHTML = "";
-      board.forEach((cell, i) => {
-        const btn = document.createElement("button");
-        btn.className = "cell";
-        btn.innerText = cell;
-        btn.onclick = () => handleClick(i);
-        boardDiv.appendChild(btn);
-      });
-    }
+<!-- 🎮 Game đoán số -->
+<p style="text-align:center">
+👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
+</p>
 
-    function handleClick(i) {
-      if (board[i] === "") {
-        board[i] = currentPlayer;
-        currentPlayer = currentPlayer === "X" ? "O" : "X";
-        renderBoard();
-        checkWinner();
-      }
-    }
-
-    function checkWinner() {
-      const winPatterns = [
-        [0,1,2],[3,4,5],[6,7,8],
-        [0,3,6],[1,4,7],[2,5,8],
-        [0,4,8],[2,4,6]
-      ];
-      for (const [a,b,c] of winPatterns) {
-        if (board[a] && board[a] === board[b] && board[b] === board[c]) {
-          statusDiv.innerText = `🎉 Người thắng: ${board[a]}`;
-          boardDiv.innerHTML = ""; return;
-        }
-      }
-      if (!board.includes("")) statusDiv.innerText = "⚖️ Hòa rồi!";
-    }
-
-    function resetBoard() {
-      board = ["", "", "", "", "", "", "", "", ""];
-      currentPlayer = "X";
-      statusDiv.innerText = "";
-      renderBoard();
-    }
-
-    renderBoard();
-  </script>
-  <section style="background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 12px; margin: 40px auto; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2 style="text-align: center;">📘 Góc học lập trình</h2>
-  <p><strong>1. Scratch là gì?</strong> – Là ngôn ngữ lập trình kéo thả, rất dễ dùng và vui nữa! Mình đã làm được nhiều game trên đó rồi.</p>
-  <p><strong>2. HTML là gì?</strong> – Là ngôn ngữ tạo ra các trang web. Mình dùng HTML để viết trang web đầu tiên nè!</p>
-  <p><strong>3. Tại sao nên học sớm?</strong> – Vì lập trình giúp mình sáng tạo, tư duy logic và tạo ra những thứ “ảo diệu” như chính web này!</p>
-  <p><strong>4. Dùng iPad học lập trình?</strong> – Mình dùng Safari, VS Code Web, GitHub… và một chiếc bàn phím là đủ chiến rồi! 😎</p>
-  <p><strong>5. Mục tiêu của mình:</strong> – Mỗi ngày học 1 chút để sau này trở thành lập trình viên thật xịn! 💻🚀</p>
+<!-- 🎲 Game Caro -->
+<section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto;">
+<h2>🎲 Game Caro (Tic-Tac-Toe)</h2>
+<div id="caro-board" style="display:grid; grid-template-columns: repeat(3, 80px); gap: 5px; justify-content:center;"></div>
+<p id="caro-result"></p>
 </section>
+<script>
+let caroBoard = ["", "", "", "", "", "", "", "", ""];
+let caroTurn = "X";
+function renderBoard() {
+  const board = document.getElementById("caro-board");
+  board.innerHTML = "";
+  caroBoard.forEach((cell, i) => {
+    const div = document.createElement("div");
+    div.textContent = cell;
+    div.style.cssText = "width:80px;height:80px;background:#eee;font-size:32px;text-align:center;line-height:80px;cursor:pointer;";
+    div.onclick = () => handleCaroClick(i);
+    board.appendChild(div);
+  });
+}
+function handleCaroClick(i) {
+  if (caroBoard[i] || checkWinner()) return;
+  caroBoard[i] = caroTurn;
+  caroTurn = caroTurn === "X" ? "O" : "X";
+  renderBoard();
+  const winner = checkWinner();
+  if (winner) document.getElementById("caro-result").innerText = `🎉 Người thắng: ${winner}`;
+}
+function checkWinner() {
+  const win = [
+    [0,1,2],[3,4,5],[6,7,8],
+    [0,3,6],[1,4,7],[2,5,8],
+    [0,4,8],[2,4,6]
+  ];
+  for (const [a,b,c] of win) {
+    if (caroBoard[a] && caroBoard[a] === caroBoard[b] && caroBoard[a] === caroBoard[c]) return caroBoard[a];
+  }
+  return null;
+}
+renderBoard();
+</script>
+
+<!-- 💬 Góp ý -->
+<h2>💬 Góp ý cho mình nhé!</h2>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true"
+        width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">
+  Đang tải biểu mẫu…
+</iframe>
+
+<!-- 👦 Giới thiệu -->
+<section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto;">
+  <h2>🧒 Giới thiệu về mình</h2>
+  <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
+  <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
+  <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
+</section>
+
+<!-- 📘 Góc học lập trình -->
+<section style="background: rgba(255,255,255,0.9); padding: 25px; border-radius: 12px; margin: 40px auto; max-width: 800px;">
+  <h2 style="text-align: center;">📘 Góc học lập trình</h2>
+  <p><strong>1. Scratch là gì?</strong> – Ngôn ngữ lập trình kéo thả, rất dễ dùng!</p>
+  <p><strong>2. HTML là gì?</strong> – Ngôn ngữ tạo ra các trang web.</p>
+  <p><strong>3. Tại sao nên học sớm?</strong> – Vì giúp mình sáng tạo, tư duy logic...</p>
+  <p><strong>4. Dùng iPad học được không?</strong> – Có! Dùng Safari, GitHub, VS Code Web là được.</p>
+  <p><strong>5. Mục tiêu:</strong> – Học mỗi ngày để giỏi hơn! 😎</p>
+</section>
+
+<!-- 🎵 Nhạc nền -->
+<audio autoplay loop>
+  <source src="https://example.com/nhac-nen.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🌗 Toggle script -->
+<script>
+  function toggleMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+</script>
+
 </body>
 </html>
