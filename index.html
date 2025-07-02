@@ -59,6 +59,9 @@
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
   <h1 id="typewriter">🎉 Xin chào! Đây là web đầu tiên của mình!</h1>
 
+  <div style="text-align: center; margin: 10px 0;">
+  👁️ Số lần bạn đã ghé thăm web này: <span id="visit-count">0</span> lần
+</div>
   <!-- ⏰ Đồng hồ -->
   <div style="text-align:center; margin-top: 30px; font-size: 20px;" id="clock-container">
     🕒 <span id="clock">--:--:--</span>
@@ -85,6 +88,34 @@
       setTimeout(() => bubble.remove(), 1000);
     }
   </script>
+  <!-- 🎂 Đếm ngược đến sinh nhật -->
+<section style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 800px; margin-left: auto; margin-right: auto;">
+  <h2>🎂 Còn bao lâu nữa đến sinh nhật của tớ?</h2>
+  <p id="birthday-countdown">Đang tính toán...</p>
+</section>
+
+<script>
+  function updateBirthdayCountdown() {
+    const today = new Date();
+    let birthday = new Date(today.getFullYear(), 11, 9); // 11 = Tháng 12 (JS đếm từ 0)
+
+    if (today > birthday) {
+      birthday.setFullYear(birthday.getFullYear() + 1); // Nếu đã qua thì lấy năm sau
+    }
+
+    const diffTime = birthday - today;
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diffTime / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diffTime / (1000 * 60)) % 60);
+    const seconds = Math.floor((diffTime / 1000) % 60);
+
+    document.getElementById("birthday-countdown").textContent =
+      `Còn ${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây nữa là đến sinh nhật 🎉`;
+  }
+
+  setInterval(updateBirthdayCountdown, 1000);
+  updateBirthdayCountdown();
+</script>
     <!-- 🔊 Nhạc nền -->
   <audio id="bg-music" loop>
     <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
@@ -272,6 +303,45 @@
   }
   typeWriter();
 </script>
+<style>
+  #scrollTopBtn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 1000;
+    font-size: 18px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffffcc;
+    cursor: pointer;
+    display: none;
+    font-weight: bold;
+  }
+</style>
 
+<button onclick="scrollToTop()" id="scrollTopBtn">⬆️ Lên đầu</button>
+
+<script>
+  const scrollBtn = document.getElementById("scrollTopBtn");
+
+  window.onscroll = function () {
+    scrollBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+  };
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+  <script>
+  let visitCount = localStorage.getItem("visitCount");
+  if (!visitCount) {
+    visitCount = 1;
+  } else {
+    visitCount = parseInt(visitCount) + 1;
+  }
+  localStorage.setItem("visitCount", visitCount);
+  document.getElementById("visit-count").innerText = visitCount;
+</script>
 </body>
 </html>
