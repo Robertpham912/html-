@@ -141,6 +141,28 @@
     </ul>
     <p>Nếu bạn cũng mê sách, thử đọc nha! Có sách hay thì góp ý giúp mình nhé 📩</p>
   </div>
+<!-- 🔊 Nhạc nền -->
+<audio id="bg-music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
 
+<button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 999;">
+  🎵 Bật/Tắt Nhạc
+
+</button>
 </body>
+  <script>
+  let isPlaying = false;
+  const music = document.getElementById("bg-music");
+
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
+    }
+    isPlaying = !isPlaying;
+  }
+</script>
 </html>
