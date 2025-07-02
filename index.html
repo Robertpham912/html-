@@ -2,11 +2,8 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Web đầu tiên của Phúc</title>
+  <title>🎉 Web đầu tiên của Phúc</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
     body {
       margin: 0;
       padding: 0;
@@ -32,46 +29,22 @@
       font-weight: bold;
       z-index: 999;
     }
-    .welcome-message {
-      text-align: center;
-      font-size: 20px;
-      margin-top: 80px;
-    }
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #ffffffcc;
-      padding: 10px;
-      text-align: center;
-      z-index: 998;
-    }
-    nav a {
-      margin: 0 15px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #333;
+    section {
+      background: rgba(255,255,255,0.8);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 30px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-
-  <!-- Thanh menu điều hướng -->
-  <nav>
-    <a href="#gioithieu">🧒 Giới thiệu</a>
-    <a href="#gopy">💬 Góp ý</a>
-    <a href="#muctieu">🎯 Mục tiêu hè</a>
-  </nav>
-
-  <!-- Nút chuyển chế độ -->
+  <!-- Nút chuyển chế độ tối (nếu muốn mở rộng sau này) -->
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
 
-  <!-- Lời chào -->
-  <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
-
-  <!-- Gõ chữ từng chữ -->
-  <h1 id="typewriter" style="text-align: center;"></h1>
+  <!-- Tiêu đề gõ máy -->
+  <h1 id="typewriter"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
@@ -83,94 +56,85 @@
       }
     }
     window.onload = type;
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
   </script>
 
-  <!-- Bộ đếm khách -->
+  <!-- Bộ đếm khách truy cập -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
       <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
-           border="0" title="Visitor Counter" alt="Visitor Counter" style="width: 150px;">
+           border="0" 
+           title="Visitor Counter" 
+           alt="Visitor Counter" 
+           style="width: 150px;">
     </a>
     <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
 
-  <!-- Link game -->
+  <!-- Link chơi game nếu sau này thêm -->
   <p style="text-align: center;">
-    👉 <a href="caro.html" style="font-size: 18px; color: green;">Chơi Caro 3x3 🎯</a>
+    👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
   </p>
 
   <!-- Góp ý -->
-  <h2 id="gopy" style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
+  <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
   <iframe 
     src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
-    width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">
+    width="100%" 
+    height="520" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0">
     Đang tải biểu mẫu…
   </iframe>
 
   <!-- Giới thiệu -->
-  <section id="gioithieu" style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <section>
     <h2>🧒 Giới thiệu về mình</h2>
     <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
     <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
     <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
   </section>
 
-  <!-- Mục tiêu -->
-  <section id="muctieu" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <h2>🌞 Mục tiêu mùa hè của mình</h2>
-    <ul style="font-size: 18px; line-height: 1.6;">
-      <li>📘 Học xong HTML và CSS cơ bản</li>
-      <li>💡 Làm thêm mini game mới (Carô, Đoán số...)</li>
-      <li>🧠 Biết cách dùng JavaScript để tạo hiệu ứng</li>
-      <li>🔧 Hiểu cách cập nhật web trên GitHub</li>
-      <li>✍️ Ghi lại quá trình học và chia sẻ lên web</li>
-    </ul>
-  </section>
-
-  <!-- Đồng hồ -->
-  <div style="text-align:center; font-size: 18px; margin-top: 30px;">
-    <span>🕒 Bây giờ là: <span id="clock"></span></span>
-  </div>
+  <!-- Hiệu ứng sao rơi -->
+  <canvas id="starCanvas" style="position:fixed; top:0; left:0; z-index:-1;"></canvas>
   <script>
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById("clock").innerText = `${h}:${m}:${s}`;
+    const canvas = document.getElementById("starCanvas");
+    const ctx = canvas.getContext("2d");
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+    let stars = [];
+    for (let i = 0; i < 100; i++) {
+      stars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.5 + 0.5, d: Math.random() * 1 });
     }
-    setInterval(updateClock, 1000);
-    updateClock();
-  </script>
-
-  <!-- Nhạc nền -->
-  <audio id="bg-music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ âm thanh.
-  </audio>
-  <button onclick="toggleMusic()" style="position: fixed; bottom: 10px; left: 10px; z-index: 1000; background: #fff; border: none; padding: 10px; border-radius: 8px;">
-    🎵 Bật/Tắt nhạc
-  </button>
-  <script>
-    const music = document.getElementById("bg-music");
-    let isPlaying = false;
-    function toggleMusic() {
-      if (isPlaying) {
-        music.pause();
-      } else {
-        music.play();
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      for (let i = 0; i < stars.length; i++) {
+        let s = stars[i];
+        ctx.moveTo(s.x, s.y);
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2, true);
       }
-      isPlaying = !isPlaying;
+      ctx.fill();
+      move();
     }
-  </script>
-
-  <!-- JS: Chuyển chế độ tối -->
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
+    function move() {
+      for (let i = 0; i < stars.length; i++) {
+        let s = stars[i];
+        s.y += s.d;
+        if (s.y > h) {
+          stars[i] = { x: Math.random() * w, y: 0, r: s.r, d: s.d };
+        }
+      }
     }
+    setInterval(draw, 33);
+    window.addEventListener('resize', () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
   </script>
-
 </body>
 </html>
-      
