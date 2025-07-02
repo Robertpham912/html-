@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Trang Web Của Phúc</title>
+  <title>Trang web của Phúc</title>
   <style>
     body {
       margin: 0;
@@ -11,17 +11,14 @@
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      transition: background 0.5s, color 0.5s;
     }
+
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    .dark-mode {
-      background: #121212;
-      color: white;
-    }
+
     .toggle-btn {
       position: fixed;
       top: 10px;
@@ -34,93 +31,38 @@
       font-weight: bold;
       z-index: 999;
     }
-    section {
-      background: rgba(255,255,255,0.8);
-      padding: 20px;
-      border-radius: 12px;
-      max-width: 600px;
-      margin: 30px auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    #clock {
-      font-size: 24px;
-      text-align: center;
-      margin-top: 10px;
-    }
-    #today {
-      font-size: 18px;
-      text-align: center;
-      margin-top: 5px;
-    }
-    .quiz {
-      text-align: center;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    .star {
-      position: fixed;
-      background: white;
+
+    .fire-trail {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: orange;
       border-radius: 50%;
-      width: 2px;
-      height: 2px;
-      animation: starFall linear infinite;
+      pointer-events: none;
+      box-shadow: 0 0 10px yellow, 0 0 20px red;
+      animation: fadeOut 0.5s ease-out forwards;
+      z-index: 9999;
     }
-    @keyframes starFall {
-      0% {
-        transform: translateY(0px);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh);
+
+    @keyframes fadeOut {
+      to {
         opacity: 0;
+        transform: scale(2);
       }
+    }
+
+    .welcome-message {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
+  <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
+
   <h1 id="typewriter"></h1>
-
-  <div id="clock"></div>
-  <div id="today"></div>
-
-  <!-- Đếm lượt truy cập -->
-  <div style="text-align: center; margin-top: 20px;">
-    <a href="https://www.freecounterstat.com" target="_blank">
-      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
-           border="0" 
-           title="Visitor Counter" 
-           alt="Visitor Counter" 
-           style="width: 150px;">
-    </a>
-    <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
-  </div>
-
-  <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
-    width="100%" 
-    height="520" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0">Đang tải biểu mẫu…
-  </iframe>
-
-  <section>
-    <h2>🧒 Giới thiệu về mình</h2>
-    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
-    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
-    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
-  </section>
-
-  <!-- Mini Game: Đố vui -->
-  <div class="quiz">
-    <h2>🧠 Mini Game: Đố vui</h2>
-    <p id="question">Câu hỏi sẽ hiện ở đây...</p>
-    <input id="answer" type="text" placeholder="Nhập câu trả lời">
-    <button onclick="checkAnswer()">Trả lời</button>
-    <p id="feedback"></p>
-  </div>
 
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
@@ -132,50 +74,61 @@
         setTimeout(type, 80);
       }
     }
+    window.onload = type;
+  </script>
+
+  <!-- Bộ đếm truy cập -->
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
+      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
+           border="0" 
+           title="Visitor Counter" 
+           alt="Visitor Counter" 
+           style="width: 150px;">
+    </a>
+    <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
+  </div>
+
+  <p style="text-align: center;">
+    👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
+  </p>
+
+  <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
+    width="100%" 
+    height="520" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0">
+    Đang tải biểu mẫu…
+  </iframe>
+
+  <section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2>🧒 Giới thiệu về mình</h2>
+    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
+    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
+    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
+  </section>
+
+  <!-- Hiệu ứng chuột đuôi lửa -->
+  <script>
+    document.addEventListener("mousemove", function(e) {
+      const spark = document.createElement("div");
+      spark.className = "fire-trail";
+      spark.style.left = e.pageX + "px";
+      spark.style.top = e.pageY + "px";
+      document.body.appendChild(spark);
+      setTimeout(() => {
+        spark.remove();
+      }, 500);
+    });
+  </script>
+
+  <!-- Toggle chế độ tối (có thể mở rộng thêm nếu muốn sau này) -->
+  <script>
     function toggleMode() {
       document.body.classList.toggle("dark-mode");
-    }
-    function updateClock() {
-      const now = new Date();
-      document.getElementById("clock").innerText = "⏰ Bây giờ là: " + now.toLocaleTimeString();
-      document.getElementById("today").innerText = "📅 Hôm nay là: " + now.toLocaleDateString();
-    }
-    setInterval(updateClock, 1000);
-    window.onload = () => {
-      type();
-      updateClock();
-      showQuestion();
-      createStars();
-    }
-
-    // Mini Game: Đố vui
-    const quiz = [
-      { q: "Trái đất quay quanh cái gì?", a: "mặt trời" },
-      { q: "Một tuần có mấy ngày?", a: "7" },
-      { q: "HTML là viết tắt của?", a: "hypertext markup language" }
-    ];
-    let current = 0;
-    function showQuestion() {
-      document.getElementById("question").innerText = quiz[current].q;
-    }
-    function checkAnswer() {
-      const user = document.getElementById("answer").value.trim().toLowerCase();
-      if (user === quiz[current].a) {
-        document.getElementById("feedback").innerText = "✅ Đúng rồi!";
-      } else {
-        document.getElementById("feedback").innerText = "❌ Sai rồi, thử lại nhé!";
-      }
-    }
-
-    // Hiệu ứng sao rơi
-    function createStars() {
-      for (let i = 0; i < 50; i++) {
-        const star = document.createElement("div");
-        star.className = "star";
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.animationDuration = (1 + Math.random() * 3) + "s";
-        document.body.appendChild(star);
-      }
     }
   </script>
 </body>
