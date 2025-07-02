@@ -237,5 +237,46 @@
   document.getElementById("quote-text").innerText =
     quotes[Math.floor(Math.random() * quotes.length)];
 </script>
+  <!-- ⏰ Đồng hồ thời gian thực -->
+<div style="text-align:center; margin-top: 40px;">
+  <h2>⏰ Đồng hồ thời gian thực</h2>
+  <div id="clock" style="font-size: 32px; font-weight: bold;"></div>
+</div>
+<script>
+  function updateClock() {
+    const now = new Date();
+    const time = now.toLocaleTimeString('vi-VN');
+    document.getElementById('clock').textContent = time;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<!-- 📅 Lịch mini -->
+<div style="text-align:center; margin-top: 40px;">
+  <h2>📅 Lịch hôm nay</h2>
+  <div id="date" style="font-size: 24px;"></div>
+</div>
+<script>
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('date').textContent = dateStr;
+</script>
+
+<!-- 🌤️ Tiện ích thời tiết - Hà Nội -->
+<div style="text-align:center; margin-top: 40px;">
+  <h2>🌤️ Dự báo thời tiết</h2>
+  <a class="weatherwidget-io" href="https://forecast7.com/vi/21d03105d84/hanoi/" data-label_1="HÀ NỘI" data-label_2="Thời tiết" data-theme="pure">HÀ NỘI Thời tiết</a>
+</div>
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id)){
+    js=d.createElement(s);js.id=id;
+    js.src='https://weatherwidget.io/js/widget.min.js';
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document,'script','weatherwidget-io-js');
+</script>
 </body>
 </html>
