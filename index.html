@@ -88,7 +88,7 @@
 
   <!-- 💬 Góp ý -->
   <h2>💬 Góp ý cho mình nhé!</h2>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true"
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform"
     width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Đang tải biểu mẫu…</iframe>
 
   <!-- 🧒 Giới thiệu -->
@@ -97,5 +97,46 @@
     <p style="color: #000;">Mình là <strong>Phúc</strong>, học sinh lớp 5 và thích lập trình!</p>
     <p style="color: #000;">Trang web này được mình làm bằng HTML, CSS và JavaScript.</p>
   </section>
+  <!-- 🎈 Hiệu ứng bong bóng bay -->
+<canvas id="bubbles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+<script>
+const canvas = document.getElementById('bubbles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let bubbles = [];
+
+for (let i = 0; i < 30; i++) {
+  bubbles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 15 + 5,
+    speed: Math.random() * 1 + 0.5,
+    color: `rgba(${Math.random()*255},${Math.random()*255},255,0.4)`
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let b of bubbles) {
+    b.y -= b.speed;
+    if (b.y < -b.radius) {
+      b.y = canvas.height + b.radius;
+      b.x = Math.random() * canvas.width;
+    }
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
+    ctx.fillStyle = b.color;
+    ctx.fill();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
 </body>
 </html>
