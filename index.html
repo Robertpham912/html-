@@ -2,15 +2,17 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>🎉 Web đầu tiên của Phúc</title>
+  <title>🌟 Web đầu tiên của Phúc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    /* Toàn bộ CSS nền chuyển màu + sao rơi + giao diện đẹp */
     body {
       margin: 0;
-      padding: 0;
-      font-family: sans-serif;
+      font-family: "Segoe UI", sans-serif;
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
+      color: #222;
     }
 
     @keyframes gradientBG {
@@ -19,10 +21,10 @@
       100% { background-position: 0% 50%; }
     }
 
-    .music-btn {
+    .toggle-btn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      top: 10px;
+      right: 10px;
       background: #ffffffcc;
       border: none;
       padding: 10px 15px;
@@ -32,14 +34,68 @@
       z-index: 999;
     }
 
-    h1, h2, h3, p {
-      color: #fff;
+    .dark-mode {
+      background: #121212;
+      color: white;
+    }
+
+    h1, h2, h3 {
       text-align: center;
+    }
+
+    section {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 12px;
+      margin: 30px auto;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    nav {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    nav a {
+      margin: 10px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #0072ff;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #clock {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .shooting-star {
+      position: fixed;
+      top: -10px;
+      width: 2px;
+      height: 80px;
+      background: white;
+      animation: fall 1.5s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px) translateX(0); }
+      100% { transform: translateY(100vh) translateX(200px); }
     }
   </style>
 </head>
 <body>
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
+
   <h1 id="typewriter"></h1>
+
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
@@ -51,105 +107,85 @@
       }
     }
     window.onload = type;
+
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    setInterval(() => {
+      const clock = document.getElementById("clock");
+      if (clock) {
+        const now = new Date();
+        clock.innerHTML = `⏰ ${now.toLocaleTimeString()} - 📅 ${now.toLocaleDateString()}`;
+      }
+    }, 1000);
   </script>
 
-  <!-- 🎵 Nhạc nền -->
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1109f26734.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ audio.
-  </audio>
-  <button class="music-btn" onclick="toggleMusic()">🎵 Bật/Tắt Nhạc</button>
+  <div id="clock"></div>
+
+  <!-- 🌠 Sao rơi -->
   <script>
-    const music = document.getElementById("bg-music");
-    let isPlaying = false;
-    function toggleMusic() {
-      if (isPlaying) {
-        music.pause();
-      } else {
-        music.play();
-      }
-      isPlaying = !isPlaying;
-    }
+    setInterval(() => {
+      const star = document.createElement("div");
+      star.className = "shooting-star";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(star);
+      setTimeout(() => document.body.removeChild(star), 1500);
+    }, 1000);
   </script>
 
   <!-- 👁️ Bộ đếm truy cập -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank">
-      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f"
-        border="0" style="width: 150px;" />
+      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" border="0" style="width: 150px;" />
     </a>
-    <p style="color: #fff;">👁️ Số người đã ghé thăm web của Phúc</p>
+    <p>👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
 
-  <!-- 🎮 Link mini game -->
-  <p style="text-align:center;">
-    👉 <a href="game.html" style="font-size: 18px; color: yellow;">Chơi mini game: Đoán số 🎮</a>
-  </p>
-
   <!-- 💬 Góp ý -->
-  <h2>💬 Góp ý cho mình nhé!</h2>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform"
-    width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Đang tải biểu mẫu…</iframe>
+  <section>
+    <h2>💬 Góp ý cho mình nhé!</h2>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Đang tải biểu mẫu…</iframe>
+  </section>
 
   <!-- 🧒 Giới thiệu -->
-  <section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto;">
+  <section>
     <h2>🧒 Giới thiệu về mình</h2>
-    <p style="color: #000;">Mình là <strong>Phúc</strong>, học sinh lớp 5 và thích lập trình!</p>
-    <p style="color: #000;">Trang web này được mình làm bằng HTML, CSS và JavaScript.</p>
+    <p>Xin chào! Mình tên là <strong>Phúc</strong>, học lớp 5 và yêu thích lập trình.</p>
+    <p>Trang web này là sản phẩm đầu tay của mình, được viết bằng HTML, CSS và JavaScript.</p>
+    <p>Mục tiêu là trở thành lập trình viên thật giỏi trong tương lai! 💻🚀</p>
   </section>
-  <!-- 🎈 Hiệu ứng bong bóng bay -->
-<canvas id="bubbles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
-<script>
-const canvas = document.getElementById('bubbles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 
-let bubbles = [];
+  <!-- 📘 Góc học lập trình -->
+  <section>
+    <h2>📘 Góc học lập trình</h2>
+    <p><strong>1. Scratch là gì?</strong> – Ngôn ngữ kéo thả, dễ học và rất vui!</p>
+    <p><strong>2. HTML là gì?</strong> – Dùng để tạo trang web như trang này nè!</p>
+    <p><strong>3. Học lập trình sớm có lợi không?</strong> – Có chứ! Giúp tư duy logic và sáng tạo hơn.</p>
+    <p><strong>4. Mình học bằng gì?</strong> – Dùng iPad + bàn phím + VS Code Web + GitHub!</p>
+  </section>
 
-for (let i = 0; i < 30; i++) {
-  bubbles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 15 + 5,
-    speed: Math.random() * 1 + 0.5,
-    color: `rgba(${Math.random()*255},${Math.random()*255},255,0.4)`
-  });
-}
+  <!-- 📚 Menu chọn bài học -->
+  <nav>
+    <h2>📚 Các bài học lập trình</h2>
+    <a href="#lesson1">🔸 HTML cơ bản</a> |
+    <a href="#lesson2">🔸 CSS dễ hiểu</a> |
+    <a href="#lesson3">🔸 JavaScript nhập môn</a>
+  </nav>
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let b of bubbles) {
-    b.y -= b.speed;
-    if (b.y < -b.radius) {
-      b.y = canvas.height + b.radius;
-      b.x = Math.random() * canvas.width;
-    }
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
-    ctx.fillStyle = b.color;
-    ctx.fill();
-  }
-  requestAnimationFrame(animate);
-}
-animate();
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-</script>
-  <!-- 📚 Góc đọc sách -->
-<section style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 12px; margin: 40px auto; max-width: 800px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
-  <h2 style="text-align: center;">📚 Góc đọc sách</h2>
-  <p>Ở đây là những quyển sách mình đã đọc và rất thích! Nếu bạn cũng mê sách, thử đọc nha:</p>
+  <section id="lesson1">
+    <h3>🔸 HTML cơ bản</h3>
+    <p><code>&lt;h1&gt;Xin chào&lt;/h1&gt;</code> là cách tạo tiêu đề.</p>
+  </section>
 
-  <ul style="line-height: 1.8;">
-    <li><strong>📘 Chuyện Con Mèo Dạy Hải Âu Bay</strong> – Một câu chuyện cảm động về lòng tin và tình bạn.</li>
-    <li><strong>📗 Dế Mèn Phiêu Lưu Ký</strong> – Một cuộc hành trình thú vị với những bài học về dũng cảm và trưởng thành.</li>
-    <li><strong>📕 Những Tấm Lòng Cao Cả</strong> – Truyện cảm động về tình bạn, lòng tốt và sự tử tế trong cuộc sống.</li>
-  </ul>
+  <section id="lesson2">
+    <h3>🔸 CSS dễ hiểu</h3>
+    <p>Dùng để tô màu, chỉnh bố cục, làm web đẹp hơn.</p>
+  </section>
 
-  <p style="margin-top: 20px;">Bạn có sách hay nào muốn chia sẻ? Hãy góp ý cho mình ở phần bên trên nha! 📩</p>
-</section>
+  <section id="lesson3">
+    <h3>🔸 JavaScript nhập môn</h3>
+    <p>Giúp web có hiệu ứng, game, tương tác người dùng...</p>
+  </section>
 </body>
 </html>
