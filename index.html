@@ -56,7 +56,8 @@
   </style>
 </head>
 <body>
-  <!-- Điều hướng -->
+
+  <!-- Thanh menu điều hướng -->
   <nav>
     <a href="#gioithieu">🧒 Giới thiệu</a>
     <a href="#gopy">💬 Góp ý</a>
@@ -66,9 +67,10 @@
   <!-- Nút chuyển chế độ -->
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
 
+  <!-- Lời chào -->
   <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
 
-  <!-- Gõ chữ -->
+  <!-- Gõ chữ từng chữ -->
   <h1 id="typewriter" style="text-align: center;"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
@@ -83,7 +85,7 @@
     window.onload = type;
   </script>
 
-  <!-- Bộ đếm -->
+  <!-- Bộ đếm khách -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
       <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
@@ -92,7 +94,7 @@
     <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
 
-  <!-- Game -->
+  <!-- Link game -->
   <p style="text-align: center;">
     👉 <a href="caro.html" style="font-size: 18px; color: green;">Chơi Caro 3x3 🎯</a>
   </p>
@@ -141,11 +143,34 @@
     updateClock();
   </script>
 
-  <!-- JS: Chế độ tối -->
+  <!-- Nhạc nền -->
+  <audio id="bg-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ âm thanh.
+  </audio>
+  <button onclick="toggleMusic()" style="position: fixed; bottom: 10px; left: 10px; z-index: 1000; background: #fff; border: none; padding: 10px; border-radius: 8px;">
+    🎵 Bật/Tắt nhạc
+  </button>
+  <script>
+    const music = document.getElementById("bg-music");
+    let isPlaying = false;
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+      } else {
+        music.play();
+      }
+      isPlaying = !isPlaying;
+    }
+  </script>
+
+  <!-- JS: Chuyển chế độ tối -->
   <script>
     function toggleMode() {
       document.body.classList.toggle("dark-mode");
     }
   </script>
+
 </body>
 </html>
+      
