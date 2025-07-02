@@ -2,65 +2,32 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>💻 Web của Phúc</title>
+  <title>🌟 Web của Phúc</title>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      padding: 0;
+      font-family: sans-serif;
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      transition: background 0.5s, color 0.5s;
     }
-
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
-    .dark-mode {
-      background: #121212;
-      color: white;
-    }
-
-    h1, h2, h3, p {
-      text-align: center;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.95);
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 1000;
-    }
-
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    section {
-      background: rgba(255,255,255,0.85);
-      margin: 80px auto;
-      padding: 20px;
+    .section {
+      background: rgba(255,255,255,0.9);
+      padding: 30px;
       border-radius: 12px;
       max-width: 800px;
+      margin: 40px auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    .toggle-btn, .clock, .star {
-      position: fixed;
-      z-index: 999;
-    }
-
     .toggle-btn {
+      position: fixed;
       top: 10px;
       right: 10px;
       background: #ffffffcc;
@@ -69,180 +36,118 @@
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-    }
-
-    .clock {
-      top: 10px;
-      left: 10px;
-      font-size: 16px;
-      background: #ffffffcc;
-      padding: 8px 12px;
-      border-radius: 8px;
-    }
-
-    .star {
-      width: 3px;
-      height: 3px;
-      background: white;
-      position: absolute;
-      border-radius: 50%;
-      animation: fall 5s linear infinite;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
+      z-index: 999;
     }
   </style>
 </head>
 <body>
-  <div class="clock" id="clock"></div>
-  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
 
-  <nav>
-    <a href="#gioi-thieu">👦 Giới thiệu</a>
-    <a href="#hoc-lap-trinh">💻 Góc học lập trình</a>
-    <a href="#game">🎮 Game</a>
-    <a href="#gop-y">💬 Góp ý</a>
-    <a href="#goc-doc-sach">📚 Góc đọc sách</a>
-  </nav>
+<!-- Nút chuyển chế độ (tạm placeholder) -->
+<button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
 
-  <h1 id="typewriter"></h1>
-
-  <!-- 👁️ Bộ đếm truy cập -->
-  <div style="text-align: center; margin-top: 20px;">
-    <a href="https://www.freecounterstat.com" target="_blank">
-      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f"
-           style="width: 150px;" alt="counter"></a>
-    <p>👁️ Số người đã ghé thăm web của Phúc</p>
-  </div>
-
-  <!-- 🎮 Game -->
-  <section id="game">
-    <h2>🎮 Mini Game: Đoán số</h2>
-    <p>Đoán một số từ 1 đến 100 nhé!</p>
-    <input type="number" id="guess" min="1" max="100">
-    <button onclick="checkGuess()">Đoán</button>
-    <div id="result"></div>
-
-    <hr>
-
-    <h3>🎲 Game Caro (Tic-Tac-Toe)</h3>
-    <table id="caro" border="1" style="margin: auto; border-collapse: collapse;">
-      <tr><td onclick="caro(0,0)"></td><td onclick="caro(0,1)"></td><td onclick="caro(0,2)"></td></tr>
-      <tr><td onclick="caro(1,0)"></td><td onclick="caro(1,1)"></td><td onclick="caro(1,2)"></td></tr>
-      <tr><td onclick="caro(2,0)"></td><td onclick="caro(2,1)"></td><td onclick="caro(2,2)"></td></tr>
-    </table>
-    <p id="caro-result"></p>
-  </section>
-
-  <!-- 💬 Góp ý -->
-  <section id="gop-y">
-    <h2>💬 Góp ý cho mình nhé!</h2>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true"
-            width="100%" height="520" frameborder="0">Đang tải biểu mẫu…</iframe>
-  </section>
-
-  <!-- 🧒 Giới thiệu -->
-  <section id="gioi-thieu">
-    <h2>🧒 Giới thiệu về mình</h2>
-    <p>Mình là <strong>Phúc</strong>, học sinh lớp 5 yêu thích lập trình.</p>
-    <p>Trang web này mình tự viết bằng HTML, CSS và JavaScript.</p>
-  </section>
-
-  <!-- 📘 Góc học lập trình -->
-  <section id="hoc-lap-trinh">
-    <h2>📘 Góc học lập trình</h2>
-    <p>1. <strong>Scratch:</strong> Lập trình kéo thả vui lắm luôn!</p>
-    <p>2. <strong>HTML:</strong> Làm ra cấu trúc web như thế này nè.</p>
-    <p>3. <strong>CSS:</strong> Giúp web đẹp lung linh ✨</p>
-    <p>4. <strong>JavaScript:</strong> Cho web thông minh, có hiệu ứng & game!</p>
-  </section>
-
-  <!-- 📚 Góc đọc sách -->
-  <section id="goc-doc-sach">
-    <h2>📚 Góc đọc sách</h2>
-    <ul>
-      <li>📘 <strong>Chuyện Con Mèo Dạy Hải Âu Bay</strong></li>
-      <li>📗 <strong>Dế Mèn Phiêu Lưu Ký</strong></li>
-      <li>📕 <strong>Những Tấm Lòng Cao Cả</strong></li>
-    </ul>
-    <p>Bạn thích cuốn nào? Góp ý bên trên nhé!</p>
-  </section>
-
-  <!-- 🔊 Nhạc nền -->
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
-  </audio>
-  <button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px;">🎵 Bật/Tắt Nhạc</button>
-
-  <script>
-    // Typewriter
-    const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
-    let index = 0;
-    function type() {
-      if (index < text.length) {
-        document.getElementById("typewriter").innerHTML += text.charAt(index++);
-        setTimeout(type, 80);
-      }
+<!-- Hiệu ứng gõ chữ -->
+<h1 id="typewriter" style="text-align:center; margin-top:30px;"></h1>
+<script>
+  const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
+  let index = 0;
+  function type() {
+    if (index < text.length) {
+      document.getElementById("typewriter").innerHTML += text.charAt(index);
+      index++;
+      setTimeout(type, 80);
     }
-    window.onload = type;
+  }
+  window.onload = type;
+</script>
 
-    // Chế độ tối/sáng
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
-    }
+<!-- Đồng hồ thời gian thực -->
+<div style="text-align: center; font-size: 18px; margin-top: 10px;" id="clock"></div>
+<script>
+  setInterval(() => {
+    const now = new Date();
+    document.getElementById("clock").innerText = '🕒 ' + now.toLocaleTimeString();
+  }, 1000);
+</script>
 
-    // Nhạc nền
-    let isPlaying = false;
-    const music = document.getElementById("bg-music");
-    function toggleMusic() {
-      isPlaying ? music.pause() : music.play();
-      isPlaying = !isPlaying;
-    }
+<!-- Bộ đếm -->
+<div style="text-align: center; margin-top: 20px;" data-aos="zoom-in">
+  <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
+    <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f"
+         border="0" title="Visitor Counter" alt="Visitor Counter" style="width: 150px;">
+  </a>
+  <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
+</div>
 
-    // Đồng hồ
-    setInterval(() => {
-      const d = new Date();
-      document.getElementById("clock").innerText = d.toLocaleTimeString();
-    }, 1000);
+<!-- Liên kết game -->
+<p style="text-align:center; font-size:18px;" data-aos="fade-up">
+  👉 <a href="game.html" style="color: blue;">Chơi mini game: Đoán số 🎮</a>
+</p>
 
-    // Game đoán số
-    let secret = Math.floor(Math.random() * 100) + 1;
-    function checkGuess() {
-      const guess = parseInt(document.getElementById("guess").value);
-      const result = document.getElementById("result");
-      result.innerHTML = guess === secret ? "🎉 Chính xác!" : guess < secret ? "🔼 Lớn hơn!" : "🔽 Nhỏ hơn!";
-    }
+<!-- Góp ý -->
+<div class="section" id="gop-y" data-aos="fade-up">
+  <h2>💬 Góp ý cho mình nhé!</h2>
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true"
+    width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">
+    Đang tải biểu mẫu…
+  </iframe>
+</div>
 
-    // Game caro
-    let board = [["", "", ""], ["", "", ""], ["", "", ""]];
-    let player = "X";
-    function caro(r, c) {
-      if (board[r][c] === "") {
-        board[r][c] = player;
-        document.getElementById("caro").rows[r].cells[c].innerText = player;
-        if (checkWin()) document.getElementById("caro-result").innerText = `🎉 ${player} thắng!`;
-        player = player === "X" ? "O" : "X";
-      }
-    }
-    function checkWin() {
-      for (let i = 0; i < 3; i++) {
-        if (board[i][0] && board[i][0] === board[i][1] && board[i][1] === board[i][2]) return true;
-        if (board[0][i] && board[0][i] === board[1][i] && board[1][i] === board[2][i]) return true;
-      }
-      return board[0][0] && board[0][0] === board[1][1] && board[1][1] === board[2][2]
-          || board[0][2] && board[0][2] === board[1][1] && board[1][1] === board[2][0];
-    }
+<!-- Giới thiệu -->
+<section class="section" data-aos="fade-up">
+  <h2>🧒 Giới thiệu về mình</h2>
+  <p>Mình là <strong>Phúc</strong>, học sinh lớp 5 và thích lập trình!</p>
+  <p>Trang web này được mình làm bằng HTML, CSS và JavaScript.</p>
+</section>
 
-    // Sao rơi
-    for (let i = 0; i < 30; i++) {
-      const star = document.createElement("div");
-      star.className = "star";
-      star.style.left = Math.random() * 100 + "vw";
-      star.style.animationDuration = Math.random() * 3 + 2 + "s";
-      document.body.appendChild(star);
+<!-- Góc học lập trình -->
+<section class="section" data-aos="fade-up">
+  <h2>📘 Góc học lập trình</h2>
+  <p><strong>1. Scratch là gì?</strong> – Là ngôn ngữ kéo thả dễ dùng và vui!</p>
+  <p><strong>2. HTML là gì?</strong> – Ngôn ngữ tạo ra trang web. Mình dùng để viết web này!</p>
+  <p><strong>3. Tại sao nên học sớm?</strong> – Vì lập trình giúp sáng tạo và tư duy logic!</p>
+  <p><strong>4. Dùng iPad học lập trình?</strong> – Mình dùng Safari + bàn phím là đủ chiến rồi 😎</p>
+  <p><strong>5. Mục tiêu:</strong> – Mỗi ngày học 1 chút để sau thành lập trình viên giỏi! 💻🚀</p>
+</section>
+
+<!-- Góc đọc sách -->
+<section class="section" data-aos="fade-up">
+  <h2>📚 Góc đọc sách</h2>
+  <ul>
+    <li>📘 <strong>Chuyện Con Mèo Dạy Hải Âu Bay</strong> – Tình bạn và lòng tin.</li>
+    <li>📗 <strong>Dế Mèn Phiêu Lưu Ký</strong> – Dũng cảm và trưởng thành.</li>
+    <li>📕 <strong>Những Tấm Lòng Cao Cả</strong> – Lòng tốt và tử tế.</li>
+  </ul>
+  <p>Nếu bạn cũng mê sách, thử đọc nha! Có sách hay thì góp ý giúp mình 📩</p>
+</section>
+
+<!-- Nhạc nền -->
+<audio id="bg-music" loop autoplay>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
+<button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 999;">
+  🎵 Bật/Tắt Nhạc
+</button>
+
+<script>
+  let isPlaying = true;
+  const music = document.getElementById("bg-music");
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
     }
-  </script>
+    isPlaying = !isPlaying;
+  }
+</script>
+
+<!-- AOS thư viện hiệu ứng scroll -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
 </body>
 </html>
