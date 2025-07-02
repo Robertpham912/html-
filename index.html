@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <title>🌟 Web đầu tiên của Phúc</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Trang web của Phúc</title>
   <style>
-    /* Toàn bộ CSS nền chuyển màu + sao rơi + giao diện đẹp */
     body {
       margin: 0;
-      font-family: "Segoe UI", sans-serif;
+      padding: 0;
+      font-family: sans-serif;
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      color: #222;
+      padding-top: 60px;
     }
 
     @keyframes gradientBG {
@@ -21,81 +20,53 @@
       100% { background-position: 0% 50%; }
     }
 
-    .toggle-btn {
+    /* Thanh điều hướng cố định */
+    .navbar {
       position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #ffffffcc;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 999;
-    }
-
-    .dark-mode {
-      background: #121212;
-      color: white;
-    }
-
-    h1, h2, h3 {
+      top: 0;
+      width: 100%;
+      background-color: rgba(255,255,255,0.9);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
       text-align: center;
+      padding: 10px 0;
     }
 
-    section {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 25px;
-      border-radius: 12px;
-      margin: 30px auto;
-      max-width: 800px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    nav {
-      text-align: center;
-      margin: 40px 0;
-    }
-
-    nav a {
-      margin: 10px;
-      font-size: 18px;
+    .navbar a {
+      margin: 0 15px;
       text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .navbar a:hover {
       color: #0072ff;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    #clock {
-      text-align: center;
-      font-size: 24px;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-
-    .shooting-star {
-      position: fixed;
-      top: -10px;
-      width: 2px;
-      height: 80px;
-      background: white;
-      animation: fall 1.5s linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes fall {
-      0% { transform: translateY(-100px) translateX(0); }
-      100% { transform: translateY(100vh) translateX(200px); }
+    .section {
+      max-width: 800px;
+      margin: 40px auto;
+      background: rgba(255,255,255,0.9);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
 
-  <h1 id="typewriter"></h1>
+  <!-- 🚀 Thanh điều hướng -->
+  <div class="navbar">
+    <a href="#gioi-thieu">👦 Giới thiệu</a>
+    <a href="#goc-lap-trinh">💻 Góc học lập trình</a>
+    <a href="#game">🎮 Game</a>
+    <a href="#gop-y">💬 Góp ý</a>
+    <a href="#goc-doc-sach">📚 Góc đọc sách</a>
+  </div>
 
+  <!-- ✨ Hiệu ứng chữ gõ -->
+  <h1 id="typewriter" style="text-align: center;"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
@@ -107,85 +78,69 @@
       }
     }
     window.onload = type;
-
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
-    }
-
-    setInterval(() => {
-      const clock = document.getElementById("clock");
-      if (clock) {
-        const now = new Date();
-        clock.innerHTML = `⏰ ${now.toLocaleTimeString()} - 📅 ${now.toLocaleDateString()}`;
-      }
-    }, 1000);
   </script>
 
-  <div id="clock"></div>
-
-  <!-- 🌠 Sao rơi -->
-  <script>
-    setInterval(() => {
-      const star = document.createElement("div");
-      star.className = "shooting-star";
-      star.style.left = Math.random() * window.innerWidth + "px";
-      document.body.appendChild(star);
-      setTimeout(() => document.body.removeChild(star), 1500);
-    }, 1000);
-  </script>
-
-  <!-- 👁️ Bộ đếm truy cập -->
+  <!-- 👁️ Bộ đếm -->
   <div style="text-align: center; margin-top: 20px;">
-    <a href="https://www.freecounterstat.com" target="_blank">
-      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" border="0" style="width: 150px;" />
+    <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
+      <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
+           border="0" 
+           title="Visitor Counter" 
+           alt="Visitor Counter" 
+           style="width: 150px;">
     </a>
-    <p>👁️ Số người đã ghé thăm web của Phúc</p>
+    <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
+  </div>
+
+  <!-- 🎮 Game link -->
+  <div class="section" id="game">
+    <p>
+      👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
+    </p>
   </div>
 
   <!-- 💬 Góp ý -->
-  <section>
+  <div class="section" id="gop-y">
     <h2>💬 Góp ý cho mình nhé!</h2>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true" width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Đang tải biểu mẫu…</iframe>
-  </section>
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true" 
+      width="100%" 
+      height="520" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0">
+      Đang tải biểu mẫu…
+    </iframe>
+  </div>
 
   <!-- 🧒 Giới thiệu -->
-  <section>
+  <div class="section" id="gioi-thieu">
     <h2>🧒 Giới thiệu về mình</h2>
-    <p>Xin chào! Mình tên là <strong>Phúc</strong>, học lớp 5 và yêu thích lập trình.</p>
-    <p>Trang web này là sản phẩm đầu tay của mình, được viết bằng HTML, CSS và JavaScript.</p>
-    <p>Mục tiêu là trở thành lập trình viên thật giỏi trong tương lai! 💻🚀</p>
-  </section>
+    <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
+    <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
+    <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
+  </div>
 
-  <!-- 📘 Góc học lập trình -->
-  <section>
+  <!-- 💻 Góc học lập trình -->
+  <div class="section" id="goc-lap-trinh">
     <h2>📘 Góc học lập trình</h2>
-    <p><strong>1. Scratch là gì?</strong> – Ngôn ngữ kéo thả, dễ học và rất vui!</p>
-    <p><strong>2. HTML là gì?</strong> – Dùng để tạo trang web như trang này nè!</p>
-    <p><strong>3. Học lập trình sớm có lợi không?</strong> – Có chứ! Giúp tư duy logic và sáng tạo hơn.</p>
-    <p><strong>4. Mình học bằng gì?</strong> – Dùng iPad + bàn phím + VS Code Web + GitHub!</p>
-  </section>
+    <p><strong>1. Scratch là gì?</strong> – Là ngôn ngữ lập trình kéo thả, rất dễ dùng và vui nữa! Mình đã làm được nhiều game trên đó rồi.</p>
+    <p><strong>2. HTML là gì?</strong> – Là ngôn ngữ tạo ra các trang web. Mình dùng HTML để viết trang web đầu tiên nè!</p>
+    <p><strong>3. Tại sao nên học sớm?</strong> – Vì lập trình giúp mình sáng tạo, tư duy logic và tạo ra những thứ “ảo diệu” như chính web này!</p>
+    <p><strong>4. Dùng iPad học lập trình?</strong> – Mình dùng Safari, VS Code Web, GitHub… và một chiếc bàn phím là đủ chiến rồi! 😎</p>
+    <p><strong>5. Mục tiêu của mình:</strong> – Mỗi ngày học 1 chút để sau này trở thành lập trình viên thật xịn! 💻🚀</p>
+  </div>
 
-  <!-- 📚 Menu chọn bài học -->
-  <nav>
-    <h2>📚 Các bài học lập trình</h2>
-    <a href="#lesson1">🔸 HTML cơ bản</a> |
-    <a href="#lesson2">🔸 CSS dễ hiểu</a> |
-    <a href="#lesson3">🔸 JavaScript nhập môn</a>
-  </nav>
+  <!-- 📚 Góc đọc sách -->
+  <div class="section" id="goc-doc-sach">
+    <h2>📚 Góc đọc sách</h2>
+    <ul>
+      <li>📘 <strong>Chuyện Con Mèo Dạy Hải Âu Bay</strong> – Câu chuyện cảm động về lòng tin và tình bạn.</li>
+      <li>📗 <strong>Dế Mèn Phiêu Lưu Ký</strong> – Cuộc hành trình thú vị với những bài học dũng cảm.</li>
+      <li>📕 <strong>Những Tấm Lòng Cao Cả</strong> – Truyện cảm động về lòng tốt và tình bạn.</li>
+    </ul>
+    <p>Nếu bạn cũng mê sách, thử đọc nha! Có sách hay thì góp ý giúp mình nhé 📩</p>
+  </div>
 
-  <section id="lesson1">
-    <h3>🔸 HTML cơ bản</h3>
-    <p><code>&lt;h1&gt;Xin chào&lt;/h1&gt;</code> là cách tạo tiêu đề.</p>
-  </section>
-
-  <section id="lesson2">
-    <h3>🔸 CSS dễ hiểu</h3>
-    <p>Dùng để tô màu, chỉnh bố cục, làm web đẹp hơn.</p>
-  </section>
-
-  <section id="lesson3">
-    <h3>🔸 JavaScript nhập môn</h3>
-    <p>Giúp web có hiệu ứng, game, tương tác người dùng...</p>
-  </section>
 </body>
 </html>
