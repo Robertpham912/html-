@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>📚 Blog học lập trình của Phúc</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fefefe;
+      padding: 20px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #2c3e50;
+    }
+
+    .date {
+      font-size: 14px;
+      color: gray;
+    }
+
+    .back {
+      margin-top: 20px;
+    }
+
+    .back a {
+      color: blue;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Ngày đầu tiên học HTML</h1>
+  <p class="date">📅 Ngày đăng: <span id="today"></span></p>
+
+  <script>
+    const today = new Date();
+    const dateStr = today.getDate().toString().padStart(2, '0') + '/' +
+                    (today.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                    today.getFullYear();
+    document.getElementById("today").innerText = dateStr;
+  </script>
+
+  <p>Hôm nay mình đã học được cách tạo trang web bằng HTML. Mình biết cách dùng thẻ <code>&lt;h1&gt;</code> để tạo tiêu đề, và <code>&lt;p&gt;</code> để viết đoạn văn.</p>
+
+  <p>Mình cũng học thêm về CSS để đổi màu nền, đổi font chữ, làm hiệu ứng nền chuyển động nữa!</p>
+
+  <p>Mình thấy lập trình rất vui và muốn học thêm nhiều thứ hơn. Mục tiêu của mình là sau này tạo ra một trò chơi hoặc một web thật nổi tiếng!</p>
+
+  <div class="back">
+    🔙 <a href="index.html">Quay lại trang chính</a>
+  </div>
+</body>
+</html>
