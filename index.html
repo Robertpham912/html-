@@ -32,6 +32,14 @@
       z-index: 999;
     }
 
+    #clock {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      margin-top: 20px;
+    }
+
     section {
       background: rgba(255,255,255,0.8);
       padding: 20px;
@@ -43,13 +51,13 @@
   </style>
 </head>
 <body>
-  <!-- Nút chuyển chế độ (có thể dùng sau nếu thích) -->
+  <!-- Nút chuyển chế độ (nếu cần sau này) -->
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
 
   <!-- Banner -->
   <img src="banner.png" width="100%" alt="Banner web của Phúc">
 
-  <!-- Dòng chào hiệu ứng gõ -->
+  <!-- Chào hiệu ứng gõ -->
   <h1 id="typewriter"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
@@ -64,20 +72,34 @@
     window.onload = type;
   </script>
 
-  <!-- Bộ đếm khách -->
+  <!-- Đồng hồ -->
+  <div id="clock">🕒 ...</div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById("clock").innerHTML = `🕒 Bây giờ là: ${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock(); // Gọi lần đầu
+  </script>
+
+  <!-- Bộ đếm -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
       <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" border="0" title="Visitor Counter" alt="Visitor Counter" style="width: 150px;">
     </a>
-    <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
+    <p style="font-family: Arial; font-size: 12px; color: #fff;">👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
 
-  <!-- Link đến mini game -->
+  <!-- Game -->
   <p style="text-align: center;">
     👉 <a href="game.html" style="font-size: 18px; color: blue;">Chơi mini game: Đoán số 🎮</a>
   </p>
 
-  <!-- Google Form góp ý -->
+  <!-- Form góp ý -->
   <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
   <iframe 
     src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
@@ -100,5 +122,3 @@
   </script>
 </body>
 </html>
-
-      
