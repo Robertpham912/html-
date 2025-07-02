@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Web đầu tiên của Phúc</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       margin: 0;
       padding: 0;
@@ -12,13 +15,11 @@
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
     }
-
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .toggle-btn {
       position: fixed;
       top: 10px;
@@ -31,20 +32,43 @@
       font-weight: bold;
       z-index: 999;
     }
-
     .welcome-message {
       text-align: center;
       font-size: 20px;
-      margin-top: 20px;
+      margin-top: 80px;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffffcc;
+      padding: 10px;
+      text-align: center;
+      z-index: 998;
+    }
+    nav a {
+      margin: 0 15px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <!-- Nút chuyển chế độ sáng/tối -->
+  <!-- Điều hướng -->
+  <nav>
+    <a href="#gioithieu">🧒 Giới thiệu</a>
+    <a href="#gopy">💬 Góp ý</a>
+    <a href="#muctieu">🎯 Mục tiêu hè</a>
+  </nav>
+
+  <!-- Nút chuyển chế độ -->
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ tối</button>
+
   <div class="welcome-message">👋 Chào mừng bạn đến với web của Phúc!</div>
 
-  <!-- Gõ chữ từng chữ -->
+  <!-- Gõ chữ -->
   <h1 id="typewriter" style="text-align: center;"></h1>
   <script>
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
@@ -59,45 +83,38 @@
     window.onload = type;
   </script>
 
-  <!-- Bộ đếm truy cập -->
+  <!-- Bộ đếm -->
   <div style="text-align: center; margin-top: 20px;">
     <a href="https://www.freecounterstat.com" target="_blank" title="Visitor Counter">
       <img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=27js9p9p9nknf7x8b0w1bwe7z9v3nk2f" 
-           border="0" 
-           title="Visitor Counter" 
-           alt="Visitor Counter" 
-           style="width: 150px;">
+           border="0" title="Visitor Counter" alt="Visitor Counter" style="width: 150px;">
     </a>
     <p style="font-family: Arial; font-size: 12px; color: #666;">👁️ Số người đã ghé thăm web của Phúc</p>
   </div>
 
-  <!-- Liên kết game -->
+  <!-- Game -->
   <p style="text-align: center;">
     👉 <a href="caro.html" style="font-size: 18px; color: green;">Chơi Caro 3x3 🎯</a>
   </p>
 
   <!-- Góp ý -->
-  <h2 style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
+  <h2 id="gopy" style="text-align: center;">💬 Góp ý cho mình nhé!</h2>
   <iframe 
     src="https://docs.google.com/forms/d/e/1FAIpQLSdsugSFS2hHzVxOBXRToPNIb3FnD2s8sFWYk0Q-B8n5ZT0RtA/viewform?embedded=true" 
-    width="100%" 
-    height="520" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0">
+    width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">
     Đang tải biểu mẫu…
   </iframe>
 
   <!-- Giới thiệu -->
-  <section style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <section id="gioithieu" style="background: rgba(255,255,255,0.8); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     <h2>🧒 Giới thiệu về mình</h2>
     <p>Xin chào! Mình tên là <strong>Phúc</strong>, hiện đang học lớp 5 và rất yêu thích lập trình.</p>
     <p>Trang web này là sản phẩm đầu tiên mình tự làm bằng HTML, CSS và một chút JavaScript.</p>
     <p>Mình đang cố gắng học mỗi ngày để sau này trở thành lập trình viên thật giỏi! 💻🚀</p>
   </section>
 
-  <!-- Mục tiêu hè -->
-  <section style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <!-- Mục tiêu -->
+  <section id="muctieu" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 12px; max-width: 600px; margin: 30px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
     <h2>🌞 Mục tiêu mùa hè của mình</h2>
     <ul style="font-size: 18px; line-height: 1.6;">
       <li>📘 Học xong HTML và CSS cơ bản</li>
@@ -108,7 +125,7 @@
     </ul>
   </section>
 
-  <!-- Đồng hồ thời gian thực -->
+  <!-- Đồng hồ -->
   <div style="text-align:center; font-size: 18px; margin-top: 30px;">
     <span>🕒 Bây giờ là: <span id="clock"></span></span>
   </div>
@@ -124,7 +141,7 @@
     updateClock();
   </script>
 
-  <!-- Chuyển chế độ tối -->
+  <!-- JS: Chế độ tối -->
   <script>
     function toggleMode() {
       document.body.classList.toggle("dark-mode");
