@@ -343,5 +343,36 @@
   localStorage.setItem("visitCount", visitCount);
   document.getElementById("visit-count").innerText = visitCount;
 </script>
+<!-- 🎮 Game Kéo – Búa – Bao -->
+<section style="background: #ffffffdd; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center;">
+  <h2>🎮 Kéo – Búa – Bao</h2>
+  <p>Chọn một trong ba nhé:</p>
+  <button onclick="playGame('kéo')">✌️ Kéo</button>
+  <button onclick="playGame('búa')">✊ Búa</button>
+  <button onclick="playGame('bao')">✋ Bao</button>
+  <p id="result" style="margin-top: 20px; font-weight: bold;"></p>
+</section>
+  <script>
+  function playGame(playerChoice) {
+    const choices = ["kéo", "búa", "bao"];
+    const botChoice = choices[Math.floor(Math.random() * 3)];
+
+    let result = "";
+
+    if (playerChoice === botChoice) {
+      result = `🤝 Hòa! Máy cũng chọn ${botChoice}.`;
+    } else if (
+      (playerChoice === "kéo" && botChoice === "bao") ||
+      (playerChoice === "búa" && botChoice === "kéo") ||
+      (playerChoice === "bao" && botChoice === "búa")
+    ) {
+      result = `🎉 Bạn thắng! Máy chọn ${botChoice}.`;
+    } else {
+      result = `😢 Bạn thua! Máy chọn ${botChoice}.`;
+    }
+
+    document.getElementById("result").textContent = result;
+  }
+</script>
 </body>
 </html>
