@@ -7,14 +7,17 @@
   <link rel="icon" href="https://fav.farm/✨" />
   <style>
     * { box-sizing: border-box; }
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
+      transition: background 0.5s, color 0.5s;
+    }
+    body {
       background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       color: #333;
-      transition: background 0.5s, color 0.5s;
     }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
@@ -56,27 +59,16 @@
   </style>
 </head>
 <body onclick="createBubble(event)">
-  <button class="toggle-btn" id="chuyen-che-do" onclick="toggleMode()">🌗 Chuyển chế độ</button>
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
   <h1 id="typewriter">🎉 Xin chào! Đây là web đầu tiên của mình!</h1>
 
-  <!-- ✅ Bộ đếm ngày học lập trình -->
-  <section id="dem-ngay" style="text-align:center; margin: 30px 0; background:#ffffffcc; max-width:800px; margin-left:auto; margin-right:auto; padding:20px; border-radius:12px;">
-    <h2>📅 Mình đã học lập trình được:</h2>
-    <p id="day-counter">0 ngày</p>
-  </section>
   <script>
-    const startDate = new Date("2024-06-01");
-    function updateDayCounter() {
-      const now = new Date();
-      const diffTime = now - startDate;
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      document.getElementById("day-counter").textContent = diffDays + " ngày";
+    // Chuyển sáng/tối
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
     }
-    updateDayCounter();
-  </script>
 
-  <!-- 🫧 Bong bóng click -->
-  <script>
+    // Hiệu ứng bong bóng khi click
     function createBubble(e) {
       const bubble = document.createElement("span");
       bubble.className = "bubble";
@@ -86,111 +78,443 @@
       setTimeout(() => bubble.remove(), 1000);
     }
 
+    // Hiệu ứng chữ gõ
+    const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
+    let index = 0;
+    function typeWriter() {
+      if (index < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+    typeWriter();
+  </script>
+  <!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🌟 Web của Phúc</title>
+  <link rel="icon" href="https://fav.farm/✨" />
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.5s, color 0.5s;
+    }
+    body {
+      background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #333;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body.dark-mode {
+      background: #111;
+      color: #eee;
+    }
+    .toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #ffffffcc;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 999;
+    }
+    .bubble {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #ff6ec4, #7873f5);
+      border-radius: 50%;
+      opacity: 0.8;
+      pointer-events: none;
+      animation: bubble 1s ease-out forwards;
+    }
+    @keyframes bubble {
+      to {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body onclick="createBubble(event)">
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
+  <h1 id="typewriter">🎉 Xin chào! Đây là web đầu tiên của mình!</h1>
+
+  <script>
+    // Chuyển sáng/tối
     function toggleMode() {
       document.body.classList.toggle("dark-mode");
     }
+
+    // Hiệu ứng bong bóng khi click
+    function createBubble(e) {
+      const bubble = document.createElement("span");
+      bubble.className = "bubble";
+      bubble.style.left = e.clientX + "px";
+      bubble.style.top = e.clientY + "px";
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 1000);
+    }
+
+    // Hiệu ứng chữ gõ
+    const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
+    let index = 0;
+    function typeWriter() {
+      if (index < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+    typeWriter();
   </script>
-  <!-- 🎨 Đổi màu nền -->
-<section style="text-align:center; margin: 30px 0;">
-  <label for="colorPicker">🎨 Chọn màu nền bạn thích:</label>
-  <input type="color" id="colorPicker" onchange="changeBackground()" value="#ffffff" style="width: 80px; height: 40px; border: none; cursor: pointer;">
-  <button onclick="resetBackground()" style="margin-left: 10px;">🔄 Trở lại mặc định</button>
+    <!-- 👁️ Bộ đếm số lần truy cập -->
+  <div style="text-align: center; margin: 10px 0;">
+    👁️ Số lần bạn đã ghé thăm web này: <span id="visit-count">0</span> lần
+  </div>
+
+  <!-- ⏰ Đồng hồ thời gian thực -->
+  <div style="text-align:center; margin-top: 30px; font-size: 20px;" id="clock-container">
+    🕒 <span id="clock">--:--:--</span>
+  </div>
+
+  <script>
+    // Cập nhật đồng hồ mỗi giây
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText = now.toLocaleTimeString("vi-VN");
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Bộ đếm số lần truy cập (dùng localStorage)
+    const countKey = "visitCount";
+    let currentCount = localStorage.getItem(countKey);
+    if (!currentCount) currentCount = 1;
+    else currentCount = parseInt(currentCount) + 1;
+    localStorage.setItem(countKey, currentCount);
+    document.getElementById("visit-count").innerText = currentCount;
+  </script>
+  <!-- 🎂 Đếm ngược đến sinh nhật -->
+<section style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 800px; margin-left: auto; margin-right: auto;">
+  <h2>🎂 Còn bao lâu nữa đến sinh nhật của tớ?</h2>
+  <p id="birthday-countdown">Đang tính toán...</p>
 </section>
 
 <script>
-  function changeBackground() {
-    const color = document.getElementById("colorPicker").value;
-    document.body.style.background = color;
-  }
-
-  function resetBackground() {
-    document.body.style.background = "linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92)";
-  }
-</script>
-<!-- 📅 Lịch mini -->
-<section style="text-align: center; margin: 30px auto; max-width: 300px; padding: 20px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2>📅 Lịch hôm nay</h2>
-  <p id="calendar-today" style="font-size: 24px; font-weight: bold;">--</p>
-</section>
-
-<script>
-  function updateCalendar() {
+  function updateBirthdayCountdown() {
     const today = new Date();
-    const dayNames = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
-    const dayName = dayNames[today.getDay()];
-    const dateStr = `${dayName}, ${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
-    document.getElementById("calendar-today").textContent = dateStr;
+    let birthday = new Date(today.getFullYear(), 11, 9); // 09/12
+    if (today > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
+
+    const diff = birthday - today;
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("birthday-countdown").textContent =
+      `🎉 Còn ${d} ngày ${h} giờ ${m} phút ${s} giây nữa là đến sinh nhật!`;
   }
-  updateCalendar();
+
+  setInterval(updateBirthdayCountdown, 1000);
+  updateBirthdayCountdown();
 </script>
-<!-- 🧮 Máy tính mini -->
-<section style="text-align:center; margin: 40px auto; max-width: 350px; padding: 25px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2>🧮 Máy tính mini</h2>
-  <input id="calc-display" style="width: 90%; padding: 10px; font-size: 20px; margin-bottom: 10px;" disabled />
-  <br/>
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
-    <button onclick="press('7')">7</button>
-    <button onclick="press('8')">8</button>
-    <button onclick="press('9')">9</button>
-    <button onclick="press('/')">÷</button>
-    <button onclick="press('4')">4</button>
-    <button onclick="press('5')">5</button>
-    <button onclick="press('6')">6</button>
-    <button onclick="press('*')">×</button>
-    <button onclick="press('1')">1</button>
-    <button onclick="press('2')">2</button>
-    <button onclick="press('3')">3</button>
-    <button onclick="press('-')">−</button>
-    <button onclick="press('0')">0</button>
-    <button onclick="press('.')">.</button>
-    <button onclick="calculate()">=</button>
-    <button onclick="press('+')">+</button>
-    <button onclick="clearDisplay()" style="grid-column: span 4; background: #fdd;">🗑️ Xóa</button>
+
+<!-- 🔊 Nhạc nền -->
+<audio id="bg-music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
+<button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 999;">
+  🎵 Bật/Tắt Nhạc
+</button>
+<script>
+  let isPlaying = false;
+  const music = document.getElementById("bg-music");
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
+    }
+    isPlaying = !isPlaying;
+  }
+</script>
+
+<!-- 🌤️ Tiện ích thời tiết (Hà Nội) -->
+<div style="text-align:center; margin-top: 40px;">
+  <iframe src="https://forecast7.com/vi/21d03105d85/ha-noi/" frameborder="0" width="650" height="250" allowtransparency="true" 
+  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+</div>
+
+<!-- 🖼️ Slideshow ảnh -->
+<section style="text-align: center; margin: 50px auto;">
+  <h2>🖼️ Bộ sưu tập ảnh</h2>
+  <img id="slideshow" src="https://picsum.photos/seed/1/600/300" style="max-width: 90%; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3);"/>
+</section>
+<script>
+  const slide = document.getElementById("slideshow");
+  let i = 1;
+  setInterval(() => {
+    i++;
+    slide.src = `https://picsum.photos/seed/${i}/600/300`;
+  }, 3000);
+</script>
+<!-- 🎲 Game Caro (Tic-Tac-Toe) -->
+<section style="background: #fff; padding: 20px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center;">🎲 Game Caro (Tic-Tac-Toe)</h2>
+  <table id="caro-board" style="margin: auto;"></table>
+  <p id="caro-status" style="text-align: center; font-weight: bold;"></p>
+</section>
+
+<script>
+  const caroBoard = document.getElementById("caro-board");
+  const caroStatus = document.getElementById("caro-status");
+  let caroCurrent = "❌";
+  let caroCells = Array(3).fill().map(() => Array(3).fill(""));
+
+  function renderCaroBoard() {
+    caroBoard.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      const row = document.createElement("tr");
+      for (let j = 0; j < 3; j++) {
+        const cell = document.createElement("td");
+        cell.textContent = caroCells[i][j];
+        cell.style.width = "60px";
+        cell.style.height = "60px";
+        cell.style.border = "1px solid black";
+        cell.style.fontSize = "30px";
+        cell.style.textAlign = "center";
+        cell.style.cursor = "pointer";
+        cell.onclick = () => handleCaroClick(i, j);
+        row.appendChild(cell);
+      }
+      caroBoard.appendChild(row);
+    }
+  }
+
+  function handleCaroClick(i, j) {
+    if (caroCells[i][j] !== "") return;
+    caroCells[i][j] = caroCurrent;
+    if (checkWin(caroCurrent)) {
+      caroStatus.textContent = caroCurrent + " thắng rồi!";
+      setTimeout(resetCaro, 1500);
+    } else {
+      caroCurrent = caroCurrent === "❌" ? "⭕" : "❌";
+      renderCaroBoard();
+    }
+  }
+
+  function checkWin(p) {
+    for (let i = 0; i < 3; i++) {
+      if (caroCells[i][0] === p && caroCells[i][1] === p && caroCells[i][2] === p) return true;
+      if (caroCells[0][i] === p && caroCells[1][i] === p && caroCells[2][i] === p) return true;
+    }
+    if (caroCells[0][0] === p && caroCells[1][1] === p && caroCells[2][2] === p) return true;
+    if (caroCells[0][2] === p && caroCells[1][1] === p && caroCells[2][0] === p) return true;
+    return false;
+  }
+
+  function resetCaro() {
+    caroCells = Array(3).fill().map(() => Array(3).fill(""));
+    caroCurrent = "❌";
+    caroStatus.textContent = "";
+    renderCaroBoard();
+  }
+
+  renderCaroBoard();
+</script>
+
+<!-- 🔢 Game Đoán Số -->
+<section style="background: #fdfdfd; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center;">🔢 Game Đoán Số</h2>
+  <p style="text-align:center;">Tớ đang nghĩ 1 số từ 1 đến 10. Bạn thử đoán xem!</p>
+  <div style="text-align: center;">
+    <input type="number" id="guess-input" min="1" max="10" />
+    <button onclick="checkGuess()">Đoán</button>
+    <p id="guess-result"></p>
   </div>
 </section>
 
 <script>
-  let expression = "";
-
-  function press(val) {
-    expression += val;
-    document.getElementById("calc-display").value = expression;
-  }
-
-  function calculate() {
-    try {
-      const result = eval(expression);
-      document.getElementById("calc-display").value = result;
-      expression = result.toString();
-    } catch {
-      document.getElementById("calc-display").value = "Lỗi!";
-      expression = "";
+  let randomNumber = Math.floor(Math.random() * 10) + 1;
+  function checkGuess() {
+    const guess = parseInt(document.getElementById("guess-input").value);
+    const result = document.getElementById("guess-result");
+    if (guess === randomNumber) {
+      result.textContent = "🎉 Chính xác!";
+      randomNumber = Math.floor(Math.random() * 10) + 1;
+    } else {
+      result.textContent = "❌ Sai rồi! Thử lại nhé!";
     }
   }
-
-  function clearDisplay() {
-    expression = "";
-    document.getElementById("calc-display").value = "";
-  }
 </script>
-<!-- 🌐 Chuyển ngôn ngữ Việt ↔ English -->
-<section style="text-align:center; margin: 40px auto; max-width: 600px; padding: 25px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2>🌐 Ngôn ngữ / Language</h2>
-  <p id="lang-text">Xin chào! Đây là trang web cá nhân của mình.</p>
-  <button onclick="toggleLang()">🌍 Chuyển đổi ngôn ngữ</button>
+
+<!-- 🧠 Mini Quiz -->
+<section style="background: #fefefe; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center;">🧠 Mini Quiz về lập trình</h2>
+  <p>Câu hỏi: Thẻ HTML nào dùng để tạo tiêu đề lớn?</p>
+  <div style="text-align:center;">
+    <button onclick="checkQuiz('a')">a) &lt;p&gt;</button>
+    <button onclick="checkQuiz('b')">b) &lt;title&gt;</button>
+    <button onclick="checkQuiz('c')">c) &lt;h1&gt;</button>
+    <button onclick="checkQuiz('d')">d) &lt;div&gt;</button>
+    <p id="quiz-answer"></p>
+  </div>
 </section>
 
 <script>
-  let isVietnamese = true;
-  function toggleLang() {
-    const text = document.getElementById("lang-text");
-    if (isVietnamese) {
-      text.textContent = "Hello! This is my personal website.";
+  function checkQuiz(ans) {
+    const answer = document.getElementById("quiz-answer");
+    if (ans === "c") {
+      answer.textContent = "✅ Chính xác!";
     } else {
-      text.textContent = "Xin chào! Đây là trang web cá nhân của mình.";
+      answer.textContent = "❌ Sai rồi. Đáp án đúng là: <h1>";
     }
-    isVietnamese = !isVietnamese;
   }
 </script>
+<!-- 💻 Góc học lập trình -->
+<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
+  <h2 style="text-align: center;">💻 Góc học lập trình</h2>
+  <p><strong>1. Scratch là gì?</strong> – Là ngôn ngữ lập trình kéo thả, rất dễ dùng và vui nữa! Mình đã làm được nhiều game trên đó rồi.</p>
+  <p><strong>2. HTML là gì?</strong> – Là ngôn ngữ tạo ra các trang web. Mình dùng HTML để viết trang web đầu tiên nè!</p>
+  <p><strong>3. Tại sao nên học sớm?</strong> – Vì lập trình giúp mình sáng tạo, tư duy logic và tạo ra những thứ “ảo diệu” như chính web này!</p>
+  <p><strong>4. Dùng iPad học lập trình?</strong> – Mình dùng Safari, VS Code Web, GitHub… và một chiếc bàn phím là đủ chiến rồi! 😎</p>
+  <p><strong>5. Mục tiêu của mình:</strong> – Mỗi ngày học 1 chút để sau này trở thành lập trình viên thật xịn! 💻🚀</p>
+</section>
+
+<!-- 🧒 Giới thiệu bản thân -->
+<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
+  <h2>🧒 Giới thiệu về mình</h2>
+  <p>Mình là <strong>Phúc</strong>, học sinh lớp 5 và thích lập trình!</p>
+  <p>Trang web này được mình làm bằng HTML, CSS và JavaScript.</p>
+</section>
+
+<!-- 📩 Góp ý qua Google Form -->
+<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
+  <h2>📩 Góp ý cho mình nhé!</h2>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
+</section><!-- 📚 Góc đọc sách -->
+<section style="background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 12px; margin: 40px auto; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);" id="goc-doc-sach">
+  <h2>📚 Góc đọc sách</h2>
+  <ul>
+    <li>📘 <strong>Chuyện Con Mèo Dạy Hải Âu Bay</strong> – Câu chuyện cảm động về lòng tin và tình bạn.</li>
+    <li>📗 <strong>Dế Mèn Phiêu Lưu Ký</strong> – Cuộc hành trình thú vị với những bài học dũng cảm.</li>
+    <li>📕 <strong>Những Tấm Lòng Cao Cả</strong> – Truyện cảm động về lòng tốt và tình bạn.</li>
+  </ul>
+  <p>Nếu bạn cũng mê sách, thử đọc nha! Có sách hay thì góp ý giúp mình nhé 📩</p>
+</section>
+
+<!-- 💬 Hiệu ứng chữ gõ -->
+<script>
+  const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
+  let index = 0;
+  function typeWriter() {
+    if (index < text.length) {
+      document.getElementById("typewriter").innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 60);
+    }
+  }
+  typeWriter();
+</script>
+
+<!-- 🌠 Hiệu ứng sao rơi -->
+<canvas id="stars" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 0;"></canvas>
+<script>
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+  let w = (canvas.width = window.innerWidth);
+  let h = (canvas.height = window.innerHeight);
+  const stars = [];
+
+  for (let i = 0; i < 150; i++) {
+    stars.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      radius: Math.random() * 1.2,
+      vx: -0.5 + Math.random(),
+      vy: -0.5 + Math.random()
+    });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      ctx.moveTo(s.x, s.y);
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2, true);
+    }
+    ctx.fill();
+    moveStars();
+  }
+
+  function moveStars() {
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      s.x += s.vx;
+      s.y += s.vy;
+      if (s.x < 0) s.x = w;
+      if (s.y < 0) s.y = h;
+      if (s.x > w) s.x = 0;
+      if (s.y > h) s.y = 0;
+    }
+  }
+
+  setInterval(drawStars, 50);
+  window.addEventListener("resize", () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  });
+</script>
+<!-- 📌 Thanh menu điều hướng -->
+<nav style="position: fixed; top: 0; left: 0; width: 100%; background: #ffffffdd; backdrop-filter: blur(6px); z-index: 1000; display: flex; justify-content: center; gap: 15px; padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+  <a href="#gioi-thieu" style="text-decoration: none; font-weight: bold;">🧒 Giới thiệu</a>
+  <a href="#goc-hoc-lap-trinh" style="text-decoration: none; font-weight: bold;">💻 Học lập trình</a>
+  <a href="#goc-doc-sach" style="text-decoration: none; font-weight: bold;">📚 Góc đọc sách</a>
+  <a href="#mini-quiz" style="text-decoration: none; font-weight: bold;">🧠 Quiz</a>
+  <a href="#gop-y" style="text-decoration: none; font-weight: bold;">📩 Góp ý</a>
+</nav>
+
+<!-- 🔊 Nhạc nền -->
+<audio id="bg-music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
+
+<button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 999;">
+  🎵 Bật/Tắt Nhạc
+</button>
+
+<script>
+  let isPlaying = false;
+  const music = document.getElementById("bg-music");
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
+    }
+    isPlaying = !isPlaying;
+  }
+</script>
+
 </body>
 </html>
