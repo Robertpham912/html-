@@ -53,6 +53,34 @@
         opacity: 0;
       }
     }
+    #calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+#calendar div {
+  padding: 5px;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+#calendar .today {
+  background: #ffd54f;
+  font-weight: bold;
+}
+    #calc-buttons button {
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: #e0e0e0;
+  transition: background 0.3s;
+}
+#calc-buttons button:hover {
+  background: #bdbdbd;
+}
   </style>
 </head>
 <body onclick="createBubble(event)">
@@ -497,6 +525,75 @@
       text.textContent = "Xin chào! Đây là phiên bản Tiếng Việt.";
     } else if (lang === "en") {
       text.textContent = "Hello! This is the English version.";
+    }
+  }
+</script>
+  <!-- 🔤 Đổi Font Chữ -->
+<div style="text-align:center; margin: 30px 0;">
+  <label for="font-selector">🖋️ Đổi font chữ:</label>
+  <select id="font-selector" onchange="changeFont()" style="padding: 5px; font-size: 16px;">
+    <option value="'Segoe UI', sans-serif">Hiện đại (mặc định)</option>
+    <option value="'Comic Sans MS', cursive">Viết tay mềm mại</option>
+    <option value="'Courier New', monospace">Đánh máy cổ điển</option>
+  </select>
+</div>
+  <!-- 🎨 Đổi màu nền -->
+<section style="text-align:center; margin: 30px 0;">
+  <label for="colorPicker">🎨 Chọn màu nền bạn thích:</label>
+  <input type="color" id="colorPicker" onchange="changeBackground()" value="#ffffff" style="width: 80px; height: 40px; border: none; cursor: pointer;">
+  <button onclick="resetBackground()" style="margin-left: 10px;">🔄 Trở lại mặc định</button>
+</section>
+  <script>
+  function changeBackground() {
+    const color = document.getElementById("colorPicker").value;
+    document.body.style.background = color;
+  }
+
+  function resetBackground() {
+    document.body.style.background = "linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92)";
+  }
+</script>
+  <!-- 📅 Lịch mini -->
+<section style="text-align: center; margin: 30px auto; max-width: 300px; padding: 20px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(
+  <!-- 🧮 Máy tính mini -->
+<section style="text-align:center; padding: 20px; margin: 40px auto; background: #ffffffcc; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2>🧮 Máy tính mini</h2>
+  <input type="text" id="calc-display" readonly style="width: 100%; padding: 10px; font-size: 18px; margin-bottom: 10px;" />
+  <div id="calc-buttons" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+    <button onclick="appendCalc('7')">7</button>
+    <button onclick="appendCalc('8')">8</button>
+    <button onclick="appendCalc('9')">9</button>
+    <button onclick="appendCalc('/')">÷</button>
+    <button onclick="appendCalc('4')">4</button>
+    <button onclick="appendCalc('5')">5</button>
+    <button onclick="appendCalc('6')">6</button>
+    <button onclick="appendCalc('*')">×</button>
+    <button onclick="appendCalc('1')">1</button>
+    <button onclick="appendCalc('2')">2</button>
+    <button onclick="appendCalc('3')">3</button>
+    <button onclick="appendCalc('-')">−</button>
+    <button onclick="appendCalc('0')">0</button>
+    <button onclick="appendCalc('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="appendCalc('+')">+</button>
+    <button onclick="clearCalc()" style="grid-column: span 4;">🧹 Xóa</button>
+  </div>
+</section>
+  <script>
+  function appendCalc(value) {
+    document.getElementById("calc-display").value += value;
+  }
+
+  function clearCalc() {
+    document.getElementById("calc-display").value = "";
+  }
+
+  function calculate() {
+    try {
+      const result = eval(document.getElementById("calc-display").value);
+      document.getElementById("calc-display").value = result;
+    } catch {
+      document.getElementById("calc-display").value = "Lỗi!";
     }
   }
 </script>
