@@ -374,5 +374,131 @@
     document.getElementById("result").textContent = result;
   }
 </script>
-</body>
+  <!-- 🧮 Bộ đếm ngày học lập trình -->
+<section style="text-align:center; margin: 40px auto; background: #fffbe6; padding: 25px; border-radius: 12px; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2>🧮 Mình đã học lập trình được:</h2>
+  <p id="coding-days" style="font-size: 24px;">...</p>
+</section>
+
+<script>
+  function updateCodingDays() {
+    const startDate = new Date("2024-06-01");
+    const today = new Date();
+    const diffTime = today - startDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.getElementById("coding-days").textContent = `${diffDays} ngày rồi đó! 🎉`;
+  }
+  updateCodingDays();
+</script>
+  <!-- 🌈 Trình đổi màu nền -->
+<section style="text-align:center; margin: 40px auto; background: #e6f7ff; padding: 25px; border-radius: 12px; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2>🎨 Chọn màu nền yêu thích:</h2>
+  <input type="color" id="colorPicker" />
+  <button onclick="changeBackground()">Thay đổi</button>
+</section>
+
+<script>
+  function changeBackground() {
+    const color = document.getElementById("colorPicker").value;
+    document.body.style.background = color;
+  }
+</script>
+  <!-- 🗓️ Lịch mini -->
+<section style="text-align:center; margin: 40px auto; background: #fff3cd; padding: 25px; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2>🗓️ Lịch mini hôm nay</h2>
+  <div id="mini-calendar" style="font-size: 20px; font-weight: bold;"></div>
+</section>
+
+<script>
+  function renderCalendar() {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1; // Tháng trong JS bắt đầu từ 0
+    const year = today.getFullYear();
+    const weekday = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Th
+                     <!-- 📅 Lịch mini -->
+<section style="background: #ffffffdd; padding: 20px; margin: 40px auto; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center;">
+  <h2>📅 Lịch Mini</h2>
+  <div id="mini-calendar"></div>
+</section>
+<script>
+  function renderCalendar() {
+    const calendarDiv = document.getElementById("mini-calendar");
+    const today = new Date();
+    const month = today.toLocaleString("vi-VN", { month: "long" });
+    const year = today.getFullYear();
+
+    let days = "";
+    for (let i = 1; i <= 31; i++) {
+      days += `<div style="display:inline-block; width:30px; margin:2px; ${i === today.getDate() ? 'font-weight:bold;color:#d33;' : ''}">${i}</div>`;
+    }
+
+    calendarDiv.innerHTML = `<strong>${month} ${year}</strong><br/>${days}`;
+  }
+  renderCalendar();
+</script>
+
+<!-- 🧮 Máy tính mini -->
+<section style="background: #ffffffdd; padding: 25px; margin: 40px auto; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align:center;">
+  <h2>🧮 Máy tính Mini</h2>
+  <input id="calc-display" type="text" style="width: 90%; font-size: 20px; margin-bottom: 10px;" readonly>
+  <div>
+    <button onclick="appendCalc('1')">1</button>
+    <button onclick="appendCalc('2')">2</button>
+    <button onclick="appendCalc('3')">3</button>
+    <button onclick="appendCalc('+')">+</button><br/>
+    <button onclick="appendCalc('4')">4</button>
+    <button onclick="appendCalc('5')">5</button>
+    <button onclick="appendCalc('6')">6</button>
+    <button onclick="appendCalc('-')">-</button><br/>
+    <button onclick="appendCalc('7')">7</button>
+    <button onclick="appendCalc('8')">8</button>
+    <button onclick="appendCalc('9')">9</button>
+    <button onclick="appendCalc('*')">*</button><br/>
+    <button onclick="appendCalc('0')">0</button>
+    <button onclick="appendCalc('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="appendCalc('/')">/</button><br/>
+    <button onclick="clearCalc()">C</button>
+  </div>
+</section>
+<script>
+  let calc = "";
+  function appendCalc(val) {
+    calc += val;
+    document.getElementById("calc-display").value = calc;
+  }
+  function calculate() {
+    try {
+      calc = eval(calc).toString();
+      document.getElementById("calc-display").value = calc;
+    } catch {
+      document.getElementById("calc-display").value = "Lỗi!";
+      calc = "";
+    }
+  }
+  function clearCalc() {
+    calc = "";
+    document.getElementById("calc-display").value = "";
+  }
+</script>
+  <!-- 🌐 Chuyển ngôn ngữ Việt ↔ English -->
+<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; text-align: center;">
+  <h2>🌐 Chuyển Ngôn Ngữ</h2>
+  <button onclick="changeLanguage('vi')">🇻🇳 Tiếng Việt</button>
+  <button onclick="changeLanguage('en')">🇬🇧 English</button>
+  <p id="lang-text">Xin chào! Đây là phiên bản Tiếng Việt.</p>
+</section>
+
+<script>
+  function changeLanguage(lang) {
+    const text = document.getElementById("lang-text");
+    if (lang === "vi") {
+      text.textContent = "Xin chào! Đây là phiên bản Tiếng Việt.";
+    } else if (lang === "en") {
+      text.textContent = "Hello! This is the English version.";
+    }
+  }
+</script>
+  </body>
 </html>
