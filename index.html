@@ -641,5 +641,50 @@ body {
     }
   }
 </script>
+  <!-- 🔍 Tìm kiếm nội dung -->
+<section style="text-align:center; margin: 40px 0;">
+  <h2>🔍 Tìm kiếm nội dung trên trang</h2>
+  <input type="text" id="searchInput" placeholder="Nhập từ khóa (ví dụ: Caro, Nhạc, Góp ý...)" style="padding: 10px; width: 60%; border-radius: 8px; border: 1px solid #ccc;">
+  <button onclick="searchContent()" style="padding: 10px 15px; margin-left: 10px; border-radius: 8px; border: none; background: #4CAF50; color: white;">Tìm</button>
+  <p id="searchResult" style="margin-top: 10px;"></p>
+</section>
+
+<script>
+  const keywords = {
+    "caro": "caro-board",
+    "góp ý": "gop-y",
+    "giới thiệu": "gioi-thieu",
+    "góc học lập trình": "goc-hoc-lap-trinh",
+    "slideshow": "slideshow",
+    "quiz": "mini-quiz",
+    "nhạc": "bg-music",
+    "sinh nhật": "birthday-countdown",
+    "thời tiết": "weather",
+    "đếm lượt": "visit-count",
+    "lịch": "mini-calendar"
+  };
+
+  function searchContent() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const result = document.getElementById("searchResult");
+    let found = false;
+
+    for (let keyword in keywords) {
+      if (input.includes(keyword)) {
+        const element = document.getElementById(keywords[keyword]);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          result.textContent = "✅ Đã cuộn đến phần: " + keyword;
+          found = true;
+          break;
+        }
+      }
+    }
+
+    if (!found) {
+      result.textContent = "❌ Không tìm thấy nội dung phù hợp. Hãy thử từ khóa khác.";
+    }
+  }
+</script>
   </body>
 </html>
