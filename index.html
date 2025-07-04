@@ -53,104 +53,30 @@
         opacity: 0;
       }
     }
-    #calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  font-size: 14px;
-  margin-top: 10px;
-}
-#calendar div {
-  padding: 5px;
-  background: #f0f0f0;
-  border-radius: 4px;
-}
-#calendar .today {
-  background: #ffd54f;
-  font-weight: bold;
-}
-    #calc-buttons button {
-  padding: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  background: #e0e0e0;
-  transition: background 0.3s;
-}
-#calc-buttons button:hover {
-  background: #bdbdbd;
-}
-    html {
-  scroll-behavior: smooth;
-}
-    .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(6px);
-  z-index: 1000;
-  padding: 10px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.navbar ul {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.navbar a {
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-.navbar a:hover {
-  color: #0072ff;
-}
-body {
-  padding-top: 60px; /* để không bị che nội dung khi cuộn */
-}
   </style>
 </head>
 <body onclick="createBubble(event)">
-  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
+  <button class="toggle-btn" id="chuyen-che-do" onclick="toggleMode()">🌗 Chuyển chế độ</button>
   <h1 id="typewriter">🎉 Xin chào! Đây là web đầu tiên của mình!</h1>
 
-  <nav class="navbar">
-  <ul>
-    <li><a href="#gioi-thieu">Giới thiệu</a></li>
-    <li><a href="#goc-hoc-lap-trinh">Góc lập trình</a></li>
-    <li><a href="#goc-doc-sach">Góc đọc sách</a></li>
-    <li><a href="#game">Game</a></li>
-    <li><a href="#gop-y">Góp ý</a></li>
-  </ul>
-</nav>
-  
-  <div style="text-align: center; margin: 10px 0;">
-  👁️ Số lần bạn đã ghé thăm web này: <span id="visit-count">0</span> lần
-</div>
-  <!-- ⏰ Đồng hồ -->
-  <div style="text-align:center; margin-top: 30px; font-size: 20px;" id="clock-container">
-    🕒 <span id="clock">--:--:--</span>
-  </div>
-
+  <!-- ✅ Bộ đếm ngày học lập trình -->
+  <section id="dem-ngay" style="text-align:center; margin: 30px 0; background:#ffffffcc; max-width:800px; margin-left:auto; margin-right:auto; padding:20px; border-radius:12px;">
+    <h2>📅 Mình đã học lập trình được:</h2>
+    <p id="day-counter">0 ngày</p>
+  </section>
   <script>
-    function updateClock() {
+    const startDate = new Date("2024-06-01");
+    function updateDayCounter() {
       const now = new Date();
-      document.getElementById("clock").innerText = now.toLocaleTimeString("vi-VN");
+      const diffTime = now - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById("day-counter").textContent = diffDays + " ngày";
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+    updateDayCounter();
+  </script>
 
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
-    }
-
+  <!-- 🫧 Bong bóng click -->
+  <script>
     function createBubble(e) {
       const bubble = document.createElement("span");
       bubble.className = "bubble";
@@ -159,435 +85,19 @@ body {
       document.body.appendChild(bubble);
       setTimeout(() => bubble.remove(), 1000);
     }
-  </script>
-  <!-- 🎂 Đếm ngược đến sinh nhật -->
-<section style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 800px; margin-left: auto; margin-right: auto;">
-  <h2>🎂 Còn bao lâu nữa đến sinh nhật của tớ?</h2>
-  <p id="birthday-countdown">Đang tính toán...</p>
-</section>
 
-<script>
-  function updateBirthdayCountdown() {
-    const today = new Date();
-    let birthday = new Date(today.getFullYear(), 11, 9); // 11 = Tháng 12 (JS đếm từ 0)
-
-    if (today > birthday) {
-      birthday.setFullYear(birthday.getFullYear() + 1); // Nếu đã qua thì lấy năm sau
-    }
-
-    const diffTime = birthday - today;
-    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diffTime / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diffTime / (1000 * 60)) % 60);
-    const seconds = Math.floor((diffTime / 1000) % 60);
-
-    document.getElementById("birthday-countdown").textContent =
-      `Còn ${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây nữa là đến sinh nhật 🎉`;
-  }
-
-  setInterval(updateBirthdayCountdown, 1000);
-  updateBirthdayCountdown();
-</script>
-    <!-- 🔊 Nhạc nền -->
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ phát nhạc.
-  </audio>
-  <button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 999;">
-    🎵 Bật/Tắt Nhạc
-  </button>
-  <script>
-    let isPlaying = false;
-    const music = document.getElementById("bg-music");
-    function toggleMusic() {
-      if (isPlaying) {
-        music.pause();
-      } else {
-        music.play();
-      }
-      isPlaying = !isPlaying;
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
     }
   </script>
-
-  <!-- 🌤️ Tiện ích thời tiết (Hà Nội) -->
-  <div style="text-align:center; margin-top: 40px;">
-    <iframe src="https://forecast7.com/vi/21d03105d85/ha-noi/" frameborder="0" width="650" height="250" allowtransparency="true" 
-    sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
-  </div>
-
-  <!-- 🖼️ Slideshow ảnh -->
-  <section style="text-align: center; margin: 50px auto;">
-    <h2>🖼️ Bộ sưu tập ảnh</h2>
-    <img id="slideshow" src="https://picsum.photos/seed/1/600/300" style="max-width: 90%; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3);"/>
-  </section>
-  <script>
-    const slide = document.getElementById("slideshow");
-    let i = 1;
-    setInterval(() => {
-      i++;
-      slide.src = `https://picsum.photos/seed/${i}/600/300`;
-    }, 3000);
-  </script>
-  <!-- 🎮 Game Caro (Tic-Tac-Toe) -->
-<section style="background: #fff; padding: 20px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2 style="text-align: center;">🎲 Game Caro (Tic-Tac-Toe)</h2>
-  <table id="caro-board" style="margin: auto;"></table>
-  <p id="caro-status" style="text-align: center; font-weight: bold;"></p>
-</section>
-
-<script>
-  const caroBoard = document.getElementById("caro-board");
-  const caroStatus = document.getElementById("caro-status");
-  let caroCurrent = "❌";
-  let caroCells = Array(3).fill().map(() => Array(3).fill(""));
-
-  function renderCaroBoard() {
-    caroBoard.innerHTML = "";
-    for (let i = 0; i < 3; i++) {
-      const row = document.createElement("tr");
-      for (let j = 0; j < 3; j++) {
-        const cell = document.createElement("td");
-        cell.textContent = caroCells[i][j];
-        cell.style.width = "60px";
-        cell.style.height = "60px";
-        cell.style.border = "1px solid black";
-        cell.style.fontSize = "30px";
-        cell.style.textAlign = "center";
-        cell.style.cursor = "pointer";
-        cell.onclick = () => handleCaroClick(i, j);
-        row.appendChild(cell);
-      }
-      caroBoard.appendChild(row);
-    }
-  }
-
-  function handleCaroClick(i, j) {
-    if (caroCells[i][j] !== "") return;
-    caroCells[i][j] = caroCurrent;
-    if (checkWin(caroCurrent)) {
-      caroStatus.textContent = caroCurrent + " thắng rồi!";
-      setTimeout(resetCaro, 1500);
-    } else {
-      caroCurrent = caroCurrent === "❌" ? "⭕" : "❌";
-      renderCaroBoard();
-    }
-  }
-
-  function checkWin(p) {
-    for (let i = 0; i < 3; i++) {
-      if (caroCells[i][0] === p && caroCells[i][1] === p && caroCells[i][2] === p) return true;
-      if (caroCells[0][i] === p && caroCells[1][i] === p && caroCells[2][i] === p) return true;
-    }
-    if (caroCells[0][0] === p && caroCells[1][1] === p && caroCells[2][2] === p) return true;
-    if (caroCells[0][2] === p && caroCells[1][1] === p && caroCells[2][0] === p) return true;
-    return false;
-  }
-
-  function resetCaro() {
-    caroCells = Array(3).fill().map(() => Array(3).fill(""));
-    caroCurrent = "❌";
-    caroStatus.textContent = "";
-    renderCaroBoard();
-  }
-
-  renderCaroBoard();
-</script>
-
-<!-- 🎯 Game Đoán số -->
-<section style="background: #fdfdfd; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2 style="text-align: center;">🔢 Game Đoán Số</h2>
-  <p style="text-align:center;">Tớ đang nghĩ 1 số từ 1 đến 10. Bạn thử đoán xem!</p>
-  <div style="text-align: center;">
-    <input type="number" id="guess-input" min="1" max="10" />
-    <button onclick="checkGuess()">Đoán</button>
-    <p id="guess-result"></p>
-  </div>
-</section>
-<script>
-  let randomNumber = Math.floor(Math.random() * 10) + 1;
-  function checkGuess() {
-    const guess = parseInt(document.getElementById("guess-input").value);
-    const result = document.getElementById("guess-result");
-    if (guess === randomNumber) {
-      result.textContent = "🎉 Chính xác!";
-      randomNumber = Math.floor(Math.random() * 10) + 1;
-    } else {
-      result.textContent = "❌ Sai rồi! Thử lại nhé!";
-    }
-  }
-</script>
-
-<!-- 🧠 Mini Quiz -->
-<section style="background: #fefefe; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2 style="text-align:center;">🧠 Mini Quiz về lập trình</h2>
-  <p>Câu hỏi: Thẻ HTML nào dùng để tạo tiêu đề lớn?</p>
-  <div style="text-align:center;">
-    <button onclick="checkQuiz('a')">a) &lt;p&gt;</button>
-    <button onclick="checkQuiz('b')">b) &lt;title&gt;</button>
-    <button onclick="checkQuiz('c')">c) &lt;h1&gt;</button>
-    <button onclick="checkQuiz('d')">d) &lt;div&gt;</button>
-    <p id="quiz-answer"></p>
-  </div>
-</section>
-<script>
-  function checkQuiz(ans) {
-    const answer = document.getElementById("quiz-answer");
-    if (ans === "c") {
-      answer.textContent = "✅ Chính xác!";
-    } else {
-      answer.textContent = "❌ Sai rồi. Đáp án đúng là: <h1>";
-    }
-  }
-</script>
-<!-- 💻 Góc học lập trình -->
-<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
-  <h2 style="text-align: center;">💻 Góc học lập trình</h2>
-  <p><strong>1. Scratch là gì?</strong> – Là ngôn ngữ lập trình kéo thả, rất dễ dùng và vui nữa! Mình đã làm được nhiều game trên đó rồi.</p>
-  <p><strong>2. HTML là gì?</strong> – Là ngôn ngữ tạo ra các trang web. Mình dùng HTML để viết trang web đầu tiên nè!</p>
-  <p><strong>3. Tại sao nên học sớm?</strong> – Vì lập trình giúp mình sáng tạo, tư duy logic và tạo ra những thứ “ảo diệu” như chính web này!</p>
-  <p><strong>4. Dùng iPad học lập trình?</strong> – Mình dùng Safari, VS Code Web, GitHub… và một chiếc bàn phím là đủ chiến rồi! 😎</p>
-  <p><strong>5. Mục tiêu của mình:</strong> – Mỗi ngày học 1 chút để sau này trở thành lập trình viên thật xịn! 💻🚀</p>
-</section>
-
-<!-- 🧒 Giới thiệu bản thân -->
-<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
-  <h2>🧒 Giới thiệu về mình</h2>
-  <p>Mình là <strong>Phúc</strong>, học sinh lớp 5 và thích lập trình!</p>
-  <p>Trang web này được mình làm bằng HTML, CSS và JavaScript.</p>
-</section>
-
-<!-- 📩 Góp ý qua Google Form -->
-<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
-  <h2>📩 Góp ý cho mình nhé!</h2>
-  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
-</section>
-
-<!-- 💬 Hiệu ứng chữ gõ -->
-<script>
-  const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
-  let index = 0;
-  function typeWriter() {
-    if (index < text.length) {
-      document.getElementById("typewriter").innerHTML += text.charAt(index);
-      index++;
-      setTimeout(typeWriter, 60);
-    }
-  }
-  typeWriter();
-</script>
-<style>
-  #scrollTopBtn {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    z-index: 1000;
-    font-size: 18px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    background-color: #ffffffcc;
-    cursor: pointer;
-    display: none;
-    font-weight: bold;
-  }
-</style>
-
-<button onclick="scrollToTop()" id="scrollTopBtn">⬆️ Lên đầu</button>
-
-<script>
-  const scrollBtn = document.getElementById("scrollTopBtn");
-
-  window.onscroll = function () {
-    scrollBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
-  };
-
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-</script>
-  <script>
-  let visitCount = localStorage.getItem("visitCount");
-  if (!visitCount) {
-    visitCount = 1;
-  } else {
-    visitCount = parseInt(visitCount) + 1;
-  }
-  localStorage.setItem("visitCount", visitCount);
-  document.getElementById("visit-count").innerText = visitCount;
-</script>
-<!-- 🎮 Game Kéo – Búa – Bao -->
-<section style="background: #ffffffdd; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center;">
-  <h2>🎮 Kéo – Búa – Bao</h2>
-  <p>Chọn một trong ba nhé:</p>
-  <button onclick="playGame('kéo')">✌️ Kéo</button>
-  <button onclick="playGame('búa')">✊ Búa</button>
-  <button onclick="playGame('bao')">✋ Bao</button>
-  <p id="result" style="margin-top: 20px; font-weight: bold;"></p>
-</section>
-  <script>
-  function playGame(playerChoice) {
-    const choices = ["kéo", "búa", "bao"];
-    const botChoice = choices[Math.floor(Math.random() * 3)];
-
-    let result = "";
-
-    if (playerChoice === botChoice) {
-      result = `🤝 Hòa! Máy cũng chọn ${botChoice}.`;
-    } else if (
-      (playerChoice === "kéo" && botChoice === "bao") ||
-      (playerChoice === "búa" && botChoice === "kéo") ||
-      (playerChoice === "bao" && botChoice === "búa")
-    ) {
-      result = `🎉 Bạn thắng! Máy chọn ${botChoice}.`;
-    } else {
-      result = `😢 Bạn thua! Máy chọn ${botChoice}.`;
-    }
-
-    document.getElementById("result").textContent = result;
-  }
-</script>
-  <!-- 🧮 Bộ đếm ngày học lập trình -->
-<section style="text-align:center; margin: 40px auto; background: #fffbe6; padding: 25px; border-radius: 12px; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2>🧮 Mình đã học lập trình được:</h2>
-  <p id="coding-days" style="font-size: 24px;">...</p>
-</section>
-
-<script>
-  function updateCodingDays() {
-    const startDate = new Date("2024-06-01");
-    const today = new Date();
-    const diffTime = today - startDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById("coding-days").textContent = `${diffDays} ngày rồi đó! 🎉`;
-  }
-  updateCodingDays();
-</script>
-  <!-- 🌈 Trình đổi màu nền -->
-<section style="text-align:center; margin: 40px auto; background: #e6f7ff; padding: 25px; border-radius: 12px; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2>🎨 Chọn màu nền yêu thích:</h2>
-  <input type="color" id="colorPicker" />
-  <button onclick="changeBackground()">Thay đổi</button>
-</section>
-
-<script>
-  function changeBackground() {
-    const color = document.getElementById("colorPicker").value;
-    document.body.style.background = color;
-  }
-</script>
-  <!-- 🗓️ Lịch mini -->
-<section style="text-align:center; margin: 40px auto; background: #fff3cd; padding: 25px; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-  <h2>🗓️ Lịch mini hôm nay</h2>
-  <div id="mini-calendar" style="font-size: 20px; font-weight: bold;"></div>
-</section>
-
-<script>
-  function renderCalendar() {
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth() + 1; // Tháng trong JS bắt đầu từ 0
-    const year = today.getFullYear();
-    const weekday = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Th
-                     <!-- 📅 Lịch mini -->
-<section style="background: #ffffffdd; padding: 20px; margin: 40px auto; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align: center;">
-  <h2>📅 Lịch Mini</h2>
-  <div id="mini-calendar"></div>
-</section>
-<script>
-  function renderCalendar() {
-    const calendarDiv = document.getElementById("mini-calendar");
-    const today = new Date();
-    const month = today.toLocaleString("vi-VN", { month: "long" });
-    const year = today.getFullYear();
-
-    let days = "";
-    for (let i = 1; i <= 31; i++) {
-      days += `<div style="display:inline-block; width:30px; margin:2px; ${i === today.getDate() ? 'font-weight:bold;color:#d33;' : ''}">${i}</div>`;
-    }
-
-    calendarDiv.innerHTML = `<strong>${month} ${year}</strong><br/>${days}`;
-  }
-  renderCalendar();
-</script>
-
-<!-- 🧮 Máy tính mini -->
-<section style="background: #ffffffdd; padding: 25px; margin: 40px auto; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1); text-align:center;">
-  <h2>🧮 Máy tính Mini</h2>
-  <input id="calc-display" type="text" style="width: 90%; font-size: 20px; margin-bottom: 10px;" readonly>
-  <div>
-    <button onclick="appendCalc('1')">1</button>
-    <button onclick="appendCalc('2')">2</button>
-    <button onclick="appendCalc('3')">3</button>
-    <button onclick="appendCalc('+')">+</button><br/>
-    <button onclick="appendCalc('4')">4</button>
-    <button onclick="appendCalc('5')">5</button>
-    <button onclick="appendCalc('6')">6</button>
-    <button onclick="appendCalc('-')">-</button><br/>
-    <button onclick="appendCalc('7')">7</button>
-    <button onclick="appendCalc('8')">8</button>
-    <button onclick="appendCalc('9')">9</button>
-    <button onclick="appendCalc('*')">*</button><br/>
-    <button onclick="appendCalc('0')">0</button>
-    <button onclick="appendCalc('.')">.</button>
-    <button onclick="calculate()">=</button>
-    <button onclick="appendCalc('/')">/</button><br/>
-    <button onclick="clearCalc()">C</button>
-  </div>
-</section>
-<script>
-  let calc = "";
-  function appendCalc(val) {
-    calc += val;
-    document.getElementById("calc-display").value = calc;
-  }
-  function calculate() {
-    try {
-      calc = eval(calc).toString();
-      document.getElementById("calc-display").value = calc;
-    } catch {
-      document.getElementById("calc-display").value = "Lỗi!";
-      calc = "";
-    }
-  }
-  function clearCalc() {
-    calc = "";
-    document.getElementById("calc-display").value = "";
-  }
-</script>
-  <!-- 🌐 Chuyển ngôn ngữ Việt ↔ English -->
-<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; text-align: center;">
-  <h2>🌐 Chuyển Ngôn Ngữ</h2>
-  <button onclick="changeLanguage('vi')">🇻🇳 Tiếng Việt</button>
-  <button onclick="changeLanguage('en')">🇬🇧 English</button>
-  <p id="lang-text">Xin chào! Đây là phiên bản Tiếng Việt.</p>
-</section>
-
-<script>
-  function changeLanguage(lang) {
-    const text = document.getElementById("lang-text");
-    if (lang === "vi") {
-      text.textContent = "Xin chào! Đây là phiên bản Tiếng Việt.";
-    } else if (lang === "en") {
-      text.textContent = "Hello! This is the English version.";
-    }
-  }
-</script>
-  <!-- 🔤 Đổi Font Chữ -->
-<div style="text-align:center; margin: 30px 0;">
-  <label for="font-selector">🖋️ Đổi font chữ:</label>
-  <select id="font-selector" onchange="changeFont()" style="padding: 5px; font-size: 16px;">
-    <option value="'Segoe UI', sans-serif">Hiện đại (mặc định)</option>
-    <option value="'Comic Sans MS', cursive">Viết tay mềm mại</option>
-    <option value="'Courier New', monospace">Đánh máy cổ điển</option>
-  </select>
-</div>
   <!-- 🎨 Đổi màu nền -->
 <section style="text-align:center; margin: 30px 0;">
   <label for="colorPicker">🎨 Chọn màu nền bạn thích:</label>
   <input type="color" id="colorPicker" onchange="changeBackground()" value="#ffffff" style="width: 80px; height: 40px; border: none; cursor: pointer;">
   <button onclick="resetBackground()" style="margin-left: 10px;">🔄 Trở lại mặc định</button>
 </section>
-  <script>
+
+<script>
   function changeBackground() {
     const color = document.getElementById("colorPicker").value;
     document.body.style.background = color;
@@ -597,94 +107,90 @@ body {
     document.body.style.background = "linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92)";
   }
 </script>
-  <!-- 📅 Lịch mini -->
-<section style="text-align: center; margin: 30px auto; max-width: 300px; padding: 20px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(
-  <!-- 🧮 Máy tính mini -->
-<section style="text-align:center; padding: 20px; margin: 40px auto; background: #ffffffcc; border-radius: 12px; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+<!-- 📅 Lịch mini -->
+<section style="text-align: center; margin: 30px auto; max-width: 300px; padding: 20px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2>📅 Lịch hôm nay</h2>
+  <p id="calendar-today" style="font-size: 24px; font-weight: bold;">--</p>
+</section>
+
+<script>
+  function updateCalendar() {
+    const today = new Date();
+    const dayNames = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
+    const dayName = dayNames[today.getDay()];
+    const dateStr = `${dayName}, ${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+    document.getElementById("calendar-today").textContent = dateStr;
+  }
+  updateCalendar();
+</script>
+<!-- 🧮 Máy tính mini -->
+<section style="text-align:center; margin: 40px auto; max-width: 350px; padding: 25px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
   <h2>🧮 Máy tính mini</h2>
-  <input type="text" id="calc-display" readonly style="width: 100%; padding: 10px; font-size: 18px; margin-bottom: 10px;" />
-  <div id="calc-buttons" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
-    <button onclick="appendCalc('7')">7</button>
-    <button onclick="appendCalc('8')">8</button>
-    <button onclick="appendCalc('9')">9</button>
-    <button onclick="appendCalc('/')">÷</button>
-    <button onclick="appendCalc('4')">4</button>
-    <button onclick="appendCalc('5')">5</button>
-    <button onclick="appendCalc('6')">6</button>
-    <button onclick="appendCalc('*')">×</button>
-    <button onclick="appendCalc('1')">1</button>
-    <button onclick="appendCalc('2')">2</button>
-    <button onclick="appendCalc('3')">3</button>
-    <button onclick="appendCalc('-')">−</button>
-    <button onclick="appendCalc('0')">0</button>
-    <button onclick="appendCalc('.')">.</button>
+  <input id="calc-display" style="width: 90%; padding: 10px; font-size: 20px; margin-bottom: 10px;" disabled />
+  <br/>
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+    <button onclick="press('7')">7</button>
+    <button onclick="press('8')">8</button>
+    <button onclick="press('9')">9</button>
+    <button onclick="press('/')">÷</button>
+    <button onclick="press('4')">4</button>
+    <button onclick="press('5')">5</button>
+    <button onclick="press('6')">6</button>
+    <button onclick="press('*')">×</button>
+    <button onclick="press('1')">1</button>
+    <button onclick="press('2')">2</button>
+    <button onclick="press('3')">3</button>
+    <button onclick="press('-')">−</button>
+    <button onclick="press('0')">0</button>
+    <button onclick="press('.')">.</button>
     <button onclick="calculate()">=</button>
-    <button onclick="appendCalc('+')">+</button>
-    <button onclick="clearCalc()" style="grid-column: span 4;">🧹 Xóa</button>
+    <button onclick="press('+')">+</button>
+    <button onclick="clearDisplay()" style="grid-column: span 4; background: #fdd;">🗑️ Xóa</button>
   </div>
 </section>
-  <script>
-  function appendCalc(value) {
-    document.getElementById("calc-display").value += value;
-  }
 
-  function clearCalc() {
-    document.getElementById("calc-display").value = "";
+<script>
+  let expression = "";
+
+  function press(val) {
+    expression += val;
+    document.getElementById("calc-display").value = expression;
   }
 
   function calculate() {
     try {
-      const result = eval(document.getElementById("calc-display").value);
+      const result = eval(expression);
       document.getElementById("calc-display").value = result;
+      expression = result.toString();
     } catch {
       document.getElementById("calc-display").value = "Lỗi!";
+      expression = "";
     }
   }
+
+  function clearDisplay() {
+    expression = "";
+    document.getElementById("calc-display").value = "";
+  }
 </script>
-  <!-- 🔍 Tìm kiếm nội dung -->
-<section style="text-align:center; margin: 40px 0;">
-  <h2>🔍 Tìm kiếm nội dung trên trang</h2>
-  <input type="text" id="searchInput" placeholder="Nhập từ khóa (ví dụ: Caro, Nhạc, Góp ý...)" style="padding: 10px; width: 60%; border-radius: 8px; border: 1px solid #ccc;">
-  <button onclick="searchContent()" style="padding: 10px 15px; margin-left: 10px; border-radius: 8px; border: none; background: #4CAF50; color: white;">Tìm</button>
-  <p id="searchResult" style="margin-top: 10px;"></p>
+<!-- 🌐 Chuyển ngôn ngữ Việt ↔ English -->
+<section style="text-align:center; margin: 40px auto; max-width: 600px; padding: 25px; background: #ffffffcc; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2>🌐 Ngôn ngữ / Language</h2>
+  <p id="lang-text">Xin chào! Đây là trang web cá nhân của mình.</p>
+  <button onclick="toggleLang()">🌍 Chuyển đổi ngôn ngữ</button>
 </section>
 
 <script>
-  const keywords = {
-    "caro": "caro-board",
-    "góp ý": "gop-y",
-    "giới thiệu": "gioi-thieu",
-    "góc học lập trình": "goc-hoc-lap-trinh",
-    "slideshow": "slideshow",
-    "quiz": "mini-quiz",
-    "nhạc": "bg-music",
-    "sinh nhật": "birthday-countdown",
-    "thời tiết": "weather",
-    "đếm lượt": "visit-count",
-    "lịch": "mini-calendar"
-  };
-
-  function searchContent() {
-    const input = document.getElementById("searchInput").value.toLowerCase();
-    const result = document.getElementById("searchResult");
-    let found = false;
-
-    for (let keyword in keywords) {
-      if (input.includes(keyword)) {
-        const element = document.getElementById(keywords[keyword]);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-          result.textContent = "✅ Đã cuộn đến phần: " + keyword;
-          found = true;
-          break;
-        }
-      }
+  let isVietnamese = true;
+  function toggleLang() {
+    const text = document.getElementById("lang-text");
+    if (isVietnamese) {
+      text.textContent = "Hello! This is my personal website.";
+    } else {
+      text.textContent = "Xin chào! Đây là trang web cá nhân của mình.";
     }
-
-    if (!found) {
-      result.textContent = "❌ Không tìm thấy nội dung phù hợp. Hãy thử từ khóa khác.";
-    }
+    isVietnamese = !isVietnamese;
   }
 </script>
-  </body>
+</body>
 </html>
