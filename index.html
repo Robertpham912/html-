@@ -81,12 +81,56 @@
 #calc-buttons button:hover {
   background: #bdbdbd;
 }
+    html {
+  scroll-behavior: smooth;
+}
+    .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  padding: 10px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.navbar a:hover {
+  color: #0072ff;
+}
+body {
+  padding-top: 60px; /* để không bị che nội dung khi cuộn */
+}
   </style>
 </head>
 <body onclick="createBubble(event)">
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
   <h1 id="typewriter">🎉 Xin chào! Đây là web đầu tiên của mình!</h1>
 
+  <nav class="navbar">
+  <ul>
+    <li><a href="#gioi-thieu">Giới thiệu</a></li>
+    <li><a href="#goc-hoc-lap-trinh">Góc lập trình</a></li>
+    <li><a href="#goc-doc-sach">Góc đọc sách</a></li>
+    <li><a href="#game">Game</a></li>
+    <li><a href="#gop-y">Góp ý</a></li>
+  </ul>
+</nav>
+  
   <div style="text-align: center; margin: 10px 0;">
   👁️ Số lần bạn đã ghé thăm web này: <span id="visit-count">0</span> lần
 </div>
