@@ -574,6 +574,23 @@
     }
   }
 </script>
+  <div id="cookie-banner" style="position: fixed; bottom: 0; background: #222; color: white; width: 100%; padding: 10px; text-align: center; display: none;">
+  🍪 Trang web này dùng cookie để cải thiện trải nghiệm. 
+  <button onclick="acceptCookie()" style="margin-left: 10px;">Đồng ý</button>
+</div>
+
+<script>
+  function acceptCookie() {
+    document.getElementById('cookie-banner').style.display = 'none';
+    document.cookie = "acceptCookie=true";
+  }
+
+  window.onload = () => {
+    if (!document.cookie.includes("acceptCookie=true")) {
+      document.getElementById('cookie-banner').style.display = 'block';
+    }
+  }
+</script>
   
 </body>
 </html>
