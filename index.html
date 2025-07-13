@@ -515,6 +515,36 @@
     isPlaying = !isPlaying;
   }
 </script>
+<!-- 🤖 Trợ lý ảo mini -->
+<section style="background: #fff; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center;">🤖 Trợ lý ảo mini</h2>
+  <p style="text-align:center;">Hỏi gì đó nha! Ví dụ: "Mấy giờ rồi?", "2 + 2 bằng mấy?", "Tên cậu là gì?"</p>
+  <div style="text-align: center;">
+    <input id="ask" placeholder="Bạn muốn hỏi gì?" style="width: 70%; padding: 10px; font-size: 16px;" />
+    <button onclick="reply()" style="padding: 10px 15px; font-weight: bold; margin-left: 10px;">Hỏi</button>
+    <p id="answer" style="margin-top: 10px; font-weight: bold;"></p>
+  </div>
+</section>
 
+<script>
+  function reply() {
+    const q = document.getElementById("ask").value.toLowerCase();
+    const ans = document.getElementById("answer");
+
+    if (q.includes("tên")) {
+      ans.textContent = "Tớ là web của Phúc nè!";
+    } else if (q.includes("mấy giờ") || q.includes("bây giờ là mấy giờ")) {
+      ans.textContent = "Bây giờ là " + new Date().toLocaleTimeString("vi-VN");
+    } else if (q.includes("hôm nay là thứ mấy")) {
+      const days = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
+      ans.textContent = "Hôm nay là " + days[new Date().getDay()];
+    } else if (q.includes("2+2") || q.includes("2 + 2")) {
+      ans.textContent = "2 + 2 = 4 đó!";
+    } else {
+      ans.textContent = "Tớ chưa hiểu câu đó 😅 Bạn thử hỏi câu khác nhé!";
+    }
+  }
+</script>
+  
 </body>
 </html>
