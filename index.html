@@ -607,5 +607,46 @@
 <section style="height: 400px; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); background-attachment: fixed; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 8px rgba(0,0,0,0.8);">
   🔭 Cùng khám phá thế giới với mình!
 </section>
+  <!-- 💻 Ô nhập lệnh quản trị -->
+<div style="position: fixed; bottom: 80px; right: 20px; z-index: 999;">
+  <input id="adminCommand" placeholder="Nhập lệnh bắt đầu bằng ;" 
+         style="padding: 8px; width: 220px; border-radius: 8px; border: 1px solid #ccc;" 
+         onkeydown="handleCommand(event)" />
+</div>
+  <script>
+  function handleCommand(e) {
+    if (e.key === "Enter") {
+      const cmd = e.target.value.trim();
+      if (!cmd.startsWith(";")) return;
+
+      const command = cmd.slice(1).toLowerCase(); // bỏ dấu ;
+
+      switch (command) {
+        case "dark":
+          document.body.classList.add("dark-mode");
+          break;
+        case "light":
+          document.body.classList.remove("dark-mode");
+          break;
+        case "music":
+          const music = document.getElementById("bg-music");
+          if (music) music.play();
+          break;
+        case "mute":
+          const muteMusic = document.getElementById("bg-music");
+          if (muteMusic) muteMusic.pause();
+          break;
+        case "reset":
+          document.body.style.background = "linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92)";
+          break;
+        default:
+          alert("Lệnh không hợp lệ!");
+      }
+
+      e.target.value = ""; // Xóa sau khi nhập
+    }
+  }
+</script>
+  
 </body>
 </html>
