@@ -16,3 +16,4 @@ Trả về nền mặc định 🌈
 Ẩn phần tử có id tương ứng (ví dụ: ;hide clock-container) ❌
 ;show [id]
 Hiện phần tử có id tương ứng ✅
+2015
