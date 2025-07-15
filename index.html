@@ -149,6 +149,9 @@
       }
     }
   </style>
+  <!-- 🌐 Web App Manifest -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#00c6ff">
 </head>
 <body onclick="createBubble(event)">
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
@@ -710,6 +713,20 @@
 
   function hideAdminPanel() {
     document.getElementById("adminPanel").style.display = "none";
+  }
+</script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .then((reg) => {
+          console.log("✅ Service Worker đã đăng ký:", reg.scope);
+        })
+        .catch((err) => {
+          console.log("❌ Lỗi đăng ký Service Worker:", err);
+        });
+    });
   }
 </script>
 </body>
