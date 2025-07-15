@@ -678,15 +678,18 @@
   <button onclick="location.reload()">🔁 Reload web</button><br><br>
   <button onclick="hideAdminPanel()">🔓 Thoát Admin Panel</button>
 </div>
-  <script>
+<script>
   document.addEventListener("keydown", function(e) {
+    // Khi người dùng nhấn dấu chấm phẩy (;) thì hiện ô nhập lệnh
     if (e.key === ";") {
-      let input = prompt("Nhập lệnh quản trị bắt đầu bằng dấu `;`:");
-      if (input === ";admin-panel") {
+      let input = prompt("🔐 Nhập lệnh quản trị (bắt đầu bằng dấu ;):");
+
+      // So sánh chính xác lệnh
+      if (input && input.trim().toLowerCase() === ";admin-panel") {
         document.getElementById("adminPanel").style.display = "block";
-        alert("🔒 Đã mở Admin Panel!");
+        alert("✅ Đã bật bảng điều khiển admin!");
       } else {
-        alert("❌ Lệnh không đúng hoặc chưa hỗ trợ!");
+        alert("❌ Lệnh không đúng hoặc chưa được hỗ trợ.");
       }
     }
   });
