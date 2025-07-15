@@ -668,5 +668,32 @@
   }
 </style>
 <img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" class="octocat-fly" alt="Flying Octocat">
+  <!-- 🔐 Admin Panel -->
+<div id="adminPanel" style="display:none; position:fixed; top:60px; right:20px; background:#fff; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; padding:20px; max-width:300px;">
+  <h3>🛠️ Bảng điều khiển Admin</h3>
+  <textarea id="adminNotes" placeholder="Ghi chú admin..." style="width:100%; height:80px;"></textarea><br><br>
+  <label for="adminColor">🌈 Màu nền:</label>
+  <input type="color" id="adminColor" onchange="document.body.style.background = this.value;"><br><br>
+  <button onclick="toggleMusic()">🎵 Bật/Tắt nhạc</button><br><br>
+  <button onclick="location.reload()">🔁 Reload web</button><br><br>
+  <button onclick="hideAdminPanel()">🔓 Thoát Admin Panel</button>
+</div>
+  <script>
+  document.addEventListener("keydown", function(e) {
+    if (e.key === ";") {
+      let input = prompt("Nhập lệnh quản trị bắt đầu bằng dấu `;`:");
+      if (input === ";admin-panel") {
+        document.getElementById("adminPanel").style.display = "block";
+        alert("🔒 Đã mở Admin Panel!");
+      } else {
+        alert("❌ Lệnh không đúng hoặc chưa hỗ trợ!");
+      }
+    }
+  });
+
+  function hideAdminPanel() {
+    document.getElementById("adminPanel").style.display = "none";
+  }
+</script>
 </body>
 </html>
