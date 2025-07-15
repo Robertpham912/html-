@@ -1,0 +1,20 @@
+{
+  "name": "Web của Phúc",
+  "short_name": "PhucWeb",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0072ff",
+  "icons": [
+    {
+      "src": "https://fav.farm/✨",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://fav.farm/✨",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
