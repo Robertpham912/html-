@@ -698,5 +698,38 @@
     document.getElementById("adminPanel").style.display = "none";
   }
 </script>
+  <script>
+  const adminCommands = {
+    ";admin-panel": () => {
+      document.getElementById("adminPanel").style.display = "block";
+      alert("✅ Đã bật bảng điều khiển admin!");
+    },
+    ";reload": () => {
+      location.reload();
+    },
+    ";toggle-music": () => {
+      toggleMusic();
+    },
+    ";hide-panel": () => {
+      hideAdminPanel();
+    },
+    // Cậu có thể thêm nhiều lệnh nữa ở đây
+  };
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === ";") {
+      const input = prompt("🔐 Nhập lệnh quản trị (bắt đầu bằng dấu ;):");
+      if (input && adminCommands[input.trim().toLowerCase()]) {
+        adminCommands[input.trim().toLowerCase()](); // Chạy lệnh tương ứng
+      } else {
+        alert("❌ Lệnh không đúng hoặc chưa được hỗ trợ.");
+      }
+    }
+  });
+
+  function hideAdminPanel() {
+    document.getElementById("adminPanel").style.display = "none";
+  }
+</script>
 </body>
 </html>
