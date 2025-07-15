@@ -729,5 +729,23 @@
     });
   }
 </script>
+<!-- 🔘 Nút mở Admin Panel (có mật khẩu) -->
+<button id="adminBtn" onclick="requestAdminPassword()" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #fff; color: #000; padding: 10px 15px; border-radius: 10px; border: none; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-weight: bold;">
+  ⚙️ Admin
+</button>
+
+<script>
+  const adminPassword = "2015"; // 🔐 Mật khẩu là năm sinh của cậu
+
+  function requestAdminPassword() {
+    const input = prompt("🔐 Nhập mật khẩu để truy cập Admin Panel:");
+    if (input === adminPassword) {
+      document.getElementById("adminPanel").style.display = "block";
+      alert("✅ Truy cập thành công!");
+    } else {
+      alert("❌ Sai mật khẩu!");
+    }
+  }
+</script>
 </body>
 </html>
