@@ -936,5 +936,76 @@
     }
   }
 </script>
+  <!-- 🧑‍💻 Developer Mode -->
+<div id="devModePanel" style="display:none; position:fixed; bottom:20px; left:20px; background:#fff; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; padding:20px; max-width:320px;">
+  <h3>🧑‍💻 Developer Mode</h3>
+  <button onclick="toggleInspector()">🔍 Bật Live DOM Inspector</button><br><br>
+  <textarea id="customCSS" placeholder="💅 Viết CSS tại đây..." style="width:100%; height:80px;"></textarea><br>
+  <button onclick="applyCSS()">🎨 Áp dụng CSS</button><br><br>
+  <div id="perfLog" style="font-size:14px;"></div>
+  <br>
+  <button onclick="document.getElementById('devModePanel').style.display='none'">❌ Đóng Dev Mode</button>
+</div>
+
+<button onclick="openDevMode()" style="position:fixed; bottom:20px; left:20px; padding:10px 15px; background:#ffffffcc; border:none; border-radius:8px; font-weight:bold; cursor:pointer; z-index:9998;">
+  🧑‍💻 Dev Mode
+</button>
+
+<script>
+  // Ghi lại thời gian tải
+  const loadTime = performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;
+  let lastInteraction = new Date().toLocaleTimeString();
+
+  function openDevMode() {
+    const pass = prompt("🔐 Nhập mật khẩu Dev Mode:");
+    if (pass === "2015") {
+      document.getElementById("devModePanel").style.display = "block";
+      updatePerfLog();
+    } else {
+      alert("❌ Sai mật khẩu!");
+    }
+  }
+
+  function updatePerfLog() {
+    document.getElementById("perfLog").innerHTML = `📊 Tải trang: ${loadTime}ms<br>⏱️ Tương tác gần nhất: ${lastInteraction}`;
+  }
+
+  document.addEventListener("click", () => {
+    lastInteraction = new Date().toLocaleTimeString();
+    updatePerfLog();
+  });
+
+  // Live DOM Inspector
+  let inspectorEnabled = false;
+  function toggleInspector() {
+    inspectorEnabled = !inspectorEnabled;
+    if (inspectorEnabled) {
+      document.body.style.cursor = "crosshair";
+      document.addEventListener("click", inspectElement, true);
+      alert("🔍 Click vào phần tử bất kỳ để xem thông tin.");
+    } else {
+      document.body.style.cursor = "default";
+      document.removeEventListener("click", inspectElement, true);
+    }
+  }
+
+  function inspectElement(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = e.target;
+    const html = el.outerHTML.split('\n').slice(0, 5).join('\n'); // Giới hạn hiển thị
+    const css = window.getComputedStyle(el);
+    alert(`📄 HTML:\n${html}\n\n🎨 CSS:\ncolor: ${css.color};\nfont-size: ${css.fontSize};\npadding: ${css.padding};`);
+    toggleInspector();
+  }
+
+  // CSS editor
+  function applyCSS() {
+    const style = document.createElement("style");
+    style.textContent = document.getElementById("customCSS").value;
+    document.head.appendChild(style);
+    alert("✅ CSS đã được áp dụng!");
+  }
+</script>
 </body>
 </html>
