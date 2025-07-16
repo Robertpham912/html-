@@ -906,5 +906,32 @@
     </div>
   </div>
 </div>
+  <script>
+  function showDevLogin() {
+    const pass = prompt("🔐 Nhập mật khẩu để mở Developer Mode:");
+    if (pass === "2015") {
+      document.getElementById("devPanel").style.display = "block";
+      switchTab('elements'); // mặc định hiển thị tab Elements
+    } else {
+      alert("❌ Sai mật khẩu!");
+    }
+  }
+
+  function hideDevPanel() {
+    document.getElementById("devPanel").style.display = "none";
+  }
+
+  function switchTab(tab) {
+    const content = document.getElementById("devContent");
+    if (tab === 'elements') {
+      content.textContent = document.documentElement.outerHTML;
+    } else if (tab === 'network') {
+      content.innerHTML = "📡 Mô phỏng Network:<br>Trang đã tải lúc: <b>" + new Date().toLocaleTimeString() + "</b>";
+    } else if (tab === 'storage') {
+      const storageData = Object.entries(localStorage).map(([key, value]) => `<b>${key}</b>: ${value}`).join("<br>");
+      content.innerHTML = "🗃️ Dữ liệu Local Storage:<br>" + (storageData || "Không có dữ liệu.");
+    }
+  }
+</script>
 </body>
 </html>
