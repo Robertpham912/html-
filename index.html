@@ -672,17 +672,117 @@
 </style>
 <img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" class="octocat-fly" alt="Flying Octocat">
   <!-- 🔐 Admin Panel -->
+<!-- 🔐 Admin Panel (mở rộng) -->
 <div id="adminPanel" style="display:none; position:fixed; top:60px; right:20px; background:#fff; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; padding:20px; max-width:300px;">
   <h3>🛠️ Bảng điều khiển Admin</h3>
-  <textarea id="adminNotes" placeholder="Ghi chú admin..." style="width:100%; height:80px;"></textarea><br><br>
-  <label for="adminColor">🌈 Màu nền:</label>
+  
+  <!-- 1. Ghi chú admin -->
+  <textarea id="adminNotes" placeholder="Ghi chú admin..." style="width:100%; height:60px; margin-bottom:10px;"></textarea>
+
+  <!-- 2. Thay đổi màu nền -->
+  <label>🌈 Màu nền:</label>
   <input type="color" id="adminColor" onchange="document.body.style.background = this.value;"><br><br>
-  <button onclick="toggleMusic()">🎵 Bật/Tắt nhạc</button><br><br>
-  <button onclick="location.reload()">🔁 Reload web</button><br><br>
-  <button onclick="hideAdminPanel()">🔓 Thoát Admin Panel</button>
+
+  <!-- 3. Chế độ sáng/tối -->
+  <button onclick="toggleMode()" style="width:100%; margin-bottom:8px;">🌗 Chuyển Sáng/Tối</button>
+
+  <!-- 4. Bật/tắt nhạc nền -->
+  <button onclick="toggleMusic()" style="width:100%; margin-bottom:8px;">🎵 Bật/Tắt Nhạc</button>
+
+  <!-- 5. Đặt lại bộ đếm truy cập -->
+  <button onclick="resetVisitCount()" style="width:100%; margin-bottom:8px;">🔄 Reset Visit Count</button>
+
+  <!-- 6. Ẩn/hiện các section -->
+  <button onclick="toggleSection('slideshow')" style="width:100%; margin-bottom:8px;">🖼️ Ẩn/Hiện Slideshow</button>
+  <button onclick="toggleSection('goc-doc-sach')" style="width:100%; margin-bottom:8px;">📚 Ẩn/Hiện Góc đọc sách</button>
+
+  <!-- 7. Cuộn lên/xuống -->
+  <button onclick="window.scrollTo(0,0)" style="width:48%; margin-right:4%;">⬆️ Lên đầu</button>
+  <button onclick="window.scrollTo(0,document.body.scrollHeight)" style="width:48%;">⬇️ Cuối trang</button><br><br>
+
+  <!-- 8. Confetti party -->
+  <button onclick="runConfetti()" style="width:100%; margin-bottom:8px;">🎉 Confetti</button>
+
+  <!-- 9. Đóng panel -->
+  <button onclick="hideAdminPanel()" style="width:100%; background:#f44; color:#fff;">❌ Đóng Admin Panel</button>
 </div>
-<
-  <script>
+
+<script>
+  // ẩn/thể hiện panel
+  function hideAdminPanel() {
+    document.getElementById("adminPanel").style.display = "none";
+  }
+
+  // 1: toggle dark mode
+  function toggleMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+
+  // 2: toggle music
+  let _isMusicPlaying = false;
+  function toggleMusic() {
+    const m = document.getElementById("bg-music");
+    if (!m) return;
+    _isMusicPlaying ? m.pause() : m.play();
+    _isMusicPlaying = !_isMusicPlaying;
+  }
+
+  // 3: reset visit count
+  function resetVisitCount() {
+    localStorage.setItem('visitCount', '0');
+    document.getElementById('visit-count').innerText = '0';
+    alert('✅ Đã reset số lượt truy cập!');
+  }
+
+  // 4: toggle section by id
+  function toggleSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return alert('Không tìm thấy section: ' + id);
+    el.style.display = (el.style.display === 'none') ? '' : 'none';
+  }
+
+  // 5: confetti (rất đơn giản)
+  function runConfetti() {
+    const duration = 3 * 1000;
+    const end = Date.now() + duration;
+    (function frame() {
+      // tạo vài viên confetti
+      const conf = document.createElement('div');
+      conf.textContent = '✨';
+      conf.style.position = 'fixed';
+      conf.style.left = Math.random() * 100 + 'vw';
+      conf.style.top = '0';
+      conf.style.fontSize = (10 + Math.random()*30) + 'px';
+      conf.style.pointerEvents = 'none';
+      document.body.appendChild(conf);
+      // rơi dần
+      let y = 0;
+      const id = setInterval(() => {
+        y += 5;
+        conf.style.top = y + 'px';
+        if (y > window.innerHeight) {
+          clearInterval(id);
+          document.body.removeChild(conf);
+        }
+      }, 20);
+      if (Date.now() < end) requestAnimationFrame(frame);
+    }());
+  }
+
+  // 6: mở panel với mật khẩu (đặt mã từ trước)
+  const adminPassword = "2015";
+  function requestAdminPanel() {
+    const pass = prompt("🔐 Nhập mật khẩu Admin:");
+    if (pass === adminPassword) {
+      document.getElementById("adminPanel").style.display = "block";
+    } else {
+      alert('❌ Sai mật khẩu!');
+    }
+  }
+
+  // liên kết nút ngoài để mở
+  document.getElementById('adminBtn')?.addEventListener('click', requestAdminPanel);
+</script>
   const adminCommands = {
     ";admin-panel": () => {
       document.getElementById("adminPanel").style.display = "block";
