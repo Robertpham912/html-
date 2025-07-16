@@ -887,6 +887,15 @@
     allowfullscreen>
   </iframe>
 </section>
+  <hr>
+<h4>📦 Quản lý Dữ liệu (localStorage)</h4>
+<label>🔑 Key: <input type="text" id="dataKey" style="width: 90%; margin: 5px 0;"></label><br>
+<label>📄 Value: <textarea id="dataValue" style="width: 90%; height: 60px;"></textarea></label><br>
+<button onclick="saveData()">💾 Lưu dữ liệu</button>
+<button onclick="deleteData()">🗑️ Xóa key</button>
+<button onclick="clearAllData()">🚫 Xóa toàn bộ</button>
+<button onclick="loadDataList()">🔄 Refresh</button>
+<div id="dataList" style="margin-top: 10px; max-height: 150px; overflow-y: auto; font-size: 14px; background: #f9f9f9; padding: 10px; border-radius: 5px;"></div>
   <!-- 🔧 Nút mở Developer Mode -->
 <button onclick="showDevLogin()" style="position:fixed; bottom:80px; right:20px; padding:10px 15px; background:#eee; border:none; border-radius:8px; cursor:pointer; z-index:9999;">
   🧑‍💻 Dev Mode
@@ -1079,6 +1088,59 @@ function updatePerfLog() {
   document.getElementById("perfLog").textContent =
     `⏱️ Load time: ${loadTime}ms — Tương tác gần nhất: ${now.toLocaleTimeString()}`;
 }
+</script>
+  <script>
+  function saveData() {
+    const key = document.getElementById('dataKey').value;
+    const value = document.getElementById('dataValue').value;
+    if (key) {
+      localStorage.setItem(key, value);
+      alert("✅ Đã lưu!");
+      loadDataList();
+    } else {
+      alert("⚠️ Vui lòng nhập key.");
+    }
+  }
+
+  function deleteData() {
+    const key = document.getElementById('dataKey').value;
+    if (key && localStorage.getItem(key) !== null) {
+      localStorage.removeItem(key);
+      alert("🗑️ Đã xóa!");
+      loadDataList();
+    } else {
+      alert("❌ Key không tồn tại.");
+    }
+  }
+
+  function clearAllData() {
+    if (confirm("⚠️ Bạn chắc chắn muốn xóa toàn bộ dữ liệu?")) {
+      localStorage.clear();
+      alert("🚫 Đã xóa toàn bộ!");
+      loadDataList();
+    }
+  }
+
+  function loadDataList() {
+    const dataList = document.getElementById("dataList");
+    dataList.innerHTML = "";
+    if (localStorage.length === 0) {
+      dataList.innerHTML = "<i>Không có dữ liệu.</i>";
+      return;
+    }
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);
+      const item = document.createElement("div");
+      item.innerHTML = `<b>${key}:</b> ${value}`;
+      dataList.appendChild(item);
+    }
+  }
+
+  // Tự động tải khi mở admin panel
+  if (typeof loadDataList === 'function') {
+    loadDataList();
+  }
 </script>
 </body>
 </html>
