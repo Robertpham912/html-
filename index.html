@@ -890,7 +890,9 @@
   <!-- 🔧 Nút mở Developer Mode -->
 <button onclick="showDevLogin()" style="position:fixed; bottom:80px; right:20px; padding:10px 15px; background:#eee; border:none; border-radius:8px; cursor:pointer; z-index:9999;">
   🧑‍💻 Dev Mode
-</button><!-- 🔧 Developer Panel -->
+</button>
+
+<!-- 🔧 Developer Panel -->
 <div id="devPanel" style="display:none; position:fixed; top:60px; left:20px; width:90%; max-width:600px; height:400px; background:white; border:2px solid #333; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
   <div style="background:#333; color:#fff; padding:8px; font-weight:bold;">💻 Developer Mode 
     <button onclick="hideDevPanel()" style="float:right; background:red; color:white; border:none; border-radius:4px; cursor:pointer;">✖</button>
@@ -906,12 +908,13 @@
     </div>
   </div>
 </div>
-  <script>
+
+<script>
   function showDevLogin() {
     const pass = prompt("🔐 Nhập mật khẩu để mở Developer Mode:");
     if (pass === "2015") {
       document.getElementById("devPanel").style.display = "block";
-      switchTab('elements'); // mặc định hiển thị tab Elements
+      switchTab('elements');
     } else {
       alert("❌ Sai mật khẩu!");
     }
