@@ -887,5 +887,54 @@
     allowfullscreen>
   </iframe>
 </section>
+  <!-- 🧑‍💻 Developer Panel -->
+<div id="devPanel" style="display:none; position:fixed; top:60px; left:20px; background:#eeeeee; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; padding:20px; max-width:320px;">
+  <h3>👨‍💻 Developer Mode</h3>
+  <button onclick="stopMusic()">🛑 Dừng nhạc nền</button><br><br>
+  <button onclick="disableEffects()">🌌 Tắt hiệu ứng nền</button><br><br>
+  <button onclick="fakeConsole()">🖥️ Mở console giả lập</button><br><br>
+  <button onclick="hideDevPanel()">❌ Đóng Developer Panel</button>
+</div>
+
+<!-- 🔘 Nút mở Developer Panel -->
+<button onclick="promptDevAccess()" style="position: fixed; bottom: 80px; left: 20px; padding: 10px 15px; background: #eeeeeecc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 9999;">
+  🧑‍💻 Dev Mode
+</button>
+
+<script>
+  function promptDevAccess() {
+    const pass = prompt("🔐 Nhập mật khẩu Developer Mode:");
+    if (pass === "2015") {
+      document.getElementById("devPanel").style.display = "block";
+      alert("✅ Truy cập Developer Mode thành công!");
+    } else {
+      alert("❌ Sai mật khẩu rồi!");
+    }
+  }
+
+  function hideDevPanel() {
+    document.getElementById("devPanel").style.display = "none";
+  }
+
+  function stopMusic() {
+    const music = document.getElementById("bg-music");
+    if (music) {
+      music.pause();
+      alert("🔇 Nhạc nền đã dừng.");
+    } else {
+      alert("⚠️ Không tìm thấy nhạc nền.");
+    }
+  }
+
+  function disableEffects() {
+    document.body.style.background = "#f0f0f0";
+    document.body.classList.remove("dark-mode");
+    alert("🪄 Hiệu ứng nền đã bị vô hiệu hóa.");
+  }
+
+  function fakeConsole() {
+    alert("🖥️ Console giả lập: Debug mode đang hoạt động...");
+  }
+</script>
 </body>
 </html>
