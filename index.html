@@ -747,5 +747,34 @@
     }
   }
 </script>
+  <section style="text-align:center; margin:40px 0;">
+  <h2>🎵 Nhạc: Morning Mood (Grow a Garden theme) – 1 Giờ</h2>
+  <iframe width="320" height="180"
+    src="https://www.youtube.com/embed/gQX56IHUe3o?autoplay=0&loop=1&playlist=gQX56IHUe3o"
+    title="Morning Mood – Grow a Garden"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</section>
+  <button onclick="toggleGardenMusic()" style="margin:10px; padding:8px 12px;">🎵 Bật/Tắt Morning Mood</button>
+<iframe id="gardenFrame" width="320" height="180"
+  src="https://www.youtube.com/embed/gQX56IHUe3o?loop=1&playlist=gQX56IHUe3o"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen></iframe>
+
+<script>
+  let gardenPlaying = false;
+  function toggleGardenMusic() {
+    const frame = document.getElementById("gardenFrame");
+    if (!gardenPlaying) {
+      frame.src = frame.src + "&autoplay=1";
+    } else {
+      frame.src = frame.src.replace("&autoplay=1", "");
+    }
+    gardenPlaying = !gardenPlaying;
+  }
+</script>
 </body>
 </html>
