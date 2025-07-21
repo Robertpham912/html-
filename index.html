@@ -90,65 +90,6 @@
     }
     typeWriter();
   </script>
-  <!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌟 Web của Phúc</title>
-  <link rel="icon" href="https://fav.farm/✨" />
-  <style>
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      transition: background 0.5s, color 0.5s;
-    }
-    body {
-      background: linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: #333;
-    }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    body.dark-mode {
-      background: #111;
-      color: #eee;
-    }
-    .toggle-btn {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: #ffffffcc;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 999;
-    }
-    .bubble {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #ff6ec4, #7873f5);
-      border-radius: 50%;
-      opacity: 0.8;
-      pointer-events: none;
-      animation: bubble 1s ease-out forwards;
-    }
-    @keyframes bubble {
-      to {
-        transform: translateY(-100px);
-        opacity: 0;
-      }
-    }
-  </style>
   <!-- 🌐 Web App Manifest -->
 <link rel="manifest" href="manifest.json" />
 <meta name="theme-color" content="#00c6ff">
