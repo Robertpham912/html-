@@ -1096,5 +1096,43 @@ function updatePerfLog() {
   <iframe src="https://www.retrogames.cc/embed/24344-pac-man.html" width="400" height="500" style="border:none;"></iframe><br>
   <button onclick="document.getElementById('secretGame').style.display='none'">Đóng game</button>
 </div>
+  <!-- Popup Update có thể chỉnh sửa -->
+<div id="popup-update" style="display: none;">
+  <div style="background: white; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px; margin: 100px auto; box-shadow: 0 0 15px rgba(0,0,0,0.3); position: relative; z-index: 1001;">
+    <h2>🔔 Cập nhật mới</h2>
+    <div id="popup-content">
+      <ul>
+        <li>Thêm nội dung cập nhật tại đây...</li>
+      </ul>
+    </div>
+    <button onclick="closeUpdatePopup()" style="padding: 6px 12px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Đóng</button>
+  </div>
+  <div onclick="closeUpdatePopup()" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000;"></div>
+</div>
+  <script>
+  // Hiện popup khi vào web
+  window.onload = function () {
+    let content = localStorage.getItem("popupUpdateContent");
+    if (content) {
+      document.getElementById("popup-content").innerHTML = content;
+    }
+    document.getElementById("popup-update").style.display = "block";
+  };
+
+  // Đóng popup
+  function closeUpdatePopup() {
+    document.getElementById("popup-update").style.display = "none";
+  }
+
+  // Dev command: ;updatepopup <nội dung>
+  function runAdminCommand(command) {
+    if (command.startsWith(";updatepopup ")) {
+      const newContent = command.replace(";updatepopup ", "");
+      document.getElementById("popup-content").innerHTML = newContent;
+      localStorage.setItem("popupUpdateContent", newContent);
+      alert("✅ Đã cập nhật nội dung popup!");
+    }
+  }
+</script>
 </body>
 </html>
