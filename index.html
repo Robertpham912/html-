@@ -6,6 +6,31 @@
   <title>🌟 Web của Phúc</title>
   <link rel="icon" href="https://fav.farm/✨" />
   <style>
+    #auth-container {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+#auth-container input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+}
+#auth-container button {
+  width: 100%;
+  padding: 8px;
+  background: #4CAF50;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+#auth-container button:hover {
+  background: #45a049;
+}
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
@@ -1103,6 +1128,7 @@ function updatePerfLog() {
     <li>✨ Thêm chế độ Developer Mode</li>
     <li>🛠️ Giao diện tự động sáng/tối</li>
     <li>🚗 Game đua xe 3D chuẩn bị ra mắt!</li>
+    <li>update hệ thống đăng nhập – đăng ký – đăng xuấ</li>
   </ul>
   <button onclick="closePopup()">Đóng</button>
 </div><script>
@@ -1122,5 +1148,27 @@ function updatePerfLog() {
 
   window.onload = showPopup;
 </script>
+  <div id="auth-container">
+  <div id="welcome-message" style="display:none;">
+    Xin chào, <span id="username-display"></span>!
+    <button onclick="logout()">Đăng xuất</button>
+  </div>
+
+  <div id="login-form">
+    <h3>Đăng nhập</h3>
+    <input type="text" id="login-username" placeholder="Tên đăng nhập">
+    <input type="password" id="login-password" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng nhập</button>
+    <p>Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
+  </div>
+
+  <div id="register-form" style="display:none;">
+    <h3>Đăng ký</h3>
+    <input type="text" id="register-username" placeholder="Tên đăng nhập">
+    <input type="password" id="register-password" placeholder="Mật khẩu">
+    <button onclick="register()">Đăng ký</button>
+    <p>Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
+  </div>
+</div>
 </body>
 </html>
