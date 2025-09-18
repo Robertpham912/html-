@@ -1170,5 +1170,98 @@ function updatePerfLog() {
     <p>Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
   </div>
 </div>
+  <style>
+  .contact-container {
+    max-width: 400px;
+    margin: 20px auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+  }
+  .contact-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  .contact-container label {
+    display: block;
+    margin: 8px 0 5px;
+    font-weight: bold;
+  }
+  .contact-container input, 
+  .contact-container textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  .contact-container input:focus, 
+  .contact-container textarea:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 5px #4caf50;
+  }
+  .contact-container button {
+    width: 100%;
+    padding: 10px;
+    background: #4caf50;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .contact-container button:hover {
+    background: #45a049;
+  }
+  .captcha-message {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+</style>
+
+<div class="contact-container">
+  <h2>Liên hệ</h2>
+  <form id="contactForm">
+    <label>Họ tên:</label>
+    <input type="text" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <label>Nội dung:</label>
+    <textarea name="message" required></textarea>
+
+    <!-- Câu hỏi chống bot -->
+    <label>2 + 5 = ?</label>
+    <input type="number" id="captchaAnswer" required>
+
+    <button type="submit">Gửi</button>
+    <div class="captcha-message" id="captchaMessage"></div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault(); 
+
+    let answer = document.getElementById("captchaAnswer").value;
+    let message = document.getElementById("captchaMessage");
+
+    if(answer == 7) {
+      message.style.color = "green";
+      message.innerText = "✔ Gửi thành công!";
+    } else {
+      message.style.color = "red";
+      message.innerText = "❌ Sai rồi! Cậu là bot à?";
+    }
+  });
+</script>
 </body>
 </html>
