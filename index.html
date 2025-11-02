@@ -5,14 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🌟 Web của Phúc</title>
   <link rel="icon" href="https://fav.farm/✨" />
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#00c6ff">
   <style>
+    #auth-container {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+#auth-container input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+}
+#auth-container button {
+  width: 100%;
+  padding: 8px;
+  background: #4CAF50;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+#auth-container button:hover {
+  background: #45a049;
+}
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       transition: background 0.5s, color 0.5s;
     }
     body {
@@ -58,88 +81,18 @@
         opacity: 0;
       }
     }
-    nav {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      background: #ffffffdd;
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: flex; justify-content: center;
-      gap: 15px; padding: 10px 0;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    nav a { text-decoration: none; font-weight: bold; }
-    #stars {
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 0;
-    }
-    /* Octocat fly */
-    .octocat-fly {
-      position: fixed;
-      bottom: 40px;
-      left: -150px;
-      width: 100px;
-      animation: flyOctocat 12s linear infinite;
-      z-index: 999;
-    }
-    @keyframes flyOctocat {
-      0% { left: -150px; transform: rotate(0deg); }
-      50% { left: 100%; transform: rotate(360deg); }
-      100% { left: -150px; transform: rotate(0deg); }
-    }
   </style>
 </head>
 <body onclick="createBubble(event)">
-  <nav>
-    <a href="#gioi-thieu">🧒 Giới thiệu</a>
-    <a href="#goc-hoc-lap-trinh">💻 Học lập trình</a>
-    <a href="#goc-doc-sach">📚 Góc đọc sách</a>
-    <a href="#mini-quiz">🧠 Quiz</a>
-    <a href="#gop-y">📩 Góp ý</a>
-  </nav>
   <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
-  <h1 id="typewriter"></h1>
-  <div style="text-align: center; margin: 10px 0;">
-    👁️ Số lần bạn đã ghé thăm web này: <span id="visit-count">0</span> lần
-  </div>
-  <div style="text-align:center; margin-top: 30px; font-size: 20px;" id="clock-container">
-    🕒 <span id="clock">--:--:--</span>
-  </div>
-  <!-- Các section chính: sinh nhật, nhạc, game, quiz, giới thiệu... -->
-  <!-- ... giữ nguyên các section như bản gốc, chỉ sửa lỗi lặp/chồng thẻ ... -->
+  <h1 id="typewriter">🎉 Xin chào! Đây là web đầu tiên của mình!</h1>
 
-  <!-- Ví dụ section sinh nhật -->
-  <section style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 800px; margin-left: auto; margin-right: auto;">
-    <h2>🎂 Còn bao lâu nữa đến sinh nhật của tớ?</h2>
-    <p id="birthday-countdown">Đang tính toán...</p>
-  </section>
-  <!-- ... các section tiếp theo giữ nguyên, chỉ loại trừ lặp lại ... -->
-
-  <!-- Nhạc nền -->
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
-    Trình duyệt của bạn không hỗ trợ phát nhạc.
-  </audio>
-  <button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index:999;">
-    🎵 Bật/Tắt Nhạc
-  </button>
-  <!-- Octocat góc phải trên -->
-  <a href="https://github.com" target="_blank" style="position: fixed; top: 0; right: 0; border: 0; z-index: 1000;">
-    <img src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub" width="149" height="149">
-  </a>
-  <img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" class="octocat-fly" alt="Flying Octocat">
-
-  <!-- Cookie Banner -->
-  <div id="cookie-banner" style="position: fixed; bottom: 0; background: #222; color: white; width: 100%; padding: 10px; text-align: center; display: none;">
-    🍪 Trang web này dùng cookie để cải thiện trải nghiệm.
-    <button onclick="acceptCookie()" style="margin-left: 10px;">Đồng ý</button>
-  </div>
-  <!-- Scripts -->
   <script>
     // Chuyển sáng/tối
     function toggleMode() {
       document.body.classList.toggle("dark-mode");
     }
+
     // Hiệu ứng bong bóng khi click
     function createBubble(e) {
       const bubble = document.createElement("span");
@@ -149,6 +102,7 @@
       document.body.appendChild(bubble);
       setTimeout(() => bubble.remove(), 1000);
     }
+
     // Hiệu ứng chữ gõ
     const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
     let index = 0;
@@ -159,99 +113,1155 @@
         setTimeout(typeWriter, 60);
       }
     }
-    window.onload = typeWriter;
-    // Đồng hồ
+    typeWriter();
+  </script>
+  <!-- 🌐 Web App Manifest -->
+<link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#00c6ff">
+</head>
+<body onclick="createBubble(event)">
+  <button class="toggle-btn" onclick="toggleMode()">🌗 Chuyển chế độ</button>
+  <h1 id="typewriter">🎉 Xin chào! Đây là web đầu tiên của mình!</h1>
+
+  <script>
+    // Chuyển sáng/tối
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Hiệu ứng bong bóng khi click
+    function createBubble(e) {
+      const bubble = document.createElement("span");
+      bubble.className = "bubble";
+      bubble.style.left = e.clientX + "px";
+      bubble.style.top = e.clientY + "px";
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 1000);
+    }
+
+    // Hiệu ứng chữ gõ
+    const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
+    let index = 0;
+    function typeWriter() {
+      if (index < text.length) {
+        document.getElementById("typewriter").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+    typeWriter();
+  </script>
+    <!-- 👁️ Bộ đếm số lần truy cập -->
+  <div style="text-align: center; margin: 10px 0;">
+    👁️ Số lần bạn đã ghé thăm web này: <span id="visit-count">0</span> lần
+  </div>
+
+  <!-- ⏰ Đồng hồ thời gian thực -->
+  <div style="text-align:center; margin-top: 30px; font-size: 20px;" id="clock-container">
+    🕒 <span id="clock">--:--:--</span>
+  </div>
+
+  <script>
+    // Cập nhật đồng hồ mỗi giây
     function updateClock() {
       const now = new Date();
       document.getElementById("clock").innerText = now.toLocaleTimeString("vi-VN");
     }
-    setInterval(updateClock, 1000); updateClock();
-    // Bộ đếm số lần truy cập
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Bộ đếm số lần truy cập (dùng localStorage)
     const countKey = "visitCount";
     let currentCount = localStorage.getItem(countKey);
     if (!currentCount) currentCount = 1;
     else currentCount = parseInt(currentCount) + 1;
     localStorage.setItem(countKey, currentCount);
     document.getElementById("visit-count").innerText = currentCount;
-    // Đếm ngược sinh nhật
-    function updateBirthdayCountdown() {
-      const today = new Date();
-      let birthday = new Date(today.getFullYear(), 11, 9); // 09/12
-      if (today > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
-      const diff = birthday - today;
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-      document.getElementById("birthday-countdown").textContent =
-        `🎉 Còn ${d} ngày ${h} giờ ${m} phút ${s} giây nữa là đến sinh nhật!`;
+  </script>
+  <!-- 🎂 Đếm ngược đến sinh nhật -->
+<section style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 800px; margin-left: auto; margin-right: auto;">
+  <h2>🎂 Còn bao lâu nữa đến sinh nhật của tớ?</h2>
+  <p id="birthday-countdown">Đang tính toán...</p>
+</section>
+
+<script>
+  function updateBirthdayCountdown() {
+    const today = new Date();
+    let birthday = new Date(today.getFullYear(), 11, 9); // 09/12
+    if (today > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
+
+    const diff = birthday - today;
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("birthday-countdown").textContent =
+      `🎉 Còn ${d} ngày ${h} giờ ${m} phút ${s} giây nữa là đến sinh nhật!`;
+  }
+
+  setInterval(updateBirthdayCountdown, 1000);
+  updateBirthdayCountdown();
+</script>
+
+<!-- 🔊 Nhạc nền -->
+<audio id="bg-music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
+<button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 999;">
+  🎵 Bật/Tắt Nhạc
+</button>
+<script>
+  let isPlaying = false;
+  const music = document.getElementById("bg-music");
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
     }
-    setInterval(updateBirthdayCountdown, 1000); updateBirthdayCountdown();
-    // Nhạc nền
-    let isPlaying = false;
-    const music = document.getElementById("bg-music");
-    function toggleMusic() {
-      if (isPlaying) music.pause();
-      else music.play();
-      isPlaying = !isPlaying;
+    isPlaying = !isPlaying;
+  }
+</script>
+
+<!-- 🌤️ Tiện ích thời tiết (Hà Nội) -->
+<div style="text-align:center; margin-top: 40px;">
+  <iframe src="https://forecast7.com/vi/21d03105d85/ha-noi/" frameborder="0" width="650" height="250" allowtransparency="true" 
+  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+</div>
+
+<!-- 🖼️ Slideshow ảnh -->
+<section style="text-align: center; margin: 50px auto;">
+  <h2>🖼️ Bộ sưu tập ảnh</h2>
+  <img id="slideshow" src="https://picsum.photos/seed/1/600/300" style="max-width: 90%; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3);"/>
+</section>
+<script>
+  const slide = document.getElementById("slideshow");
+  let i = 1;
+  setInterval(() => {
+    i++;
+    slide.src = `https://picsum.photos/seed/${i}/600/300`;
+  }, 3000);
+</script>
+<!-- 🎲 Game Caro (Tic-Tac-Toe) -->
+<section style="background: #fff; padding: 20px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center;">🎲 Game Caro (Tic-Tac-Toe)</h2>
+  <table id="caro-board" style="margin: auto;"></table>
+  <p id="caro-status" style="text-align: center; font-weight: bold;"></p>
+</section>
+
+<script>
+  const caroBoard = document.getElementById("caro-board");
+  const caroStatus = document.getElementById("caro-status");
+  let caroCurrent = "❌";
+  let caroCells = Array(3).fill().map(() => Array(3).fill(""));
+
+  function renderCaroBoard() {
+    caroBoard.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      const row = document.createElement("tr");
+      for (let j = 0; j < 3; j++) {
+        const cell = document.createElement("td");
+        cell.textContent = caroCells[i][j];
+        cell.style.width = "60px";
+        cell.style.height = "60px";
+        cell.style.border = "1px solid black";
+        cell.style.fontSize = "30px";
+        cell.style.textAlign = "center";
+        cell.style.cursor = "pointer";
+        cell.onclick = () => handleCaroClick(i, j);
+        row.appendChild(cell);
+      }
+      caroBoard.appendChild(row);
     }
-    // Cookie banner
-    function acceptCookie() {
-      document.getElementById('cookie-banner').style.display = 'none';
-      document.cookie = "acceptCookie=true";
+  }
+
+  function handleCaroClick(i, j) {
+    if (caroCells[i][j] !== "") return;
+    caroCells[i][j] = caroCurrent;
+    if (checkWin(caroCurrent)) {
+      caroStatus.textContent = caroCurrent + " thắng rồi!";
+      setTimeout(resetCaro, 1500);
+    } else {
+      caroCurrent = caroCurrent === "❌" ? "⭕" : "❌";
+      renderCaroBoard();
     }
+  }
+
+  function checkWin(p) {
+    for (let i = 0; i < 3; i++) {
+      if (caroCells[i][0] === p && caroCells[i][1] === p && caroCells[i][2] === p) return true;
+      if (caroCells[0][i] === p && caroCells[1][i] === p && caroCells[2][i] === p) return true;
+    }
+    if (caroCells[0][0] === p && caroCells[1][1] === p && caroCells[2][2] === p) return true;
+    if (caroCells[0][2] === p && caroCells[1][1] === p && caroCells[2][0] === p) return true;
+    return false;
+  }
+
+  function resetCaro() {
+    caroCells = Array(3).fill().map(() => Array(3).fill(""));
+    caroCurrent = "❌";
+    caroStatus.textContent = "";
+    renderCaroBoard();
+  }
+
+  renderCaroBoard();
+</script>
+
+<!-- 🔢 Game Đoán Số -->
+<section style="background: #fdfdfd; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center;">🔢 Game Đoán Số</h2>
+  <p style="text-align:center;">Tớ đang nghĩ 1 số từ 1 đến 10. Bạn thử đoán xem!</p>
+  <div style="text-align: center;">
+    <input type="number" id="guess-input" min="1" max="10" />
+    <button onclick="checkGuess()">Đoán</button>
+    <p id="guess-result"></p>
+  </div>
+</section>
+
+<script>
+  let randomNumber = Math.floor(Math.random() * 10) + 1;
+  function checkGuess() {
+    const guess = parseInt(document.getElementById("guess-input").value);
+    const result = document.getElementById("guess-result");
+    if (guess === randomNumber) {
+      result.textContent = "🎉 Chính xác!";
+      randomNumber = Math.floor(Math.random() * 10) + 1;
+    } else {
+      result.textContent = "❌ Sai rồi! Thử lại nhé!";
+    }
+  }
+</script>
+
+<!-- 🧠 Mini Quiz -->
+<section style="background: #fefefe; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center;">🧠 Mini Quiz về lập trình</h2>
+  <p>Câu hỏi: Thẻ HTML nào dùng để tạo tiêu đề lớn?</p>
+  <div style="text-align:center;">
+    <button onclick="checkQuiz('a')">a) &lt;p&gt;</button>
+    <button onclick="checkQuiz('b')">b) &lt;title&gt;</button>
+    <button onclick="checkQuiz('c')">c) &lt;h1&gt;</button>
+    <button onclick="checkQuiz('d')">d) &lt;div&gt;</button>
+    <p id="quiz-answer"></p>
+  </div>
+</section>
+
+<script>
+  function checkQuiz(ans) {
+    const answer = document.getElementById("quiz-answer");
+    if (ans === "c") {
+      answer.textContent = "✅ Chính xác!";
+    } else {
+      answer.textContent = "❌ Sai rồi. Đáp án đúng là: <h1>";
+    }
+  }
+</script>
+<!-- 💻 Góc học lập trình -->
+<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
+  <h2 style="text-align: center;">💻 Góc học lập trình</h2>
+  <p><strong>1. Scratch là gì?</strong> – Là ngôn ngữ lập trình kéo thả, rất dễ dùng và vui nữa! Mình đã làm được nhiều game trên đó rồi.</p>
+  <p><strong>2. HTML là gì?</strong> – Là ngôn ngữ tạo ra các trang web. Mình dùng HTML để viết trang web đầu tiên nè!</p>
+  <p><strong>3. Tại sao nên học sớm?</strong> – Vì lập trình giúp mình sáng tạo, tư duy logic và tạo ra những thứ “ảo diệu” như chính web này!</p>
+  <p><strong>4. Dùng iPad học lập trình?</strong> – Mình dùng Safari, VS Code Web, GitHub… và một chiếc bàn phím là đủ chiến rồi! 😎</p>
+  <p><strong>5. Mục tiêu của mình:</strong> – Mỗi ngày học 1 chút để sau này trở thành lập trình viên thật xịn! 💻🚀</p>
+</section>
+
+<!-- 🧒 Giới thiệu bản thân -->
+<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
+  <h2>🧒 Giới thiệu về mình</h2>
+  <p>Mình là <strong>Phúc</strong>, học sinh lớp 5 và thích lập trình!</p>
+  <p>Trang web này được mình làm bằng HTML, CSS và JavaScript.</p>
+</section>
+
+<!-- 📩 Góp ý qua Google Form -->
+<section style="background: #ffffffcc; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto;">
+  <h2>📩 Góp ý cho mình nhé!</h2>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfzvhmoqaUwXtpDyW1fwshwI4OHVMt6tcoW2ryuA1dNj7KiRQ/viewform?embedded=true" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Đang tải…</iframe>
+</section><!-- 📚 Góc đọc sách -->
+<section style="background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 12px; margin: 40px auto; max-width: 800px; box-shadow: 0 0 10px rgba(0,0,0,0.1);" id="goc-doc-sach">
+  <h2>📚 Góc đọc sách</h2>
+  <ul>
+    <li>📘 <strong>Chuyện Con Mèo Dạy Hải Âu Bay</strong> – Câu chuyện cảm động về lòng tin và tình bạn.</li>
+    <li>📗 <strong>Dế Mèn Phiêu Lưu Ký</strong> – Cuộc hành trình thú vị với những bài học dũng cảm.</li>
+    <li>📕 <strong>Những Tấm Lòng Cao Cả</strong> – Truyện cảm động về lòng tốt và tình bạn.</li>
+  </ul>
+  <p>Nếu bạn cũng mê sách, thử đọc nha! Có sách hay thì góp ý giúp mình nhé 📩</p>
+</section>
+<!-- 🦎 Tìm hiểu về Thằn Lằn Cá Sấu -->
+<section style="background: rgba(255, 255, 255, 0.95); padding: 30px; margin: 40px auto; border-radius: 12px; max-width: 900px; box-shadow: 0 0 10px rgba(0,0,0,0.1);" id="than-lan-ca-sau">
+  <h2 style="text-align: center;">🦎 Tìm hiểu về Thằn Lằn Cá Sấu</h2>
+  <p>Trong chuyến đi thực tế tại <strong>Trạm Đa dạng Sinh học Mê Linh</strong>, chúng mình đã được tận mắt quan sát loài <strong>Thằn Lằn Cá Sấu</strong> – một sinh vật vô cùng thú vị và quý hiếm.</p>
+  
+  <div style="text-align: center;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tribolonotus_gracilis.jpg/640px-Tribolonotus_gracilis.jpg" alt="Thằn Lằn Cá Sấu" style="max-width: 100%; border-radius: 10px; margin: 20px 0; box-shadow: 0 0 8px rgba(0,0,0,0.2);" />
+  </div>
+  
+  <h3>📌 Đặc điểm nổi bật</h3>
+  <ul>
+    <li>Thằn Lằn Cá Sấu có lớp vảy dày, gai giống cá sấu mini.</li>
+    <li>Thường sống ở môi trường ẩm ướt như rừng, gần suối.</li>
+    <li>Loài này hiếm gặp và đang được bảo tồn tại các trạm sinh học.</li>
+  </ul>
+
+  <h3>📷 Trạm Đa dạng Sinh học Mê Linh</h3>
+  <p>Cậu có thể xem thêm hoạt động của trạm tại:</p>
+  <div style="text-align:center; margin: 20px 0;">
+    <a href="https://www.facebook.com/Melinhbiodiversity/?locale=vi_VN" target="_blank" style="font-weight: bold; color: #0072ff;">🔗 Facebook Trạm Mê Linh</a>
+  </div>
+
+  <h3>🗺️ Bản đồ Google Maps</h3>
+  <div style="text-align: center;">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.1118305783963!2d105.56890257514161!3d21.145833782729407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134f78f91dbf76d%3A0xafe95b63b86f8b73!2zVHLhuqFtIMSQYSBkw6FuZyBz4bqldSBzaW5oIGjhu41jIE3DrSBC4buZbmc!5e0!3m2!1svi!2s!4v1720750849144!5m2!1svi!2s"
+      width="100%" height="350" style="border:0; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.15);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+<!-- 💬 Hiệu ứng chữ gõ -->
+<script>
+  const text = "🎉 Xin chào! Đây là web đầu tiên của mình!";
+  let index = 0;
+  function typeWriter() {
+    if (index < text.length) {
+      document.getElementById("typewriter").innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 60);
+    }
+  }
+  typeWriter();
+</script>
+
+<!-- 🌠 Hiệu ứng sao rơi -->
+<canvas id="stars" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 0;"></canvas>
+<script>
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+  let w = (canvas.width = window.innerWidth);
+  let h = (canvas.height = window.innerHeight);
+  const stars = [];
+
+  for (let i = 0; i < 150; i++) {
+    stars.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      radius: Math.random() * 1.2,
+      vx: -0.5 + Math.random(),
+      vy: -0.5 + Math.random()
+    });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      ctx.moveTo(s.x, s.y);
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2, true);
+    }
+    ctx.fill();
+    moveStars();
+  }
+
+  function moveStars() {
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      s.x += s.vx;
+      s.y += s.vy;
+      if (s.x < 0) s.x = w;
+      if (s.y < 0) s.y = h;
+      if (s.x > w) s.x = 0;
+      if (s.y > h) s.y = 0;
+    }
+  }
+
+  setInterval(drawStars, 50);
+  window.addEventListener("resize", () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  });
+</script>
+<!-- 📌 Thanh menu điều hướng -->
+<nav style="position: fixed; top: 0; left: 0; width: 100%; background: #ffffffdd; backdrop-filter: blur(6px); z-index: 1000; display: flex; justify-content: center; gap: 15px; padding: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+  <a href="#gioi-thieu" style="text-decoration: none; font-weight: bold;">🧒 Giới thiệu</a>
+  <a href="#goc-hoc-lap-trinh" style="text-decoration: none; font-weight: bold;">💻 Học lập trình</a>
+  <a href="#goc-doc-sach" style="text-decoration: none; font-weight: bold;">📚 Góc đọc sách</a>
+  <a href="#mini-quiz" style="text-decoration: none; font-weight: bold;">🧠 Quiz</a>
+  <a href="#gop-y" style="text-decoration: none; font-weight: bold;">📩 Góp ý</a>
+</nav>
+
+<!-- 🔊 Nhạc nền -->
+<audio id="bg-music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
+
+<button onclick="toggleMusic()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #ffffffcc; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; z-index: 999;">
+  🎵 Bật/Tắt Nhạc
+</button>
+
+<script>
+  let isPlaying = false;
+  const music = document.getElementById("bg-music");
+  function toggleMusic() {
+    if (isPlaying) {
+      music.pause();
+    } else {
+      music.play();
+    }
+    isPlaying = !isPlaying;
+  }
+</script>
+<!-- 🤖 Trợ lý ảo mini -->
+<section style="background: #fff; padding: 25px; border-radius: 12px; max-width: 800px; margin: 40px auto; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+  <h2 style="text-align:center;">🤖 Trợ lý ảo mini</h2>
+  <p style="text-align:center;">Hỏi gì đó nha! Ví dụ: "Mấy giờ rồi?", "2 + 2 bằng mấy?", "Tên cậu là gì?"</p>
+  <div style="text-align: center;">
+    <input id="ask" placeholder="Bạn muốn hỏi gì?" style="width: 70%; padding: 10px; font-size: 16px;" />
+    <button onclick="reply()" style="padding: 10px 15px; font-weight: bold; margin-left: 10px;">Hỏi</button>
+    <p id="answer" style="margin-top: 10px; font-weight: bold;"></p>
+  </div>
+</section>
+
+<script>
+  function reply() {
+    const q = document.getElementById("ask").value.toLowerCase();
+    const ans = document.getElementById("answer");
+
+    if (q.includes("tên")) {
+      ans.textContent = "Tớ là web của Phúc nè!";
+    } else if (q.includes("mấy giờ") || q.includes("bây giờ là mấy giờ")) {
+      ans.textContent = "Bây giờ là " + new Date().toLocaleTimeString("vi-VN");
+    } else if (q.includes("hôm nay là thứ mấy")) {
+      const days = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
+      ans.textContent = "Hôm nay là " + days[new Date().getDay()];
+    } else if (q.includes("2+2") || q.includes("2 + 2")) {
+      ans.textContent = "2 + 2 = 4 đó!";
+    } else {
+      ans.textContent = "Tớ chưa hiểu câu đó 😅 Bạn thử hỏi câu khác nhé!";
+    }
+  }
+</script>
+  <div id="cookie-banner" style="position: fixed; bottom: 0; background: #222; color: white; width: 100%; padding: 10px; text-align: center; display: none;">
+  🍪 Trang web này dùng cookie để cải thiện trải nghiệm. 
+  <button onclick="acceptCookie()" style="margin-left: 10px;">Đồng ý</button>
+</div>
+
+<script>
+  function acceptCookie() {
+    document.getElementById('cookie-banner').style.display = 'none';
+    document.cookie = "acceptCookie=true";
+  }
+
+  window.onload = () => {
     if (!document.cookie.includes("acceptCookie=true")) {
       document.getElementById('cookie-banner').style.display = 'block';
     }
-    // Hiệu ứng sao rơi
-    const canvas = document.getElementById("stars");
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      let w = (canvas.width = window.innerWidth);
-      let h = (canvas.height = window.innerHeight);
-      const stars = [];
-      for (let i = 0; i < 150; i++) {
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          radius: Math.random() * 1.2,
-          vx: -0.5 + Math.random(),
-          vy: -0.5 + Math.random()
-        });
-      }
-      function drawStars() {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = "white";
-        ctx.beginPath();
-        for (let i = 0; i < stars.length; i++) {
-          const s = stars[i];
-          ctx.moveTo(s.x, s.y);
-          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2, true);
-        }
-        ctx.fill();
-        moveStars();
-      }
-      function moveStars() {
-        for (let i = 0; i < stars.length; i++) {
-          const s = stars[i];
-          s.x += s.vx;
-          s.y += s.vy;
-          if (s.x < 0) s.x = w;
-          if (s.y < 0) s.y = h;
-          if (s.x > w) s.x = 0;
-          if (s.y > h) s.y = 0;
-        }
-      }
-      setInterval(drawStars, 50);
-      window.addEventListener("resize", () => {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      });
+  }
+</script>
+  <script>
+  function acceptCookies() {
+    localStorage.setItem("cookiesAccepted", "true");
+    document.getElementById("cookie-banner").style.display = "none";
+  }
+
+  window.onload = function () {
+    if (!localStorage.getItem("cookiesAccepted")) {
+      document.getElementById("cookie-banner").style.display = "block";
     }
-    // ... Các script khác giữ nguyên, không lặp lại ...
-  </script>
-  <canvas id="stars"></canvas>
-  <!-- Thêm các section khác như Game, Quiz, Góc đọc sách, Giới thiệu... -->
-  <!-- ... -->
+  };
+</script>
+  <!-- 🌄 Hiệu ứng Parallax -->
+<section style="height: 400px; background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); background-attachment: fixed; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold; text-shadow: 2px 2px 8px rgba(0,0,0,0.8);">
+  🔭 Cùng khám phá thế giới với mình!
+</section>
+  <!-- 💻 Ô nhập lệnh quản trị -->
+<div style="position: fixed; bottom: 80px; right: 20px; z-index: 999;">
+  <input id="adminCommand" placeholder="Nhập lệnh bắt đầu bằng ;" 
+         style="padding: 8px; width: 220px; border-radius: 8px; border: 1px solid #ccc;" 
+         onkeydown="handleCommand(event)" />
+</div>
+  <script>
+  function handleCommand(e) {
+    if (e.key === "Enter") {
+      const cmd = e.target.value.trim();
+      if (!cmd.startsWith(";")) return;
+
+      const command = cmd.slice(1).toLowerCase(); // bỏ dấu ;
+
+      switch (command) {
+        case "dark":
+          document.body.classList.add("dark-mode");
+          break;
+        case "light":
+          document.body.classList.remove("dark-mode");
+          break;
+        case "music":
+          const music = document.getElementById("bg-music");
+          if (music) music.play();
+          break;
+        case "mute":
+          const muteMusic = document.getElementById("bg-music");
+          if (muteMusic) muteMusic.pause();
+          break;
+        case "reset":
+          document.body.style.background = "linear-gradient(-45deg, #00c6ff, #0072ff, #ff6ec4, #fddb92)";
+          break;
+        default:
+          alert("Lệnh không hợp lệ!");
+      }
+
+      e.target.value = ""; // Xóa sau khi nhập
+    }
+  }
+</script>
+  <!-- 🐙 Octocat góc phải trên -->
+<a href="https://github.com" target="_blank" style="position: fixed; top: 0; right: 0; border: 0; z-index: 1000;">
+  <img src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub" width="149" height="149">
+</a>
+  <!-- 🐙 Octocat động -->
+<style>
+  .octocat-fly {
+    position: fixed;
+    bottom: 40px;
+    left: -150px;
+    width: 100px;
+    animation: flyOctocat 12s linear infinite;
+    z-index: 999;
+  }
+  @keyframes flyOctocat {
+    0% { left: -150px; transform: rotate(0deg); }
+    50% { left: 100%; transform: rotate(360deg); }
+    100% { left: -150px; transform: rotate(0deg); }
+  }
+</style>
+<img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" class="octocat-fly" alt="Flying Octocat">
+  <!-- 🔐 Admin Panel -->
+<!-- 🔐 Admin Panel (mở rộng) -->
+<div id="adminPanel" style="display:none; position:fixed; top:60px; right:20px; background:#fff; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; padding:20px; max-width:300px;">
+  <h3>🛠️ Bảng điều khiển Admin</h3>
+  
+  <!-- 1. Ghi chú admin -->
+  <textarea id="adminNotes" placeholder="Ghi chú admin..." style="width:100%; height:60px; margin-bottom:10px;"></textarea>
+
+  <!-- 2. Thay đổi màu nền -->
+  <label>🌈 Màu nền:</label>
+  <input type="color" id="adminColor" onchange="document.body.style.background = this.value;"><br><br>
+
+  <!-- 3. Chế độ sáng/tối -->
+  <button onclick="toggleMode()" style="width:100%; margin-bottom:8px;">🌗 Chuyển Sáng/Tối</button>
+
+  <!-- 4. Bật/tắt nhạc nền -->
+  <button onclick="toggleMusic()" style="width:100%; margin-bottom:8px;">🎵 Bật/Tắt Nhạc</button>
+
+  <!-- 5. Đặt lại bộ đếm truy cập -->
+  <button onclick="resetVisitCount()" style="width:100%; margin-bottom:8px;">🔄 Reset Visit Count</button>
+
+  <!-- 6. Ẩn/hiện các section -->
+  <button onclick="toggleSection('slideshow')" style="width:100%; margin-bottom:8px;">🖼️ Ẩn/Hiện Slideshow</button>
+  <button onclick="toggleSection('goc-doc-sach')" style="width:100%; margin-bottom:8px;">📚 Ẩn/Hiện Góc đọc sách</button>
+
+  <!-- 7. Cuộn lên/xuống -->
+  <button onclick="window.scrollTo(0,0)" style="width:48%; margin-right:4%;">⬆️ Lên đầu</button>
+  <button onclick="window.scrollTo(0,document.body.scrollHeight)" style="width:48%;">⬇️ Cuối trang</button><br><br>
+
+  <!-- 8. Confetti party -->
+  <button onclick="runConfetti()" style="width:100%; margin-bottom:8px;">🎉 Confetti</button>
+
+  <!-- 9. Đóng panel -->
+  <button onclick="hideAdminPanel()" style="width:100%; background:#f44; color:#fff;">❌ Đóng Admin Panel</button>
+</div>
+
+<script>
+  // ẩn/thể hiện panel
+  function hideAdminPanel() {
+    document.getElementById("adminPanel").style.display = "none";
+  }
+
+  // 1: toggle dark mode
+  function toggleMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+
+  // 2: toggle music
+  let _isMusicPlaying = false;
+  function toggleMusic() {
+    const m = document.getElementById("bg-music");
+    if (!m) return;
+    _isMusicPlaying ? m.pause() : m.play();
+    _isMusicPlaying = !_isMusicPlaying;
+  }
+
+  // 3: reset visit count
+  function resetVisitCount() {
+    localStorage.setItem('visitCount', '0');
+    document.getElementById('visit-count').innerText = '0';
+    alert('✅ Đã reset số lượt truy cập!');
+  }
+
+  // 4: toggle section by id
+  function toggleSection(id) {
+    const el = document.getElementById(id);
+    if (!el) return alert('Không tìm thấy section: ' + id);
+    el.style.display = (el.style.display === 'none') ? '' : 'none';
+  }
+
+  // 5: confetti (rất đơn giản)
+  function runConfetti() {
+    const duration = 3 * 1000;
+    const end = Date.now() + duration;
+    (function frame() {
+      // tạo vài viên confetti
+      const conf = document.createElement('div');
+      conf.textContent = '✨';
+      conf.style.position = 'fixed';
+      conf.style.left = Math.random() * 100 + 'vw';
+      conf.style.top = '0';
+      conf.style.fontSize = (10 + Math.random()*30) + 'px';
+      conf.style.pointerEvents = 'none';
+      document.body.appendChild(conf);
+      // rơi dần
+      let y = 0;
+      const id = setInterval(() => {
+        y += 5;
+        conf.style.top = y + 'px';
+        if (y > window.innerHeight) {
+          clearInterval(id);
+          document.body.removeChild(conf);
+        }
+      }, 20);
+      if (Date.now() < end) requestAnimationFrame(frame);
+    }());
+  }
+
+  // 6: mở panel với mật khẩu (đặt mã từ trước)
+  const adminPassword = "2015";
+  function requestAdminPanel() {
+    const pass = prompt("🔐 Nhập mật khẩu Admin:");
+    if (pass === adminPassword) {
+      document.getElementById("adminPanel").style.display = "block";
+    } else {
+      alert('❌ Sai mật khẩu!');
+    }
+  }
+
+  // liên kết nút ngoài để mở
+  document.getElementById('adminBtn')?.addEventListener('click', requestAdminPanel);
+</script>
+  const adminCommands = {
+    ";admin-panel": () => {
+      document.getElementById("adminPanel").style.display = "block";
+      alert("✅ Đã bật bảng điều khiển admin!");
+    },
+    ";reload": () => {
+      location.reload();
+    },
+    ";toggle-music": () => {
+      toggleMusic();
+    },
+    ";hide-panel": () => {
+      hideAdminPanel();
+    },
+    // Cậu có thể thêm nhiều lệnh nữa ở đây
+  };
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === ";") {
+      const input = prompt("🔐 Nhập lệnh quản trị (bắt đầu bằng dấu ;):");
+      if (input && adminCommands[input.trim().toLowerCase()]) {
+        adminCommands[input.trim().toLowerCase()](); // Chạy lệnh tương ứng
+      } else {
+        alert("❌ Lệnh không đúng hoặc chưa được hỗ trợ.");
+      }
+    }
+  });
+
+  function hideAdminPanel() {
+    document.getElementById("adminPanel").style.display = "none";
+  }
+</script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .then((reg) => {
+          console.log("✅ Service Worker đã đăng ký:", reg.scope);
+        })
+        .catch((err) => {
+          console.log("❌ Lỗi đăng ký Service Worker:", err);
+        });
+    });
+  }
+</script>
+<!-- 🔘 Nút mở Admin Panel (có mật khẩu) -->
+<button id="adminBtn" onclick="requestAdminPassword()" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: #fff; color: #000; padding: 10px 15px; border-radius: 10px; border: none; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.2); font-weight: bold;">
+  ⚙️ Admin
+</button>
+
+<script>
+  const adminPassword = "2015"; // 🔐 Mật khẩu là năm sinh của cậu
+
+  function requestAdminPassword() {
+    const input = prompt("🔐 Nhập mật khẩu để truy cập Admin Panel:");
+    if (input === adminPassword) {
+      document.getElementById("adminPanel").style.display = "block";
+      alert("✅ Truy cập thành công!");
+    } else {
+      alert("❌ Sai mật khẩu!");
+    }
+  }
+</script>
+  <section style="text-align:center; margin:40px 0;">
+  <h2>🎵 Nhạc: Morning Mood (Grow a Garden theme) – 1 Giờ</h2>
+  <iframe width="320" height="180"
+    src="https://www.youtube.com/embed/gQX56IHUe3o?autoplay=0&loop=1&playlist=gQX56IHUe3o"
+    title="Morning Mood – Grow a Garden"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</section>
+  <button onclick="toggleGardenMusic()" style="margin:10px; padding:8px 12px;">🎵 Bật/Tắt Morning Mood</button>
+<iframe id="gardenFrame" width="320" height="180"
+  src="https://www.youtube.com/embed/gQX56IHUe3o?loop=1&playlist=gQX56IHUe3o"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen></iframe>
+
+<script>
+  let gardenPlaying = false;
+  function toggleGardenMusic() {
+    const frame = document.getElementById("gardenFrame");
+    if (!gardenPlaying) {
+      frame.src = frame.src + "&autoplay=1";
+    } else {
+      frame.src = frame.src.replace("&autoplay=1", "");
+    }
+    gardenPlaying = !gardenPlaying;
+  }
+</script>
+  <section style="text-align:center; margin:40px 0;">
+  <h2>🎵 Nhạc nền: Morning Mood – Grow a Garden</h2>
+  <p>👉 Hãy bấm nút ▶️ bên dưới để bắt đầu nghe nhạc!</p>
+  <iframe width="320" height="180"
+    src="https://www.youtube.com/embed/gQX56IHUe3o?loop=1&playlist=gQX56IHUe3o"
+    title="Morning Mood – Grow a Garden"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</section>
+  <hr>
+<h4>📦 Quản lý Dữ liệu (localStorage)</h4>
+<label>🔑 Key: <input type="text" id="dataKey" style="width: 90%; margin: 5px 0;"></label><br>
+<label>📄 Value: <textarea id="dataValue" style="width: 90%; height: 60px;"></textarea></label><br>
+<button onclick="saveData()">💾 Lưu dữ liệu</button>
+<button onclick="deleteData()">🗑️ Xóa key</button>
+<button onclick="clearAllData()">🚫 Xóa toàn bộ</button>
+<button onclick="loadDataList()">🔄 Refresh</button>
+<div id="dataList" style="margin-top: 10px; max-height: 150px; overflow-y: auto; font-size: 14px; background: #f9f9f9; padding: 10px; border-radius: 5px;"></div>
+  <!-- 🔧 Nút mở Developer Mode -->
+<button onclick="showDevLogin()" style="position:fixed; bottom:80px; right:20px; padding:10px 15px; background:#eee; border:none; border-radius:8px; cursor:pointer; z-index:9999;">
+  🧑‍💻 Dev Mode
+</button>
+
+<!-- 🔧 Developer Panel -->
+<div id="devPanel" style="display:none; position:fixed; top:60px; left:20px; width:90%; max-width:600px; height:400px; background:white; border:2px solid #333; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
+  <div style="background:#333; color:#fff; padding:8px; font-weight:bold;">💻 Developer Mode 
+    <button onclick="hideDevPanel()" style="float:right; background:red; color:white; border:none; border-radius:4px; cursor:pointer;">✖</button>
+  </div>
+  <div style="display:flex; height:100%;">
+    <div style="width:120px; background:#f0f0f0; border-right:1px solid #ccc;">
+      <button onclick="switchTab('elements')" style="width:100%; padding:10px;">🔍 Elements</button>
+      <button onclick="switchTab('network')" style="width:100%; padding:10px;">🌐 Network</button>
+      <button onclick="switchTab('storage')" style="width:100%; padding:10px;">🗃️ Storage</button>
+    </div>
+    <div style="flex:1; padding:10px; overflow:auto;" id="devContent">
+      <!-- Nội dung tab sẽ hiển thị ở đây -->
+    </div>
+  </div>
+</div>
+
+<script>
+  function showDevLogin() {
+    const pass = prompt("🔐 Nhập mật khẩu để mở Developer Mode:");
+    if (pass === "2015") {
+      document.getElementById("devPanel").style.display = "block";
+      switchTab('elements');
+    } else {
+      alert("❌ Sai mật khẩu!");
+    }
+  }
+
+  function hideDevPanel() {
+    document.getElementById("devPanel").style.display = "none";
+  }
+
+  function switchTab(tab) {
+    const content = document.getElementById("devContent");
+    if (tab === 'elements') {
+      content.textContent = document.documentElement.outerHTML;
+    } else if (tab === 'network') {
+      content.innerHTML = "📡 Mô phỏng Network:<br>Trang đã tải lúc: <b>" + new Date().toLocaleTimeString() + "</b>";
+    } else if (tab === 'storage') {
+      const storageData = Object.entries(localStorage).map(([key, value]) => `<b>${key}</b>: ${value}`).join("<br>");
+      content.innerHTML = "🗃️ Dữ liệu Local Storage:<br>" + (storageData || "Không có dữ liệu.");
+    }
+  }
+</script>
+  <!-- 🧑‍💻 Developer Mode -->
+<div id="devModePanel" style="display:none; position:fixed; bottom:20px; left:20px; background:#fff; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; padding:20px; max-width:320px;">
+  <h3>🧑‍💻 Developer Mode</h3>
+  <button onclick="toggleInspector()">🔍 Bật Live DOM Inspector</button><br><br>
+  <textarea id="customCSS" placeholder="💅 Viết CSS tại đây..." style="width:100%; height:80px;"></textarea><br>
+  <button onclick="applyCSS()">🎨 Áp dụng CSS</button><br><br>
+  <div id="perfLog" style="font-size:14px;"></div>
+  <br>
+  <button onclick="document.getElementById('devModePanel').style.display='none'">❌ Đóng Dev Mode</button>
+</div>
+
+<button onclick="openDevMode()" style="position:fixed; bottom:20px; left:20px; padding:10px 15px; background:#ffffffcc; border:none; border-radius:8px; font-weight:bold; cursor:pointer; z-index:9998;">
+  🧑‍💻 Dev Mode
+</button>
+
+<script>
+  // Ghi lại thời gian tải
+  const loadTime = performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;
+  let lastInteraction = new Date().toLocaleTimeString();
+
+  function openDevMode() {
+    const pass = prompt("🔐 Nhập mật khẩu Dev Mode:");
+    if (pass === "2015") {
+      document.getElementById("devModePanel").style.display = "block";
+      updatePerfLog();
+    } else {
+      alert("❌ Sai mật khẩu!");
+    }
+  }
+
+  function updatePerfLog() {
+    document.getElementById("perfLog").innerHTML = `📊 Tải trang: ${loadTime}ms<br>⏱️ Tương tác gần nhất: ${lastInteraction}`;
+  }
+
+  document.addEventListener("click", () => {
+    lastInteraction = new Date().toLocaleTimeString();
+    updatePerfLog();
+  });
+
+  // Live DOM Inspector
+  let inspectorEnabled = false;
+  function toggleInspector() {
+    inspectorEnabled = !inspectorEnabled;
+    if (inspectorEnabled) {
+      document.body.style.cursor = "crosshair";
+      document.addEventListener("click", inspectElement, true);
+      alert("🔍 Click vào phần tử bất kỳ để xem thông tin.");
+    } else {
+      document.body.style.cursor = "default";
+      document.removeEventListener("click", inspectElement, true);
+    }
+  }
+
+  function inspectElement(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = e.target;
+    const html = el.outerHTML.split('\n').slice(0, 5).join('\n'); // Giới hạn hiển thị
+    const css = window.getComputedStyle(el);
+    alert(`📄 HTML:\n${html}\n\n🎨 CSS:\ncolor: ${css.color};\nfont-size: ${css.fontSize};\npadding: ${css.padding};`);
+    toggleInspector();
+  }
+
+  // CSS editor
+  function applyCSS() {
+    const style = document.createElement("style");
+    style.textContent = document.getElementById("customCSS").value;
+    document.head.appendChild(style);
+    alert("✅ CSS đã được áp dụng!");
+  }
+</script>
+  <!-- 🛠️ Developer Mode -->
+<button onclick="promptDevMode()" style="position: fixed; bottom: 20px; left: 20px; padding: 10px 15px; background: #eee; border: none; border-radius: 8px; font-weight: bold; z-index: 9999;">🧑‍💻 Dev Mode</button>
+
+<div id="devModePanel" style="display: none; position: fixed; top: 60px; left: 20px; background: #fff; border: 2px solid #000; padding: 20px; border-radius: 10px; z-index: 9999; max-width: 400px;">
+  <h3>🧑‍💻 Developer Mode</h3>
+  
+  <p><strong>1. Live DOM Inspector:</strong></p>
+  <p>Click vào bất kỳ phần tử trên trang để xem HTML + CSS của nó.</p>
+  <pre id="elementInfo" style="background: #f0f0f0; padding: 10px; max-height: 150px; overflow: auto;"></pre>
+  
+  <p><strong>2. Chỉnh CSS trực tiếp:</strong></p>
+  <textarea id="customCSS" placeholder="body { background: pink; }" style="width: 100%; height: 80px;"></textarea><br>
+  <button onclick="applyCustomCSS()">💾 Áp dụng CSS</button>
+
+  <p><strong>3. Performance log:</strong></p>
+  <p id="perfLog">⏳ Đang tính...</p>
+
+  <button onclick="hideDevMode()" style="margin-top: 15px;">❌ Đóng</button>
+</div>
+
+<script>
+function promptDevMode() {
+  const pass = prompt("🔐 Nhập mật khẩu để vào Dev Mode:");
+  if (pass === "2015") {
+    document.getElementById("devModePanel").style.display = "block";
+    updatePerfLog();
+  } else {
+    alert("❌ Mật khẩu sai!");
+  }
+}
+
+function hideDevMode() {
+  document.getElementById("devModePanel").style.display = "none";
+}
+
+// Live DOM Inspector
+document.addEventListener("click", function(e) {
+  if (document.getElementById("devModePanel").style.display !== "block") return;
+  e.preventDefault();
+  const el = e.target;
+  const tag = el.tagName.toLowerCase();
+  const id = el.id ? `#${el.id}` : '';
+  const className = el.className ? `.${el.className.split(" ").join(".")}` : '';
+  const styles = window.getComputedStyle(el);
+  const css = `
+<b>HTML:</b> &lt;${tag}${id}${className}&gt;<br>
+<b>CSS:</b><br>
+color: ${styles.color};<br>
+background: ${styles.background};<br>
+font-size: ${styles.fontSize};<br>
+padding: ${styles.padding};<br>
+margin: ${styles.margin};
+  `;
+  document.getElementById("elementInfo").innerHTML = css;
+});
+
+// Thử CSS trực tiếp
+function applyCustomCSS() {
+  const css = document.getElementById("customCSS").value;
+  const style = document.createElement("style");
+  style.innerHTML = css;
+  document.head.appendChild(style);
+}
+
+// Performance log
+function updatePerfLog() {
+  const time = window.performance.timing;
+  const loadTime = time.loadEventEnd - time.navigationStart;
+  const now = new Date();
+  document.getElementById("perfLog").textContent =
+    `⏱️ Load time: ${loadTime}ms — Tương tác gần nhất: ${now.toLocaleTimeString()}`;
+}
+</script>
+  <script>
+  function saveData() {
+    const key = document.getElementById('dataKey').value;
+    const value = document.getElementById('dataValue').value;
+    if (key) {
+      localStorage.setItem(key, value);
+      alert("✅ Đã lưu!");
+      loadDataList();
+    } else {
+      alert("⚠️ Vui lòng nhập key.");
+    }
+  }
+
+  function deleteData() {
+    const key = document.getElementById('dataKey').value;
+    if (key && localStorage.getItem(key) !== null) {
+      localStorage.removeItem(key);
+      alert("🗑️ Đã xóa!");
+      loadDataList();
+    } else {
+      alert("❌ Key không tồn tại.");
+    }
+  }
+
+  function clearAllData() {
+    if (confirm("⚠️ Bạn chắc chắn muốn xóa toàn bộ dữ liệu?")) {
+      localStorage.clear();
+      alert("🚫 Đã xóa toàn bộ!");
+      loadDataList();
+    }
+  }
+
+  function loadDataList() {
+    const dataList = document.getElementById("dataList");
+    dataList.innerHTML = "";
+    if (localStorage.length === 0) {
+      dataList.innerHTML = "<i>Không có dữ liệu.</i>";
+      return;
+    }
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);
+      const item = document.createElement("div");
+      item.innerHTML = `<b>${key}:</b> ${value}`;
+      dataList.appendChild(item);
+    }
+  }
+
+  // Tự động tải khi mở admin panel
+  if (typeof loadDataList === 'function') {
+    loadDataList();
+  }
+</script>
+  <h1 id="logo">🌟 Web của Phúc</h1>
+  <div id="secretGame" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:white; border-radius:10px; padding:20px; z-index:10000; box-shadow:0 0 20px rgba(0,0,0,0.4);">
+  <h3>🟡 Game PAC-MAN Bí Mật!</h3>
+  <iframe src="https://www.retrogames.cc/embed/24344-pac-man.html" width="400" height="500" style="border:none;"></iframe><br>
+  <button onclick="document.getElementById('secretGame').style.display='none'">Đóng game</button>
+</div>
+  <div id="secretGame" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:white; border-radius:10px; padding:20px; z-index:10000; box-shadow:0 0 20px rgba(0,0,0,0.4);">
+  <h3>🟡 Game PAC-MAN Bí Mật!</h3>
+  <iframe src="https://www.retrogames.cc/embed/24344-pac-man.html" width="400" height="500" style="border:none;"></iframe><br>
+  <button onclick="document.getElementById('secretGame').style.display='none'">Đóng game</button>
+</div>
+  <!-- Popup Thông báo cập nhật -->
+<div id="updatePopup" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: white; border: 2px solid black; padding: 20px; z-index: 9999; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+  <h3>🆕 Tính năng mới!</h3>
+  <ul>
+    <li>✨ Thêm chế độ Developer Mode</li>
+    <li>🛠️ Giao diện tự động sáng/tối</li>
+    <li>🚗 Game đua xe 3D chuẩn bị ra mắt!</li>
+    <li>update hệ thống đăng nhập – đăng ký – đăng xuấ</li>
+  </ul>
+  <button onclick="closePopup()">Đóng</button>
+</div><script>
+  function showPopup() {
+    // Hiển thị popup chỉ 1 lần mỗi ngày
+    const lastShown = localStorage.getItem('lastPopupShown');
+    const today = new Date().toDateString();
+    if (lastShown !== today) {
+      document.getElementById('updatePopup').style.display = 'block';
+      localStorage.setItem('lastPopupShown', today);
+    }
+  }
+
+  function closePopup() {
+    document.getElementById('updatePopup').style.display = 'none';
+  }
+
+  window.onload = showPopup;
+</script>
+  <div id="auth-container">
+  <div id="welcome-message" style="display:none;">
+    Xin chào, <span id="username-display"></span>!
+    <button onclick="logout()">Đăng xuất</button>
+  </div>
+
+  <div id="login-form">
+    <h3>Đăng nhập</h3>
+    <input type="text" id="login-username" placeholder="Tên đăng nhập">
+    <input type="password" id="login-password" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng nhập</button>
+    <p>Chưa có tài khoản? <a href="#" onclick="showRegister()">Đăng ký</a></p>
+  </div>
+
+  <div id="register-form" style="display:none;">
+    <h3>Đăng ký</h3>
+    <input type="text" id="register-username" placeholder="Tên đăng nhập">
+    <input type="password" id="register-password" placeholder="Mật khẩu">
+    <button onclick="register()">Đăng ký</button>
+    <p>Đã có tài khoản? <a href="#" onclick="showLogin()">Đăng nhập</a></p>
+  </div>
+</div>
+  <style>
+  .contact-container {
+    max-width: 400px;
+    margin: 20px auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+  }
+  .contact-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  .contact-container label {
+    display: block;
+    margin: 8px 0 5px;
+    font-weight: bold;
+  }
+  .contact-container input, 
+  .contact-container textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  .contact-container input:focus, 
+  .contact-container textarea:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 5px #4caf50;
+  }
+  .contact-container button {
+    width: 100%;
+    padding: 10px;
+    background: #4caf50;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .contact-container button:hover {
+    background: #45a049;
+  }
+  .captcha-message {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+</style>
+
+<div class="contact-container">
+  <h2>Liên hệ</h2>
+  <form id="contactForm">
+    <label>Họ tên:</label>
+    <input type="text" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <label>Nội dung:</label>
+    <textarea name="message" required></textarea>
+
+    <!-- Câu hỏi chống bot -->
+    <label>2 + 5 = ?</label>
+    <input type="number" id="captchaAnswer" required>
+
+    <button type="submit">Gửi</button>
+    <div class="captcha-message" id="captchaMessage"></div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault(); 
+
+    let answer = document.getElementById("captchaAnswer").value;
+    let message = document.getElementById("captchaMessage");
+
+    if(answer == 7) {
+      message.style.color = "green";
+      message.innerText = "✔ Gửi thành công!";
+    } else {
+      message.style.color = "red";
+      message.innerText = "❌ Sai rồi! Cậu là bot à?";
+    }
+  });
+</script>
 </body>
 </html>
