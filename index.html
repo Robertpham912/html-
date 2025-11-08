@@ -1042,7 +1042,7 @@ margin: ${styles.margin};
 function applyCustomCSS() {
   const css = document.getElementById("customCSS").value;
   const style = document.createElement("style");
-  style.innerHTML = css;
+  style.textContent = css;
   document.head.appendChild(style);
 }
 
