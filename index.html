@@ -3,125 +3,128 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>🌟 Web của Phúc — Phiên bản A1 (Gradient dịu + Glassmorphism)</title>
+  <title>🌟 Web của Phúc — A1 iOS26 Liquid Glass (Full Upgrade)</title>
   <link rel="icon" href="https://fav.farm/✨" />
   <meta name="theme-color" content="#9bddff" />
   <style>
-    /* =========================
-       THEME: A1 — Gradient dịu + Glassmorphism
-       ========================= */
     :root{
-      --bg1: #9bddff; /* pastel xanh */
-      --bg2: #b486f8; /* tím dịu */
-      --bg3: #ff9ace; /* hồng pastel */
-      --glass-bg: rgba(255,255,255,0.12);
+      --bg1: #9bddff;
+      --bg2: #b486f8;
+      --bg3: #ff9ace;
+      --glass-bg: rgba(255,255,255,0.10);
       --glass-border: rgba(255,255,255,0.18);
-      --card-radius: 14px;
-      --soft-shadow: 0 8px 24px rgba(13,30,80,0.08);
+      --card-radius: 16px;
       --accent: #7d2ae8;
-      --muted: rgba(255,255,255,0.85);
-      --glass-blur: 12px;
-      --text-dark: #0b1a2b;
+      --muted-dark: rgba(11,26,43,0.9);
+      --glass-blur: 14px;
     }
+    *{ box-sizing:border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    html,body{ height:100%; margin:0; font-family: Inter, "Segoe UI", Roboto, Arial; color:var(--muted-dark); background: #fff; }
 
-    * { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-    html,body{ height:100%; margin:0; font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif; color:var(--text-dark); }
-
-    /* Background gradient động nhẹ */
+    /* Gradient động nền */
     body{
-      min-height:100%;
-      background: linear-gradient(120deg, var(--bg1), var(--bg2), var(--bg3));
-      background-size: 600% 600%;
-      animation: gradientShift 18s ease infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top:72px; /* header space */
+      min-height:100vh;
+      display:flex; flex-direction:column; align-items:center; padding-top:84px;
+      background: linear-gradient(120deg,var(--bg1),var(--bg2),var(--bg3));
+      background-size:600% 600%; animation: gradientShift 20s linear infinite;
+      perspective:1200px; /* cho parallax 3D */
     }
-    @keyframes gradientShift {
-      0%{ background-position:0% 50% }
-      50%{ background-position:100% 50% }
-      100%{ background-position:0% 50% }
+    @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+    /* HEADER GLASS */
+    header.app-header{
+      position:fixed; left:12px; right:12px; top:12px; height:64px; display:flex; align-items:center; gap:12px;
+      padding:10px 14px; border-radius:14px; z-index:2000;
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      border:1px solid rgba(255,255,255,0.18); backdrop-filter: blur(18px) saturate(120%);
+      box-shadow: 0 10px 30px rgba(11,26,43,0.08);
+      transform-style: preserve-3d;
     }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700; color:rgba(255,255,255,0.95); text-shadow: 0 1px 0 rgba(0,0,0,0.12); }
+    nav.nav-links{ display:flex; gap:10px; align-items:center; }
+    nav.nav-links a{ color: rgba(255,255,255,0.95); text-decoration:none; padding:8px 10px; border-radius:10px; font-weight:600; transition: transform .18s ease, background .18s ease; }
+    nav.nav-links a:hover{ transform:translateY(-3px); background: rgba(255,255,255,0.06); }
 
-    /* Header glass */
-    header.app-header {
-      position: fixed;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      height:56px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:8px 14px;
-      border-radius:12px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(var(--glass-blur));
-      box-shadow: var(--soft-shadow);
-      z-index:1200;
-    }
-    .brand { display:flex; align-items:center; gap:10px; font-weight:700; color:var(--muted); }
-    .brand .logo { font-size:20px; transform:translateY(-1px); }
-    nav.nav-links { display:flex; gap:10px; align-items:center; }
-    nav.nav-links a { text-decoration:none; color:var(--muted); font-weight:600; padding:8px 10px; border-radius:8px; transition:0.22s; }
-    nav.nav-links a:hover{ background: rgba(255,255,255,0.06); transform:translateY(-2px); }
+    /* Container grid */
+    main.container{ width:100%; max-width:1150px; padding:22px; display:grid; grid-template-columns: 1fr 360px; gap:22px; align-items:start; z-index:100; }
 
-    /* Main layout */
-    main.container { width:100%; max-width:1100px; padding:20px; display:grid; grid-template-columns: 1fr 360px; gap:20px; align-items:start; z-index:100; }
-
-    /* Left column (content cards) */
-    .card { background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-             border-radius: var(--card-radius);
-             padding:16px;
-             border:1px solid var(--glass-border);
-             backdrop-filter: blur(calc(var(--glass-blur) - 2px));
-             box-shadow: var(--soft-shadow);
-             color:var(--muted);
-           }
-    .card h2 { margin:6px 0 12px; color:var(--text-dark); font-size:18px; }
-    .center { text-align:center; }
-
-    /* Right column (sidebar) */
-    aside.sidebar { position:sticky; top:96px; height:fit-content; align-self:start; display:flex; flex-direction:column; gap:12px; }
-
-    /* Buttons neon pastel */
-    .btn {
-      display:inline-block; padding:10px 14px; border-radius:10px; cursor:pointer; border:1px solid rgba(255,255,255,0.14);
+    /* Card (frosted glass ultra) - 3 layers depth */
+    .card{
+      border-radius: var(--card-radius);
+      padding:16px;
       background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      color:var(--text-dark); font-weight:700; transition: transform .16s ease, box-shadow .16s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+      box-shadow: 0 8px 30px rgba(11,26,43,0.08), inset 0 1px 0 rgba(255,255,255,0.02);
+      transform-style: preserve-3d;
+      transition: transform .25s cubic-bezier(.2,.9,.3,1), box-shadow .2s;
     }
-    .btn:hover{ transform:translateY(-4px); box-shadow: 0 12px 30px rgba(125,42,232,0.12); }
+    /* parallax card hover lift */
+    .card[data-parallax="true"]:hover{ transform: translateZ(24px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 18px 50px rgba(11,26,43,0.12); }
 
-    /* Music & toggle */
-    .top-controls { display:flex; gap:10px; align-items:center; }
-    .small { font-size:13px; padding:6px 10px; border-radius:8px; }
+    .card h2{ margin:6px 0 12px; color:var(--muted-dark); }
 
-    /* Slideshow */
-    .slideshow { width:100%; height:220px; border-radius:10px; overflow:hidden; position:relative; }
-    .slideshow img { width:100%; height:100%; object-fit:cover; display:block; transition:opacity .7s ease; }
+    /* Buttons neon + liquid bounce */
+    .btn{
+      border-radius:12px; padding:10px 14px; cursor:pointer; border:none; font-weight:800; letter-spacing:0.2px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      color:var(--muted-dark);
+      box-shadow: 0 6px 20px rgba(125,42,232,0.08), 0 1px 0 rgba(255,255,255,0.02);
+      transition: transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s;
+      will-change: transform;
+    }
+    /* Liquid bounce on press */
+    .btn:active{ transform: scale(.96); box-shadow: 0 8px 28px rgba(125,42,232,0.12); }
+    /* subtle glow on hover */
+    .btn:hover{ transform: translateY(-4px); box-shadow: 0 18px 40px rgba(125,42,232,0.10); }
 
-    /* Caro board */
-    table#caro-board { border-collapse:collapse; margin:8px auto; width:100%; max-width:280px; background:transparent; }
-    table#caro-board td { width:64px; height:64px; text-align:center; font-size:30px; border-radius:8px; cursor:pointer; transition: background .12s, transform .08s; background: rgba(255,255,255,0.02); }
-    table#caro-board td:hover{ background: rgba(255,255,255,0.06); transform:translateY(-2px); box-shadow:0 6px 14px rgba(125,42,232,0.06); }
+    /* Neon outline variant */
+    .btn.neon{ box-shadow: 0 10px 34px rgba(125,42,232,0.12), 0 0 28px rgba(125,42,232,0.06); border:1px solid rgba(125,42,232,0.14); }
 
-    /* Forms */
-    input.inline, textarea.inline { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); color:var(--muted); }
+    /* slideshow */
+    .slideshow{ width:100%; height:240px; border-radius:12px; overflow:hidden; position:relative; }
+    .slideshow img{ width:100%; height:100%; object-fit:cover; transition:opacity .6s ease; display:block; }
 
-    /* Mini styles */
-    footer.site-footer { margin:40px 0 80px; color:var(--muted); text-align:center; opacity:0.95; }
+    /* caro board stylized */
+    table#caro-board{ border-collapse:collapse; margin:10px auto; width:240px; height:240px; }
+    table#caro-board td{ width:33.33%; height:80px; text-align:center; font-size:30px; border-radius:8px; cursor:pointer;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      transition: transform .08s ease, box-shadow .12s ease;
+    }
+    table#caro-board td:hover{ transform: translateY(-6px); box-shadow: 0 12px 30px rgba(125,42,232,0.06); }
 
-    /* Bubble */
-    .bubble { position:absolute; width:18px; height:18px; border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); animation:bubbleUp 900ms ease-out forwards; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2)); box-shadow: 0 6px 18px rgba(125,42,232,0.08); }
-    @keyframes bubbleUp { to{ transform:translate(-50%,-140%); opacity:0; } }
+    /* secret modal visionOS */
+    #secretGame{ display:none; position:fixed; inset:0; align-items:center; justify-content:center; z-index:4000; }
+    #secretGame .panel{
+      width:92%; max-width:640px; border-radius:14px; padding:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      backdrop-filter: blur(26px) saturate(130%); border:1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 30px 80px rgba(2,6,23,0.6), 0 6px 20px rgba(125,42,232,0.08);
+      transform: translateZ(80px) scale(.98);
+      transition: transform .36s cubic-bezier(.2,.9,.25,1), opacity .28s;
+    }
+    #secretGame.show .panel{ transform: translateZ(0) scale(1); }
 
-    /* Responsive */
+    /* admin & dev panels styled as floating vision cards */
+    .floating-panel{ width:320px; border-radius:12px; padding:12px; background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.12); backdrop-filter: blur(18px); box-shadow: 0 16px 48px rgba(2,6,23,0.5); }
+
+    /* cookie */
+    #cookie-banner{ position:fixed; bottom:12px; left:12px; right:12px; z-index:3000; }
+
+    /* bubble */
+    .bubble{ position:absolute; width:18px; height:18px; border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); animation:bubbleUp 900ms ease-out forwards; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.15)); box-shadow: 0 8px 24px rgba(125,42,232,0.08); }
+    @keyframes bubbleUp{ to{ transform:translate(-50%,-140%); opacity:0; } }
+
+    /* responsive */
     @media (max-width:980px){
-      main.container { grid-template-columns: 1fr; padding:12px; }
-      aside.sidebar { position:relative; top:auto; }
-      header.app-header { left:8px; right:8px; }
+      main.container{ grid-template-columns: 1fr; padding:12px; }
+      header.app-header{ left:8px; right:8px; }
+      .floating-panel{ width:92%; }
+    }
+
+    /* prefers-reduced-motion fallback */
+    @media (prefers-reduced-motion: reduce){
+      * { animation: none !important; transition: none !important; }
     }
 
   </style>
@@ -129,7 +132,7 @@
 <body>
 
   <!-- Header -->
-  <header class="app-header">
+  <header class="app-header" id="appHeader" data-parallax="true">
     <div class="brand"><div class="logo">🌟</div><div>Web của Phúc</div></div>
     <nav class="nav-links" aria-label="Điều hướng chính">
       <a href="#gioi-thieu">Giới thiệu</a>
@@ -138,443 +141,294 @@
       <a href="#gop-y">Góp ý</a>
     </nav>
     <div class="top-controls">
-      <button id="musicToggle" class="btn small">🎵 Nhạc</button>
+      <button id="musicToggle" class="btn neon small">🎵 Nhạc</button>
       <button id="modeToggle" class="btn small">🌗 Sáng/Tối</button>
     </div>
   </header>
 
-  <!-- Main content: 2 columns -->
+  <!-- Main container -->
   <main class="container">
 
-    <!-- LEFT: nội dung chính -->
     <div class="left-col">
 
-      <!-- Hero card -->
-      <section class="card center" aria-labelledby="hero-title">
+      <section class="card" data-parallax="true">
         <h2 id="hero-title">🎉 Xin chào! Đây là web đầu tiên của mình!</h2>
-        <p style="color:var(--muted); margin:6px 0 10px;">Giao diện mới: Gradient pastel + Glassmorphism — nhẹ nhàng, dễ nhìn.</p>
-        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-          <button class="btn" onclick="document.getElementById('secretGame').style.display='flex'">🟡 Mở PAC-MAN</button>
-          <button class="btn" onclick="document.getElementById('adminPanel').style.display='block'">⚙️ Mở Admin</button>
-          <button class="btn" onclick="document.getElementById('devPanel').style.display='block'">🧑‍💻 Dev Mode</button>
+        <p style="color:rgba(11,26,43,0.7);">Bản nâng cấp: Liquid Glass iOS26 — Parallax 3D + Frosted Glass Ultra + Liquid Buttons + VisionOS popup.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn neon" id="openPacman">🟡 Mở PAC-MAN</button>
+          <button class="btn" id="openAdmin">⚙️ Admin</button>
+          <button class="btn" id="openDev">🧑‍💻 Dev Mode</button>
         </div>
       </section>
 
-      <!-- Visit + Clock -->
-      <section class="card center">
-        <div style="font-weight:700; font-size:18px;">👁️ Số lượt ghé thăm</div>
-        <div style="font-size:34px; margin:8px 0;" id="visit-count">0</div>
+      <section class="card center" data-parallax="true">
+        <div style="font-weight:800; font-size:18px;">👁️ Số lượt ghé thăm</div>
+        <div style="font-size:36px; margin:8px 0;" id="visit-count">0</div>
         <div style="font-weight:700; margin-top:6px;">🕒 <span id="clock">--:--:--</span></div>
       </section>
 
-      <!-- Birthday -->
-      <section id="birthday" class="card center">
+      <section id="birthday" class="card" data-parallax="true">
         <h2>🎂 Đếm ngược đến sinh nhật</h2>
         <p id="birthday-countdown" style="font-weight:700;"></p>
       </section>
 
-      <!-- Slideshow -->
-      <section class="card">
+      <section class="card" data-parallax="true">
         <h2>🖼️ Bộ sưu tập ảnh</h2>
-        <div class="slideshow" id="slideshow"><img src="https://picsum.photos/seed/1/1200/600" alt="slideshow image"></div>
+        <div class="slideshow" id="slideshow"><img src="https://picsum.photos/seed/1/1200/600" alt="slideshow"></div>
       </section>
 
-      <!-- Game Caro + Guess -->
-      <section id="game" class="card center">
+      <section id="game" class="card" data-parallax="true">
         <h2>🎲 Game Caro & 🔢 Đoán số</h2>
-        <div style="display:flex; gap:18px; justify-content:center; align-items:flex-start; flex-wrap:wrap;">
+        <div style="display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
           <div>
-            <table id="caro-board" aria-label="Bàn caro"></table>
+            <table id="caro-board"></table>
             <p id="caro-status" style="font-weight:700;"></p>
             <div style="text-align:center;"><button class="btn small" onclick="resetCaro()">🔄 Chơi lại</button></div>
           </div>
           <div style="min-width:220px;">
             <p>Tớ nghĩ 1 số từ 1 đến 10. Đoán thử nhé!</p>
-            <input id="guess-input" type="number" min="1" max="10" class="inline" />
-            <div style="margin-top:8px;">
-              <button class="btn" onclick="checkGuess()">Đoán</button>
-            </div>
-            <p id="guess-result" style="font-weight:700; margin-top:8px;"></p>
+            <input id="guess-input" type="number" min="1" max="10" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);" />
+            <div style="margin-top:8px;"><button class="btn" onclick="checkGuess()">Đoán</button></div>
+            <p id="guess-result" style="font-weight:700;margin-top:8px;"></p>
           </div>
         </div>
       </section>
 
-      <!-- Mini Quiz -->
-      <section id="mini-quiz" class="card">
-        <h2>🧠 Mini Quiz về lập trình</h2>
-        <p>Câu hỏi: Thẻ HTML nào dùng để tạo tiêu đề lớn?</p>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <section id="mini-quiz" class="card" data-parallax="true">
+        <h2>🧠 Mini Quiz</h2>
+        <p>Thẻ HTML nào dùng để tạo tiêu đề lớn?</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <button class="btn small" onclick="checkQuiz('a')">a) &lt;p&gt;</button>
           <button class="btn small" onclick="checkQuiz('b')">b) &lt;title&gt;</button>
           <button class="btn small" onclick="checkQuiz('c')">c) &lt;h1&gt;</button>
           <button class="btn small" onclick="checkQuiz('d')">d) &lt;div&gt;</button>
         </div>
-        <p id="quiz-answer" style="font-weight:700; margin-top:10px;"></p>
+        <p id="quiz-answer" style="font-weight:700;margin-top:10px;"></p>
       </section>
 
-      <!-- Góc học lập trình -->
-      <section id="goc-hoc" class="card">
+      <section class="card" data-parallax="true">
         <h2>💻 Góc học lập trình</h2>
-        <p><strong>Scratch</strong> - ngôn ngữ kéo thả phù hợp cho bắt đầu.</p>
-        <p><strong>HTML</strong> - ngôn ngữ tạo trang web. Học dần từng chút một nhé!</p>
+        <p><strong>Scratch</strong> - ngôn ngữ kéo thả, rất phù hợp để bắt đầu.</p>
       </section>
 
-      <!-- Thằn lằn -->
-      <section id="than-lan" class="card">
-        <h2>🦎 Tìm hiểu Thằn Lằn Cá Sấu</h2>
-        <p>Chuyến thực tế tại Trạm Đa dạng Sinh học Mê Linh — loài rất thú vị và quý hiếm.</p>
-        <div class="center">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tribolonotus_gracilis.jpg/640px-Tribolonotus_gracilis.jpg" alt="Thằn lằn" style="max-width:100%; border-radius:8px;">
+      <section class="card" data-parallax="true">
+        <h2>🦎 Thằn Lằn Cá Sấu</h2>
+        <p>Chuyến thực tế tại Trạm Đa dạng Sinh học Mê Linh...</p>
+        <div style="text-align:center;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Tribolonotus_gracilis.jpg/640px-Tribolonotus_gracilis.jpg" style="max-width:100%;border-radius:8px;" alt="than lan">
           <p><a href="https://www.facebook.com/Melinhbiodiversity/?locale=vi_VN" target="_blank">🔗 Facebook Trạm Mê Linh</a></p>
         </div>
       </section>
 
-      <!-- Contact -->
-      <section class="card">
+      <section class="card" data-parallax="true">
         <h2>✉️ Liên hệ</h2>
         <form id="contactForm">
-          <input name="name" placeholder="Họ tên" class="inline" required /><br><br>
-          <input name="email" type="email" placeholder="Email" class="inline" required /><br><br>
-          <textarea name="message" placeholder="Nội dung" class="inline" style="height:100px;" required></textarea><br><br>
-          <label>2 + 5 = ?</label>
-          <input id="captchaAnswer" type="number" class="inline" required /><br><br>
+          <input name="name" placeholder="Họ tên" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);" /><br><br>
+          <input name="email" type="email" placeholder="Email" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);" /><br><br>
+          <textarea name="message" placeholder="Nội dung" required style="width:100%;height:100px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);"></textarea><br><br>
+          <label>2 + 5 = ?</label><input id="captchaAnswer" type="number" required style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);" /><br><br>
           <button class="btn" type="submit">Gửi</button>
-          <p id="contact-result" style="font-weight:700; margin-top:8px;"></p>
+          <p id="contact-result" style="font-weight:700;margin-top:8px;"></p>
         </form>
       </section>
 
     </div>
 
-    <!-- RIGHT: sidebar -->
+    <!-- SIDEBAR -->
     <aside class="sidebar">
-
-      <div class="card">
+      <div class="card floating-panel">
         <h3 style="margin:0 0 8px 0;">🔔 Thông tin</h3>
-        <p style="margin:0 0 6px 0; color:var(--muted);">Phiên bản: Tối ưu A1</p>
-        <p style="margin:0; color:var(--muted);">Giao diện: Gradient pastel + Glass</p>
+        <p style="margin:0;color:rgba(11,26,43,0.75);">Phiên bản: Liquid Glass A1 - Full</p>
+        <p style="margin:8px 0 0 0;color:rgba(11,26,43,0.6);">Shift + P mở PAC-MAN</p>
       </div>
 
-      <div class="card center">
-        <h3 style="margin:0 0 8px 0;">🎵 Nhạc nền</h3>
+      <div class="card center" style="display:flex;flex-direction:column;gap:8px;align-items:center;">
+        <h3 style="margin:0;">🎵 Nhạc nền</h3>
         <button id="musicToggle2" class="btn small">▶️ Bật/Tắt</button>
       </div>
 
-      <div class="card">
-        <h3 style="margin:0 0 8px 0;">🕒 Đồng hồ & Đếm ngày</h3>
-        <div style="font-weight:700; font-size:18px;" id="clockSidebar">--:--:--</div>
-      </div>
-
-      <div class="card center">
-        <h3 style="margin:0 0 8px 0;">🎮 Bí mật</h3>
-        <p style="margin:0 0 8px 0;">Nhấn <kbd>Shift + P</kbd> để mở PAC-MAN</p>
+      <div class="card floating-panel center">
+        <h3 style="margin:0 0 8px 0;">🕒 Đồng hồ</h3>
+        <div id="clockSidebar" style="font-weight:700;font-size:18px;">--:--:--</div>
       </div>
 
     </aside>
 
   </main>
 
-  <!-- Secret PAC-MAN modal -->
-  <div id="secretGame" style="display:none; position:fixed; inset:0; background:rgba(2,6,23,0.6); z-index:1400; align-items:center; justify-content:center;">
-    <div style="background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); padding:12px; border-radius:10px; width:92%; max-width:540px;">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <h3 style="margin:0; color:var(--muted);">🟡 PAC-MAN Bí mật</h3>
-        <button class="btn small" onclick="document.getElementById('secretGame').style.display='none'">Đóng</button>
+  <!-- SECRET PAC-MAN Modal (vision style) -->
+  <div id="secretGame" aria-hidden="true">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h3 style="margin:0;color:rgba(11,26,43,0.85);">🟡 PAC-MAN Bí mật</h3>
+        <div>
+          <button class="btn small" id="closePac">Đóng</button>
+        </div>
       </div>
-      <iframe src="https://www.retrogames.cc/embed/24344-pac-man.html" width="100%" height="420" style="border:none; margin-top:8px;"></iframe>
+      <iframe src="https://www.retrogames.cc/embed/24344-pac-man.html" width="100%" height="420" style="border:none;margin-top:8px;border-radius:8px;"></iframe>
     </div>
   </div>
 
   <!-- Admin Panel -->
-  <div id="adminPanel" style="display:none; position:fixed; top:90px; right:18px; z-index:1500;">
-    <div class="card" style="width:320px;">
-      <h3>🛠️ Bảng điều khiển Admin</h3>
-      <label>🌈 Màu nền: <input id="adminColor" type="color" value="#9bddff" style="margin-left:6px;"></label><br><br>
-      <button class="btn small" onclick="document.getElementById('adminPanel').style.display='none'">❌ Đóng</button>
+  <div id="adminPanel" style="display:none; position:fixed; top:90px; right:18px; z-index:4500;">
+    <div class="floating-panel">
+      <h3>🛠️ Admin</h3>
+      <label>🌈 Màu nền: <input id="adminColor" type="color" value="#9bddff" /></label><br><br>
+      <button class="btn small" id="closeAdmin">Đóng</button>
       <button class="btn small" onclick="resetVisitCount()">🔄 Reset visits</button>
       <button class="btn small" onclick="runConfetti()">🎉 Confetti</button>
     </div>
   </div>
 
   <!-- Dev Panel -->
-  <div id="devPanel" style="display:none; position:fixed; top:90px; left:18px; z-index:1500;">
-    <div class="card" style="width:360px;">
-      <h3>💻 Developer Mode</h3>
+  <div id="devPanel" style="display:none; position:fixed; top:90px; left:18px; z-index:4500;">
+    <div class="floating-panel">
+      <h3>💻 Dev Mode</h3>
+      <button class="btn small" id="closeDev">Đóng</button><br><br>
       <button class="btn small" onclick="toggleInspector()">🔍 Live DOM Inspector</button><br><br>
-      <textarea id="devCustomCSS" placeholder="/* CSS nhanh */" style="width:100%; height:80px; border-radius:8px; border:1px solid rgba(255,255,255,0.08); background:transparent; color:var(--muted);"></textarea>
+      <textarea id="devCustomCSS" placeholder="/* CSS nhanh */" style="width:100%;height:80px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);"></textarea>
       <button class="btn small" onclick="applyDevCSS()">💾 Áp dụng CSS</button>
-      <div id="perfLog" style="margin-top:8px; font-size:13px; color:var(--muted);"></div>
-      <button class="btn small" onclick="document.getElementById('devPanel').style.display='none'">❌ Đóng</button>
+      <div id="perfLog" style="margin-top:8px;color:rgba(11,26,43,0.6);"></div>
     </div>
   </div>
 
-  <!-- Cookie -->
-  <div id="cookie-banner" style="display:none; position:fixed; bottom:12px; left:12px; right:12px; z-index:1600;">
-    <div class="card center" style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
-      <div style="text-align:left;">🍪 Trang web này dùng cookie để cải thiện trải nghiệm.</div>
-      <div>
-        <button class="btn small" onclick="acceptCookie()">Đồng ý</button>
-      </div>
+  <!-- Cookie banner -->
+  <div id="cookie-banner" style="display:none; position:fixed; bottom:12px; left:12px; right:12px; z-index:4600;">
+    <div class="card center" style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+      <div style="text-align:left;">🍪 Trang web dùng cookie để cải thiện trải nghiệm.</div>
+      <div><button class="btn small" onclick="acceptCookie()">Đồng ý</button></div>
     </div>
   </div>
 
-  <!-- Stars canvas (underlay) -->
-  <canvas id="stars" style="position:fixed; inset:0; z-index:0; pointer-events:none;"></canvas>
+  <!-- Stars canvas -->
+  <canvas id="stars" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
 
-  <!-- Audio (MP3) -->
+  <!-- Audio -->
   <audio id="bg-music" loop preload="auto">
     <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3" type="audio/mpeg">
-    Trình duyệt không hỗ trợ audio.
   </audio>
 
-  <footer class="site-footer">© Web của Phúc — Giao diện A1 (Gradient dịu + Glassmorphism) — Made with ❤️</footer>
+  <footer style="margin:40px 0 80px;color:rgba(11,26,43,0.7);text-align:center;">© Web của Phúc — Liquid Glass A1 Full — Made with ❤️</footer>
 
 <script>
-/* ===========================
-   JAVASCRIPT TẤT CẢ - ĐÃ TỔ CHỨC VÀ ĐẶT CHUNG
-   =========================== */
-
 (function(){
   const ADMIN_PASSWORD = "2015";
-  const visitKey = "visitCount_v3";
+  const visitKey = "visitCount_v4";
   let isMusicPlaying = false;
-  let inspectorEnabled = false;
   let randomNumber = Math.floor(Math.random()*10)+1;
+  let inspectorEnabled = false;
 
   const qs = id => document.getElementById(id);
   const qsel = sel => document.querySelector(sel);
 
   /* Visit count */
-  function updateVisitCount(){
-    let v = parseInt(localStorage.getItem(visitKey) || "0",10);
-    v = v + 1;
-    localStorage.setItem(visitKey, v);
-    qs('visit-count').innerText = v;
-  }
-  window.resetVisitCount = function(){ localStorage.setItem(visitKey,"0"); qs('visit-count').innerText = "0"; alert('✅ Đã reset visit count'); };
+  function updateVisitCount(){ let v = parseInt(localStorage.getItem(visitKey)||"0",10); v++; localStorage.setItem(visitKey,v); qs('visit-count').innerText = v; }
+  window.resetVisitCount = function(){ localStorage.setItem(visitKey,"0"); qs('visit-count').innerText='0'; alert('✅ Đã reset'); };
 
   /* Clock */
-  function updateClock(){
-    const now = new Date();
-    const time = now.toLocaleTimeString('vi-VN');
-    qs('clock').innerText = time;
-    const cs = qs('clockSidebar');
-    if(cs) cs.innerText = time;
-  }
+  function updateClock(){ const now = new Date(); const t = now.toLocaleTimeString('vi-VN'); qs('clock').innerText=t; if(qs('clockSidebar')) qs('clockSidebar').innerText=t; }
+  setInterval(updateClock,1000);
 
   /* Birthday */
-  function updateBirthday(){
-    const now = new Date();
-    let b = new Date(now.getFullYear(), 11, 9);
-    if(now > b) b.setFullYear(b.getFullYear()+1);
-    const diff = b - now;
-    const d = Math.floor(diff/(1000*60*60*24));
-    const h = Math.floor((diff/(1000*60*60))%24);
-    const m = Math.floor((diff/(1000*60))%60);
-    const s = Math.floor((diff/1000)%60);
-    qs('birthday-countdown').innerText = `🎉 Còn ${d} ngày ${h} giờ ${m} phút ${s} giây nữa!`;
-  }
+  function updateBirthday(){ const now=new Date(); let b=new Date(now.getFullYear(),11,9); if(now>b) b.setFullYear(b.getFullYear()+1); const diff=b-now; const d=Math.floor(diff/(1000*60*60*24)); const h=Math.floor((diff/(1000*60*60))%24); const m=Math.floor((diff/(1000*60))%60); const s=Math.floor((diff/1000)%60); qs('birthday-countdown').innerText=`🎉 Còn ${d} ngày ${h} giờ ${m} phút ${s} giây nữa!`; }
+  setInterval(updateBirthday,1000);
 
   /* Slideshow */
-  let slideIndex = 1;
-  function startSlideshow(){
-    const el = qsel('#slideshow img');
-    setInterval(()=> {
-      slideIndex++;
-      el.style.opacity = 0;
-      setTimeout(()=> { el.src = `https://picsum.photos/seed/${slideIndex}/1200/600`; el.style.opacity = 1; }, 300);
-    }, 3500);
-  }
+  let slideIndex=1;
+  function startSlideshow(){ const el=qsel('#slideshow img'); setInterval(()=>{ slideIndex++; el.style.opacity=0; setTimeout(()=>{ el.src=`https://picsum.photos/seed/${slideIndex}/1200/600`; el.style.opacity=1; },300); },3800); }
 
-  /* Bubble effect */
-  function createBubble(e){
-    // ignore if clicking on interactive elements
-    if(e.target.closest('button') || e.target.closest('a') || e.target.closest('input') || e.target.closest('textarea')) return;
-    const b = document.createElement('span');
-    b.className = 'bubble';
-    b.style.left = e.clientX + 'px';
-    b.style.top = e.clientY + 'px';
-    document.body.appendChild(b);
-    setTimeout(()=> b.remove(), 900);
-  }
+  /* Bubble */
+  function createBubble(e){ if(e.target.closest('button')||e.target.closest('a')||e.target.closest('input')||e.target.closest('textarea')) return; const b=document.createElement('span'); b.className='bubble'; b.style.left=e.clientX+'px'; b.style.top=e.clientY+'px'; document.body.appendChild(b); setTimeout(()=>b.remove(),900); }
+  document.addEventListener('click', createBubble);
 
-  /* Stars canvas */
-  const canvas = qs('stars');
-  const ctx = canvas.getContext('2d');
-  let w = canvas.width = window.innerWidth;
-  let h = canvas.height = window.innerHeight;
-  const stars = [];
-  for(let i=0;i<110;i++){ stars.push({ x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.2, vx:-0.4+Math.random()*0.8, vy:-0.4+Math.random()*0.8 }); }
-  function drawStars(){ ctx.clearRect(0,0,w,h); ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.beginPath(); for(const s of stars){ ctx.moveTo(s.x,s.y); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); } ctx.fill(); for(const s of stars){ s.x+=s.vx; s.y+=s.vy; if(s.x<0) s.x=w; if(s.x>w) s.x=0; if(s.y<0) s.y=h; if(s.y>h) s.y=0; } }
-  setInterval(drawStars,60);
-  window.addEventListener('resize', ()=> { w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; });
+  /* Stars */
+  const canvas=qs('stars'); const ctx=canvas.getContext('2d'); let w=canvas.width=innerWidth; let h=canvas.height=innerHeight; const stars=[]; for(let i=0;i<120;i++) stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2,vx:-0.4+Math.random()*0.8,vy:-0.4+Math.random()*0.8}); function drawStars(){ ctx.clearRect(0,0,w,h); ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.beginPath(); for(const s of stars){ ctx.moveTo(s.x,s.y); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); } ctx.fill(); for(const s of stars){ s.x+=s.vx; s.y+=s.vy; if(s.x<0) s.x=w; if(s.x>w) s.x=0; if(s.y<0) s.y=h; if(s.y>h) s.y=0; } } setInterval(drawStars,60); addEventListener('resize',()=>{ w=canvas.width=innerWidth; h=canvas.height=innerHeight; });
 
-  /* Typewriter title (once) */
-  (function typeTitle(){
-    const el = qsel('#hero-title');
-    const txt = "🎉 Xin chào! Đây là web đầu tiên của mình!";
-    if(!el) return;
-    el.textContent = '';
-    let i=0;
-    (function t(){ if(i<txt.length){ el.textContent += txt.charAt(i++); setTimeout(t,30); } })();
-  })();
-
-  /* Music control */
+  /* Music */
   const music = qs('bg-music');
-  function toggleMusic(){
-    if(!music) return;
-    if(isMusicPlaying){ music.pause(); qs('musicToggle').innerText = '🎵 Nhạc'; qs('musicToggle2').innerText = '▶️ Bật/Tắt'; }
-    else { music.play().catch(()=>{}); qs('musicToggle').innerText = '🔇 Tắt'; qs('musicToggle2').innerText = '🔈 Tắt'; }
-    isMusicPlaying = !isMusicPlaying;
-  }
-  qs('musicToggle').addEventListener('click', toggleMusic);
-  qs('musicToggle2').addEventListener('click', toggleMusic);
+  function toggleMusic(){ if(!music) return; if(isMusicPlaying){ music.pause(); qs('musicToggle').innerText='🎵 Nhạc'; qs('musicToggle2').innerText='▶️ Bật/Tắt'; } else { music.play().catch(()=>{}); qs('musicToggle').innerText='🔇 Tắt'; qs('musicToggle2').innerText='🔈 Tắt'; } isMusicPlaying=!isMusicPlaying; }
+  qs('musicToggle').addEventListener('click', toggleMusic); qs('musicToggle2').addEventListener('click', toggleMusic);
 
-  /* Caro (tic-tac-toe) */
-  const caroBoardEl = qs('caro-board');
-  const caroStatusEl = qs('caro-status');
-  let caroCells = Array(3).fill().map(()=>Array(3).fill(''));
-  let caroCurrent = '❌';
-  function renderCaro(){
-    caroBoardEl.innerHTML = '';
-    for(let i=0;i<3;i++){
-      const tr = document.createElement('tr');
-      for(let j=0;j<3;j++){
-        const td = document.createElement('td');
-        td.textContent = caroCells[i][j];
-        td.onclick = ()=> handleCaroClick(i,j);
-        tr.appendChild(td);
-      }
-      caroBoardEl.appendChild(tr);
-    }
-  }
-  function handleCaroClick(i,j){
-    if(caroCells[i][j] !== '') return;
-    caroCells[i][j] = caroCurrent;
-    if(checkWin(caroCurrent)){ caroStatusEl.textContent = caroCurrent + ' thắng rồi!'; setTimeout(resetCaro,1200); }
-    else { caroCurrent = (caroCurrent==='❌') ? '⭕' : '❌'; renderCaro(); }
-  }
-  function checkWin(p){
-    for(let i=0;i<3;i++){
-      if(caroCells[i][0]===p && caroCells[i][1]===p && caroCells[i][2]===p) return true;
-      if(caroCells[0][i]===p && caroCells[1][i]===p && caroCells[2][i]===p) return true;
-    }
-    if(caroCells[0][0]===p && caroCells[1][1]===p && caroCells[2][2]===p) return true;
-    if(caroCells[0][2]===p && caroCells[1][1]===p && caroCells[2][0]===p) return true;
-    return false;
-  }
-  window.resetCaro = function(){ caroCells = Array(3).fill().map(()=>Array(3).fill('')); caroCurrent='❌'; caroStatusEl.textContent=''; renderCaro(); };
+  /* Caro */
+  const caroEl = qs('caro-board'); const caroStatus = qs('caro-status'); let caroCells = Array(3).fill().map(()=>Array(3).fill('')); let caroCurrent = '❌';
+  function renderCaro(){ caroEl.innerHTML=''; for(let i=0;i<3;i++){ const tr=document.createElement('tr'); for(let j=0;j<3;j++){ const td=document.createElement('td'); td.textContent=caroCells[i][j]; td.onclick=()=>handleCaro(i,j); tr.appendChild(td);} caroEl.appendChild(tr);} }
+  function handleCaro(i,j){ if(caroCells[i][j] !== '') return; caroCells[i][j]=caroCurrent; if(checkWin(caroCurrent)){ caroStatus.textContent = caroCurrent + ' thắng rồi!'; setTimeout(resetCaro,1200);} else { caroCurrent = (caroCurrent==='❌') ? '⭕' : '❌'; renderCaro(); } }
+  function checkWin(p){ for(let i=0;i<3;i++){ if(caroCells[i][0]===p && caroCells[i][1]===p && caroCells[i][2]===p) return true; if(caroCells[0][i]===p && caroCells[1][i]===p && caroCells[2][i]===p) return true; } if(caroCells[0][0]===p && caroCells[1][1]===p && caroCells[2][2]===p) return true; if(caroCells[0][2]===p && caroCells[1][1]===p && caroCells[2][0]===p) return true; return false; }
+  window.resetCaro = function(){ caroCells = Array(3).fill().map(()=>Array(3).fill('')); caroCurrent='❌'; caroStatus.textContent=''; renderCaro(); };
 
-  /* Guess number */
-  window.checkGuess = function(){
-    const v = parseInt(qs('guess-input').value,10);
-    const out = qs('guess-result');
-    if(v === randomNumber){ out.textContent = '🎉 Chính xác!'; randomNumber = Math.floor(Math.random()*10)+1; }
-    else out.textContent = '❌ Sai rồi! Thử lại nhé!';
-  };
+  /* Guess */
+  window.checkGuess = function(){ const v=parseInt(qs('guess-input').value,10); const out=qs('guess-result'); if(v===randomNumber){ out.textContent='🎉 Chính xác!'; randomNumber=Math.floor(Math.random()*10)+1; } else out.textContent='❌ Sai rồi! Thử lại nhé!'; };
 
   /* Quiz */
-  window.checkQuiz = function(ans){
-    const out = qs('quiz-answer');
-    if(ans === 'c') out.textContent = '✅ Chính xác!';
-    else out.innerHTML = '❌ Sai rồi. Đáp án đúng là: &lt;h1&gt;';
-  };
+  window.checkQuiz = function(ans){ const out=qs('quiz-answer'); if(ans==='c') out.textContent='✅ Chính xác!'; else out.innerHTML='❌ Sai rồi. Đáp án đúng là: &lt;h1&gt;'; };
 
-  /* Contact form */
-  qs('contactForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const ans = parseInt(qs('captchaAnswer').value,10);
-    const out = qs('contact-result');
-    if(ans === 7){ out.style.color='green'; out.textContent = '✔ Gửi thành công! Cảm ơn cậu.'; }
-    else { out.style.color='red'; out.textContent = '❌ Sai captcha!'; }
-  });
+  /* Contact */
+  qs('contactForm').addEventListener('submit', function(e){ e.preventDefault(); const ans=parseInt(qs('captchaAnswer').value,10); const out=qs('contact-result'); if(ans===7){ out.style.color='green'; out.textContent='✔ Gửi thành công!'; } else { out.style.color='red'; out.textContent='❌ Sai captcha!'; } });
 
-  /* Admin & Dev */
-  qs('adminPanel').style.display = 'none';
-  qs('devPanel').style.display = 'none';
-  window.addEventListener('keydown', function(e){
-    // shift+p mở PAC-MAN
-    if(e.shiftKey && e.key.toLowerCase()==='p'){ qs('secretGame').style.display='flex'; }
-    // phím ; để nhập lệnh admin (ví dụ đơn giản)
-    if(e.key === ';'){ const cmd = prompt('Nhập lệnh admin (ví dụ: reload, admin-panel)'); if(cmd === 'admin-panel') qs('adminPanel').style.display='block'; if(cmd === 'reload') location.reload(); }
-  });
+  /* Secret PAC-MAN open */
+  qs('openPacman').addEventListener('click', ()=> { qs('secretGame').style.display='flex'; qs('secretGame').classList.add('show'); qs('secretGame').setAttribute('aria-hidden','false'); });
+  qs('closePac').addEventListener('click', ()=> { qs('secretGame').style.display='none'; qs('secretGame').classList.remove('show'); qs('secretGame').setAttribute('aria-hidden','true'); });
+  document.addEventListener('keydown', (e)=> { if(e.shiftKey && e.key.toLowerCase()==='p'){ qs('secretGame').style.display='flex'; qs('secretGame').classList.add('show'); } });
 
-  qs('adminColor').addEventListener('input', function(e){
-    document.documentElement.style.setProperty('--bg1', e.target.value);
-  });
+  /* Admin & Dev open */
+  qs('openAdmin').addEventListener('click', ()=> qs('adminPanel').style.display='block');
+  qs('closeAdmin').addEventListener('click', ()=> qs('adminPanel').style.display='none');
+  qs('openDev').addEventListener('click', ()=> qs('devPanel').style.display='block');
+  qs('closeDev').addEventListener('click', ()=> qs('devPanel').style.display='none');
 
-  function toggleInspector(){
-    inspectorEnabled = !inspectorEnabled;
-    if(inspectorEnabled){ document.body.style.cursor='crosshair'; alert('🔍 Click vào 1 phần tử để xem HTML/CSS'); document.addEventListener('click', inspectEl, true); }
-    else { document.body.style.cursor='default'; document.removeEventListener('click', inspectEl, true); }
-  }
-  function inspectEl(ev){
-    ev.preventDefault(); ev.stopPropagation();
-    const el = ev.target;
-    const css = window.getComputedStyle(el);
-    alert('HTML: '+el.tagName.toLowerCase() + (el.id?('#'+el.id):'') + (el.className?(' .'+el.className.split(' ').join('.')):'') + '\n\ncolor: '+css.color+'\nfont-size: '+css.fontSize+'\nbackground: '+css.background);
-    toggleInspector();
-  }
-  window.toggleInspector = toggleInspector;
+  /* Dev inspector */
+  window.toggleInspector = function(){ inspectorEnabled = !inspectorEnabled; if(inspectorEnabled){ document.body.style.cursor='crosshair'; alert('🔍 Click phần tử để xem info'); document.addEventListener('click', inspectEl, true); } else { document.body.style.cursor='default'; document.removeEventListener('click', inspectEl, true); } };
+  function inspectEl(e){ e.preventDefault(); e.stopPropagation(); const el=e.target; const css=window.getComputedStyle(el); alert('HTML: '+el.tagName.toLowerCase() + (el.id?('#'+el.id):'') + (el.className?(' .'+el.className.split(' ').join('.')):'') + '\n\ncolor: '+css.color+'\nfont-size: '+css.fontSize+'\nbackground: '+css.background); toggleInspector(); }
 
-  function applyDevCSS(){
-    const css = qs('devCustomCSS').value;
-    if(css.trim()===''){ alert('Nhập CSS trước khi áp dụng'); return; }
-    const s = document.createElement('style'); s.textContent = css; document.head.appendChild(s);
-    alert('✅ CSS đã áp dụng!');
-  }
-  window.applyDevCSS = applyDevCSS;
+  window.applyDevCSS = function(){ const css=qs('devCustomCSS').value; if(!css.trim()){ alert('Nhập CSS để áp dụng'); return; } const s=document.createElement('style'); s.textContent=css; document.head.appendChild(s); alert('✅ CSS đã áp dụng'); };
 
   /* Confetti */
-  window.runConfetti = function(){
-    const end = Date.now() + 2000;
-    (function frame(){
-      const el = document.createElement('div'); el.textContent = '✨'; el.style.position='fixed'; el.style.left = Math.random()*100+'vw'; el.style.top = '-10px'; el.style.fontSize = (12+Math.random()*30)+'px'; el.style.pointerEvents='none'; document.body.appendChild(el);
-      let y=-10; const id = setInterval(()=>{ y+=6; el.style.top = y+'px'; if(y>window.innerHeight){ clearInterval(id); el.remove(); } },20);
-      if(Date.now() < end) requestAnimationFrame(frame);
-    })();
-  };
+  window.runConfetti = function(){ const end=Date.now()+2000; (function frame(){ const el=document.createElement('div'); el.textContent='✨'; el.style.position='fixed'; el.style.left = Math.random()*100+'vw'; el.style.top='-10px'; el.style.fontSize=(12+Math.random()*30)+'px'; el.style.pointerEvents='none'; document.body.appendChild(el); let y=-10; const id=setInterval(()=>{ y+=6; el.style.top=y+'px'; if(y>window.innerHeight){ clearInterval(id); el.remove(); } },20); if(Date.now()<end) requestAnimationFrame(frame); })(); };
 
   /* Cookie */
   window.acceptCookie = function(){ localStorage.setItem('cookiesAccepted','true'); qs('cookie-banner').style.display='none'; };
-  window.addEventListener('load', function(){
-    if(!localStorage.getItem('cookiesAccepted')) qs('cookie-banner').style.display='block';
-  });
+  window.addEventListener('load', function(){ if(!localStorage.getItem('cookiesAccepted')) qs('cookie-banner').style.display='block'; });
 
-  /* Bubble click */
-  document.addEventListener('click', createBubble);
-
-  /* Perf log */
-  function updatePerf(){
-    try{
-      const t = performance.timing;
-      const load = (t.loadEventEnd && t.navigationStart) ? (t.loadEventEnd - t.navigationStart) : 0;
-      if(qs('perfLog')) qs('perfLog').innerText = '⏱️ Load: '+load+'ms — '+ new Date().toLocaleTimeString();
-    }catch(e){}
-  }
+  /* Parallax 3D - mouse & device */
+  (function enableParallax(){
+    const parallaxTargets = document.querySelectorAll('[data-parallax="true"]');
+    let supportsDevice = 'DeviceOrientationEvent' in window;
+    function applyTilt(el, tiltX, tiltY){
+      const max = 12; const rx = (tiltY/max)*12; const ry = (tiltX/max)*-12;
+      el.style.transform = `translateZ(16px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+    }
+    // mouse move
+    document.addEventListener('mousemove', (e)=>{
+      const cx = innerWidth/2, cy = innerHeight/2;
+      const tiltX = (e.clientX - cx) / cx; const tiltY = (e.clientY - cy) / cy;
+      parallaxTargets.forEach(el => {
+        const depth = 18;
+        const rx = tiltY * depth;
+        const ry = tiltX * -depth;
+        el.style.transform = `translateZ(${depth}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+    });
+    // device orientation fallback
+    if(supportsDevice){
+      window.addEventListener('deviceorientation', (ev)=>{
+        const tiltX = ev.gamma || 0; const tiltY = ev.beta || 0;
+        parallaxTargets.forEach(el => {
+          const rx = Math.max(Math.min(tiltY/3,12),-12);
+          const ry = Math.max(Math.min(tiltX/3,12),-12);
+          el.style.transform = `translateZ(16px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+      });
+    }
+  })();
 
   /* Init */
   function init(){
-    updateVisitCount();
-    updateClock(); setInterval(updateClock,1000);
-    updateBirthday(); setInterval(updateBirthday,1000);
-    startSlideshow();
-    renderCaro();
-    updatePerf();
+    updateVisitCount(); updateClock(); updateBirthday(); startSlideshow(); renderCaro(); updateClock();
   }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
 
 })();
 </script>
 
 </body>
 </html>
-"""
-# Ghi nội dung HTML vào file /mnt/data/index.html
-path = "/mnt/data/index.html"
-with open(path, "w", encoding="utf-8") as f:
-    f.write(html)
-
-# Thông báo cho người dùng (python_user_visible sẽ hiển thị output)
-path
