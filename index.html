@@ -178,56 +178,28 @@
       </section>
 
       <section id="game" class="card" data-parallax="true">
-        <h2>🎲 Game Caro & 🔢 Đoán số</h2>
-       /* Ô caro rõ nét hơn – Liquid Glass Sharp */
-table#caro-board td{
-  width:33.33%;
-  height:90px;
-  text-align:center;
-  font-size:42px;
-  font-weight:900;
-  cursor:pointer;
-  border-radius:10px;
+       <h2>🎲 Game Caro & 🔢 Đoán số</h2>
+<div style="display:flex; gap:18px; flex-wrap:wrap; justify-content:center; align-items:flex-start;">
+  <div>
+    <table id="caro-board"></table>
+    <p id="caro-status" style="font-weight:700;"></p>
+    <div style="text-align:center;">
+      <button class="btn small" onclick="resetCaro()">🔄 Chơi lại</button>
+    </div>
+  </div>
 
-  /* Viền rõ - nổi hẳn lên */
-  border:2px solid rgba(255,255,255,0.55);
+  <div style="min-width:220px;">
+    <p>Tớ nghĩ 1 số từ 1 đến 10. Đoán thử nhé!</p>
+    <input id="guess-input" type="number" min="1" max="10"
+      style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);" />
 
-  /* Kính mờ sáng nhẹ */
-  background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.10));
-  backdrop-filter: blur(10px);
+    <div style="margin-top:8px;">
+      <button class="btn" onclick="checkGuess()">Đoán</button>
+    </div>
 
-  /* Bóng đổ sắc nét */
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.6),
-    0 6px 18px rgba(0,0,0,0.15);
-
-  transition:
-    transform 0.1s cubic-bezier(.2,.6,.3,1),
-    box-shadow 0.2s ease,
-    background 0.2s ease;
-}
-
-/* Hover rõ – nổi bật */
-table#caro-board td:hover{
-  transform: translateY(-4px);
-  background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.14));
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.7),
-    0 12px 30px rgba(0,0,0,0.20);
-}
-
-/* Khi ô đã có X / O */
-table#caro-board td:active{
-  transform: scale(0.95);
-}
-            <p>Tớ nghĩ 1 số từ 1 đến 10. Đoán thử nhé!</p>
-            <input id="guess-input" type="number" min="1" max="10" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);" />
-            <div style="margin-top:8px;"><button class="btn" onclick="checkGuess()">Đoán</button></div>
-            <p id="guess-result" style="font-weight:700;margin-top:8px;"></p>
-          </div>
-        </div>
-      </section>
-
+    <p id="guess-result" style="font-weight:700;margin-top:8px;"></p>
+  </div>
+</div>
       <section id="mini-quiz" class="card" data-parallax="true">
         <h2>🧠 Mini Quiz</h2>
         <p>Thẻ HTML nào dùng để tạo tiêu đề lớn?</p>
