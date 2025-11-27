@@ -1,4 +1,5 @@
-# html-hello
+# html-hello 
+Admin gia phuc
 Admin Commands 
 ;dark
 Bật chế độ tối (Dark mode) 🌙
@@ -17,3 +18,4 @@ Trả về nền mặc định 🌈
 ;show [id]
 Hiện phần tử có id tương ứng ✅
 2015
+lưu ý : tính năng pac man đang trong GIAI ĐOẠN THỬ NGIỆM
