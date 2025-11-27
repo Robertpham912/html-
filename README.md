@@ -2,7 +2,9 @@
 # Admin gia phuc
 # Sắp tới có html part 2
 # 🔽Bảng tin update
-Admin Commands 
+-update liqud glass 
+lưu ý : tính năng pac man đang trong GIAI ĐOẠN THỬ NGIỆM
+# Admin Commands 
 ;dark
 Bật chế độ tối (Dark mode) 🌙
 ;light
@@ -20,4 +22,4 @@ Trả về nền mặc định 🌈
 ;show [id]
 Hiện phần tử có id tương ứng ✅
 2015
-# lưu ý : tính năng pac man đang trong GIAI ĐOẠN THỬ NGIỆM
+
