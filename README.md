@@ -1,5 +1,5 @@
 # html-hello 
-Admin gia phuc
+/Admin gia phuc
 Admin Commands 
 ;dark
 Bật chế độ tối (Dark mode) 🌙
