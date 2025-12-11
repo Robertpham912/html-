@@ -1,0 +1,60 @@
+name: Auto Deploy PRO
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # 🔥 Kiểm tra lỗi HTML / CSS
+      - name: Validate HTML
+        run: |
+          npx htmlhint "**/*.html" || true
+
+      - name: Validate CSS
+        run: |
+          npx stylelint "**/*.css" || true
+
+      # 🔥 Nén CSS + JS tự động
+      - name: Minify CSS
+        run: |
+          mkdir -p dist
+          for file in $(find . -name "*.css"); do
+            npx minify $file > dist/$(basename $file)
+          done
+
+      - name: Minify JS
+        run: |
+          for file in $(find . -name "*.js"); do
+            npx minify $file > dist/$(basename $file)
+          done
+
+      # 🔥 Copy HTML + assets vào thư mục build
+      - name: Build final folder
+        run: |
+          cp -r *.html dist/ || true
+          cp -r assets dist/ || true
+          cp -r images dist/ || true
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
