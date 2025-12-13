@@ -1,10 +1,30 @@
-const http = require("http");
+const CACHE_NAME = "phuc-cache-v2";
+const FILES = [
+  "/",
+  "/index.html",
+  "/style.css",
+  "/script.js"
+];
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, {"Content-Type": "text/html"});
-  res.end("<h1>Server chạy thành công!</h1>");
+self.addEventListener("install", e => {
+  self.skipWaiting();
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(c => c.addAll(FILES))
+  );
 });
 
-server.listen(3000, () => {
-  console.log("Server đang chạy ở port 3000");
+self.addEventListener("activate", e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+      )
+    )
+  );
+});
+
+self.addEventListener("fetch", e => {
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request))
+  );
 });
