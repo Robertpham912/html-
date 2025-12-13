@@ -83,6 +83,18 @@
     <p id="caro-status"></p>
     <button class="btn small" onclick="resetCaro()">🔄 Chơi lại</button>
 
+<section class="card center" id="gd-game" data-parallax="true">
+  <h2>🟦 Geometry Dash Mini</h2>
+
+  <canvas id="gd"
+    width="320"
+    height="180"
+    style="background:#111; border-radius:12px; display:block; margin:10px auto;">
+  </canvas>
+
+  <p style="font-weight:600;">👆 Click hoặc nhấn Space để nhảy</p>
+</section>
+
     <hr>
 
     <input id="guess-input" type="number" min="1" max="10" placeholder="Đoán số 1–10">
@@ -117,12 +129,6 @@
       width="100%" height="420" style="border:none"></iframe>
   </div>
 </div>
-  <section class="card center">
-  <h2>🟦 Geometry Dash Mini</h2>
-  <canvas id="gd" width="320" height="180"
-    style="background:#111;border-radius:12px;"></canvas>
-  <p>Click hoặc Space để nhảy</p>
-</section>
 
 <!-- 🌌 Effects -->
 <canvas id="stars"></canvas>
