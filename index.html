@@ -88,35 +88,92 @@
     <p id="guess-result"></p>
   </section>
 
-<canvas id="gd" width="360" height="200"
-style="background:#111;border-radius:10px"></canvas>
+<hr>
+<h3>🟦 Geometry Dash Mini PRO</h3>
+<p>Nhấn <b>Space</b> để nhảy – đụng cột là thua</p>
+
+<canvas id="gd" width="360" height="220"
+style="background:#0b0b0b;border-radius:14px"></canvas>
+
+<p id="gd-status" style="font-weight:700;"></p>
 
 <script>
-const c = document.getElementById("gd");
-const ctx = c.getContext("2d");
+const canvas = document.getElementById("gd");
+const ctx = canvas.getContext("2d");
 
-let x = 40, y = 150, v = 0, g = 1.2;
+let y = 150, v = 0;
+const ground = 180;
+const gravity = 1.1;
+let obstacles = [];
+let frame = 0;
+let alive = true;
+
+function spawn(){
+  obstacles.push({ x: canvas.width, h: 30 });
+}
+
+function resetGD(){
+  y = 150; v = 0;
+  obstacles = [];
+  frame = 0;
+  alive = true;
+  document.getElementById("gd-status").innerText = "";
+}
 
 function loop(){
-  ctx.clearRect(0,0,c.width,c.height);
+  if(!alive) return;
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
   // ground
   ctx.fillStyle="#333";
-  ctx.fillRect(0,170,c.width,30);
+  ctx.fillRect(0, ground, canvas.width, 40);
 
-  // cube
-  v += g;
+  // player
+  v += gravity;
   y += v;
-  if(y>150){ y=150; v=0; }
+  if(y > ground-20){
+    y = ground-20;
+    v = 0;
+  }
+  ctx.fillStyle="#00eaff";
+  ctx.fillRect(40, y, 20, 20);
 
-  ctx.fillStyle="cyan";
-  ctx.fillRect(x,y,20,20);
+  // obstacles
+  frame++;
+  if(frame % 120 === 0) spawn();
+
+  ctx.fillStyle="#ff3b3b";
+  obstacles.forEach(o=>{
+    o.x -= 3;
+    ctx.fillRect(o.x, ground-o.h, 20, o.h);
+
+    // collision
+    if(
+      40 < o.x+20 &&
+      40+20 > o.x &&
+      y < ground &&
+      y+20 > ground-o.h
+    ){
+      alive = false;
+      document.getElementById("gd-status").innerText =
+        "💥 Game Over – bấm R để chơi lại";
+    }
+  });
+
+  obstacles = obstacles.filter(o=>o.x>-20);
 
   requestAnimationFrame(loop);
 }
 
-document.addEventListener("keydown",e=>{
-  if(e.code==="Space" && y>=150) v = -14;
+document.addEventListener("keydown", e=>{
+  if(e.code==="Space" && y>=ground-20 && alive){
+    v = -14;
+  }
+  if(e.key==="r" || e.key==="R"){
+    resetGD();
+    loop();
+  }
 });
 
 loop();
