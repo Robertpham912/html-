@@ -88,36 +88,40 @@
     <p id="guess-result"></p>
   </section>
 
-<hr>
-<h3>🟦 Geometry Dash Mini PRO</h3>
-<p>Nhấn <b>Space</b> để nhảy – đụng cột là thua</p>
-
-<canvas id="gd" width="360" height="220"
-style="background:#0b0b0b;border-radius:14px"></canvas>
-
-<p id="gd-status" style="font-weight:700;"></p>
-
 <script>
-const canvas = document.getElementById("gd");
+/* ===== GEOMETRY DASH MINI ===== */
+const canvas = document.getElementById("gdCanvas");
 const ctx = canvas.getContext("2d");
 
-let y = 150, v = 0;
-const ground = 180;
-const gravity = 1.1;
-let obstacles = [];
-let frame = 0;
+let ground = 170;
+let y = ground - 20;
+let v = 0;
+let gravity = 0.9;
 let alive = true;
+let canJump = true;
 
-function spawn(){
-  obstacles.push({ x: canvas.width, h: 30 });
-}
+let speed = 5;
+let score = 0;
+let obstacles = [];
 
 function resetGD(){
-  y = 150; v = 0;
+  y = ground - 20;
+  v = 0;
+  speed = 5;
+  score = 0;
   obstacles = [];
-  frame = 0;
   alive = true;
-  document.getElementById("gd-status").innerText = "";
+  canJump = true;
+}
+
+function spawnObstacle(){
+  obstacles.push({ x: canvas.width, w: 20, h: 30 });
+}
+
+function gameOver(){
+  alive = false;
+  document.body.classList.add("shake");
+  setTimeout(()=>document.body.classList.remove("shake"),400);
 }
 
 function loop(){
@@ -125,50 +129,64 @@ function loop(){
 
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  // ground
-  ctx.fillStyle="#333";
-  ctx.fillRect(0, ground, canvas.width, 40);
-
-  // player
+  // gravity
   v += gravity;
   y += v;
-  if(y > ground-20){
-    y = ground-20;
+
+  if(y > ground - 20){
+    y = ground - 20;
     v = 0;
+    canJump = true;
   }
-  ctx.fillStyle="#00eaff";
-  ctx.fillRect(40, y, 20, 20);
+
+  // draw ground
+  ctx.fillStyle = "#444";
+  ctx.fillRect(0, ground, canvas.width, 4);
+
+  // draw player (xoay)
+  ctx.save();
+  ctx.translate(60, y + 20);
+  ctx.rotate(Date.now()/180);
+  ctx.fillStyle = "#00eaff";
+  ctx.fillRect(-20,-20,40,40);
+  ctx.restore();
 
   // obstacles
-  frame++;
-  if(frame % 120 === 0) spawn();
-
-  ctx.fillStyle="#ff3b3b";
-  obstacles.forEach(o=>{
-    o.x -= 3;
-    ctx.fillRect(o.x, ground-o.h, 20, o.h);
+  for(let o of obstacles){
+    o.x -= speed;
+    ctx.fillStyle = "#ff4757";
+    ctx.fillRect(o.x, ground - o.h, o.w, o.h);
 
     // collision
     if(
-      40 < o.x+20 &&
-      40+20 > o.x &&
-      y < ground &&
-      y+20 > ground-o.h
+      60 + 20 > o.x &&
+      60 - 20 < o.x + o.w &&
+      y + 40 > ground - o.h
     ){
-      alive = false;
-      document.getElementById("gd-status").innerText =
-        "💥 Game Over – bấm R để chơi lại";
+      gameOver();
     }
-  });
+  }
 
-  obstacles = obstacles.filter(o=>o.x>-20);
+  obstacles = obstacles.filter(o=>o.x+o.w>0);
+
+  if(Math.random() < 0.02) spawnObstacle();
+
+  // score + speed
+  score++;
+  speed += 0.0008;
+
+  ctx.fillStyle = "#fff";
+  ctx.font = "16px Arial";
+  ctx.fillText("Score: " + score, 10, 20);
 
   requestAnimationFrame(loop);
 }
 
+/* ===== CONTROLS ===== */
 document.addEventListener("keydown", e=>{
-  if(e.code==="Space" && y>=ground-20 && alive){
+  if(e.code==="Space" && y>=ground-20 && alive && canJump){
     v = -14;
+    canJump = false;
   }
   if(e.key==="r" || e.key==="R"){
     resetGD();
@@ -176,6 +194,14 @@ document.addEventListener("keydown", e=>{
   }
 });
 
+document.addEventListener("touchstart", ()=>{
+  if(y>=ground-20 && alive && canJump){
+    v = -14;
+    canJump = false;
+  }
+});
+
+/* START */
 loop();
 </script>
 
