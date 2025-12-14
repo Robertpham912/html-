@@ -48,7 +48,9 @@
 </head>
 
 <body>
-
+  
+ <h1 style="color:red">TEST HIỆN</h1> 
+  
 <header class="app-header" data-parallax="true">
   <div class="brand">🌟 Web của Phúc</div>
   <nav class="nav-links">
@@ -83,19 +85,17 @@
     <p id="caro-status"></p>
     <button class="btn small" onclick="resetCaro()">🔄 Chơi lại</button>
 
-<section class="card center" id="gd-game" data-parallax="true">
-  <h2>🟦 Geometry Dash Mini</h2>
+<hr>
 
-  <canvas id="gd"
-    width="320"
-    height="180"
-    style="background:#111; border-radius:12px; display:block; margin:10px auto;">
-  </canvas>
+<h2>🟦 Geometry Dash TEST</h2>
 
-  <p style="font-weight:600;">👆 Click hoặc nhấn Space để nhảy</p>
-</section>
+<canvas id="gd"
+  width="300"
+  height="150"
+  style="background:#000; display:block; margin:20px auto; border-radius:10px;">
+</canvas>
 
-    <hr>
+<p style="text-align:center">Click để nhảy</p>
 
     <input id="guess-input" type="number" min="1" max="10" placeholder="Đoán số 1–10">
     <button class="btn small" onclick="checkGuess()">Đoán</button>
@@ -147,8 +147,28 @@
 <script src="js/effects.js" defer></script>
 <script src="js/gd.js" defer></script>
 
-  <script>
-  alert("GD SCRIPT ĐÃ CHẠY");
+<script>
+  const canvas = document.getElementById("gd");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let y = 100, vy = 0;
+
+    function loop() {
+      ctx.clearRect(0,0,300,150);
+      vy += 0.4;
+      y += vy;
+      if (y > 100) { y = 100; vy = 0; }
+
+      ctx.fillStyle = "cyan";
+      ctx.fillRect(50, y, 20, 20);
+
+      requestAnimationFrame(loop);
+    }
+
+    canvas.onclick = () => vy = -6;
+    loop();
+  }
 </script>
+
 </body>
 </html>
