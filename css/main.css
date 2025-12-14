@@ -124,3 +124,15 @@ body{
   pointer-events:none;
   z-index:-1;
 }
+/* ===== Geometry Dash effects ===== */
+@keyframes shake {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(6px,-6px); }
+  50% { transform: translate(-6px,6px); }
+  75% { transform: translate(6px,6px); }
+  100% { transform: translate(0,0); }
+}
+
+.shake {
+  animation: shake 0.35s;
+}
