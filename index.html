@@ -49,8 +49,6 @@
 
 <body>
   
- <h1 style="color:red">TEST HIỆN</h1> 
-  
 <header class="app-header" data-parallax="true">
   <div class="brand">🌟 Web của Phúc</div>
   <nav class="nav-links">
@@ -85,22 +83,44 @@
     <p id="caro-status"></p>
     <button class="btn small" onclick="resetCaro()">🔄 Chơi lại</button>
 
-<hr>
-
-<h2>🟦 Geometry Dash TEST</h2>
-
-<canvas id="gd"
-  width="300"
-  height="150"
-  style="background:#000; display:block; margin:20px auto; border-radius:10px;">
-</canvas>
-
-<p style="text-align:center">Click để nhảy</p>
-
     <input id="guess-input" type="number" min="1" max="10" placeholder="Đoán số 1–10">
     <button class="btn small" onclick="checkGuess()">Đoán</button>
     <p id="guess-result"></p>
   </section>
+
+<canvas id="gd" width="360" height="200"
+style="background:#111;border-radius:10px"></canvas>
+
+<script>
+const c = document.getElementById("gd");
+const ctx = c.getContext("2d");
+
+let x = 40, y = 150, v = 0, g = 1.2;
+
+function loop(){
+  ctx.clearRect(0,0,c.width,c.height);
+
+  // ground
+  ctx.fillStyle="#333";
+  ctx.fillRect(0,170,c.width,30);
+
+  // cube
+  v += g;
+  y += v;
+  if(y>150){ y=150; v=0; }
+
+  ctx.fillStyle="cyan";
+  ctx.fillRect(x,y,20,20);
+
+  requestAnimationFrame(loop);
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.code==="Space" && y>=150) v = -14;
+});
+
+loop();
+</script>
 
   <section class="card" id="hoc" data-parallax="true">
     <h2>💻 Góc học lập trình</h2>
