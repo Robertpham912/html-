@@ -33,7 +33,21 @@
   <div id="result"></div>
 
   <script>
-    let secret = Math.floor(Math.random() * 100) + 1;
+    // Secure random integer between min and max (inclusive)
+    function getSecureRandomInt(min, max) {
+      // The range of values
+      const range = max - min + 1;
+      // When range is > 0 and ≤ 2^32
+      if (range <= 0 || range > 0xFFFFFFFF) throw new Error("Invalid range");
+      let rand;
+      const maxUint32 = 0xFFFFFFFF;
+      // Avoid bias by only allowing values in an evenly divisible range
+      do {
+        rand = window.crypto.getRandomValues(new Uint32Array(1))[0];
+      } while (rand > maxUint32 - (maxUint32 % range));
+      return min + (rand % range);
+    }
+    let secret = getSecureRandomInt(1, 100);
 
     function checkGuess() {
       const guess = parseInt(document.getElementById("guess").value);
