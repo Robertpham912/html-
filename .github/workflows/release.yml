@@ -1,0 +1,28 @@
+name: Tự động tạo Release cho Admin Gia Phúc
+
+on:
+  push:
+    tags:
+      - 'v*' # Chạy mỗi khi cậu tạo tag bắt đầu bằng chữ v (ví dụ v1.0)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kiểm tra code
+        uses: actions/checkout@v4
+
+      - name: Đóng gói dự án (Zip)
+        run: zip -r project.zip . -x "*.git*" # Nén toàn bộ trừ thư mục git
+
+      - name: Tạo Release trên GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: project.zip
+          name: Phiên bản ${{ github.ref_name }}
+          body: |
+            🚀 Bản cập nhật mới từ Admin Gia Phúc!
+            - Tự động đóng gói bởi GitHub Actions.
+            - Cập nhật các tính năng mới nhất trong repo.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
