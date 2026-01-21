@@ -1,9 +1,7 @@
 # html-hello 
 Admin gia phuc
 # Sắp tới có html part 2
-# 🔽Bảng tin update
--update liqud glass 
-lưu ý : tính năng pac man đang trong GIAI ĐOẠN THỬ NGIỆM
+# https://github.com/Robertpham912/html-/releases
 # Admin Commands 
 ;dark
 #Bật chế độ tối (Dark mode) 🌙
