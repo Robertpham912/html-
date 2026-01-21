@@ -220,13 +220,15 @@ loop();
 
   <section class="card" id="lien-he">
     <h2>✉️ Liên hệ</h2>
-    <form id="contactForm">
-      <input name="name" placeholder="Tên" required>
-      <input name="email" type="email" placeholder="Email" required>
-      <textarea name="message" placeholder="Nội dung"></textarea>
-      <button class="btn">Gửi</button>
-      <p id="contact-result"></p>
-    </form>
+ <form action="https://formspree.io/f/robertpham8822@gmail.com" method="POST">
+  <label>Email của bạn:</label>
+  <input type="email" name="email" placeholder="Ví dụ: abc@gmail.com" required>
+  
+  <label>Tin nhắn:</label>
+  <textarea name="message" placeholder="Nhập nội dung liên hệ..." required></textarea>
+  
+  <button type="submit">Gửi</button>
+</form>
   </section>
   <section class="card center">
 
