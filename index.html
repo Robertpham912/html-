@@ -75,6 +75,24 @@
     <div>👁️ Lượt truy cập</div>
     <div id="visit-count">0</div>
     
+<div class="liquid-glass">
+  <h3>🛠 System Tweaker (Beta)</h3>
+  <button onclick="runHack()">Optimize System</button>
+  <p id="status"></p>
+</div>
+
+<script>
+  const { ipcRenderer } = require('electron');
+  function runHack() {
+    document.getElementById('status').innerText = "Đang hack hệ thống...";
+    ipcRenderer.send('run-tweak');
+  }
+
+  ipcRenderer.on('tweak-reply', (event, message) => {
+    document.getElementById('status').innerText = message;
+  });
+</script>
+    
 <script>
     // 1. Logic chạy đồng hồ thời gian thực
     function updateClock() {
