@@ -1,9 +1,32 @@
 {
-  "name": "@robertpham912/html-liquid-glass",
+  "name": "web-cua-phuc",
+  "productName": "Gia Phuc Office",
   "version": "1.0.0",
-  "description": "Thư viện giao diện phong cách iOS 26 Liquid Glass",
-  "main": "index.html",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+  "description": "Van phong online cua Admin Gia Phuc phong cach Liquid Glass",
+  "main": "main.js",
+  "author": "Gia Phuc <robertpham8822@gmail.com>",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "electron": "^28.0.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.giaphuc.office",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "icon.ico"
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg"
+    }
   }
 }
