@@ -1,0 +1,9 @@
+{
+  "name": "@robertpham912/html-liquid-glass",
+  "version": "1.0.0",
+  "description": "Thư viện giao diện phong cách iOS 26 Liquid Glass",
+  "main": "index.html",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
