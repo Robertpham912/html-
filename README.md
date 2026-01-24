@@ -1,19 +1,23 @@
-# html-hello
-Admin Commands 
+# html-hello 
+Admin gia phuc
+# Sắp tới có html part 2
+# https://github.com/Robertpham912/html-/releases
+# Admin Commands 
 ;dark
-Bật chế độ tối (Dark mode) 🌙
+#Bật chế độ tối (Dark mode) 🌙
 ;light
-Bật chế độ sáng (Light mode) ☀️
+#Bật chế độ sáng (Light mode) ☀️
 ;music on
-Bật nhạc nền 🔊
+#Bật nhạc nền 🔊
 ;music off
-Tắt nhạc nền 🔇
+#Tắt nhạc nền 🔇
 ;bg [màu]
-Đổi màu nền (ví dụ: ;bg red, ;bg #00ffcc) 🎨
+#Đổi màu nền (ví dụ: ;bg red, ;bg #00ffcc) 🎨
 ;reset bg
-Trả về nền mặc định 🌈
+#Trả về nền mặc định 🌈
 ;hide [id]
-Ẩn phần tử có id tương ứng (ví dụ: ;hide clock-container) ❌
+#Ẩn phần tử có id tương ứng (ví dụ: ;hide clock-container) ❌
 ;show [id]
-Hiện phần tử có id tương ứng ✅
+#Hiện phần tử có id tương ứng ✅
 2015
+
