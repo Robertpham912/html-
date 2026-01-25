@@ -292,6 +292,13 @@ loop();
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3">
 </audio>
 
+// Thử CSS trực tiếp
+function applyCustomCSS() {
+  const css = document.getElementById("customCSS").value;
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.appendChild(style);
+}
 <footer>© Phúc — Liquid Glass A1</footer>
 
 <!-- 🚀 JS -->
