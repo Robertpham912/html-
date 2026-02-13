@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <!-- 🔍 SEO -->
   <title>Phúc’s Website</title>
   <meta name="description" content="✨ Phúc’s Website — web cá nhân phong cách iOS 26 Liquid Glass, game, học lập trình và nhiều hiệu ứng xịn." />
   <meta name="keywords" content="Phúc, website cá nhân, lập trình, iOS 26, Liquid Glass, game HTML, portfolio" />
@@ -12,24 +11,15 @@
   <meta name="robots" content="index, follow" />
   <meta http-equiv="Content-Language" content="vi" />
 
-  <!-- 🎨 Theme -->
   <meta name="theme-color" content="#9bddff" />
   <link rel="icon" href="https://fav.farm/✨" />
 
-  <!-- 🖼️ Open Graph -->
   <meta property="og:title" content="Phúc’s Website" />
   <meta property="og:description" content="Web cá nhân phong cách iOS 26 — mượt, đẹp, hiện đại." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://robertpham912.github.io/" />
   <meta property="og:image" content="https://i.imgur.com/7qQJYQK.png" />
 
-  <!-- 🐦 Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Phúc’s Website" />
-  <meta name="twitter:description" content="Web cá nhân phong cách iOS 26 Liquid Glass." />
-  <meta name="twitter:image" content="https://i.imgur.com/7qQJYQK.png" />
-
-  <!-- 📌 Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -43,7 +33,6 @@
   }
   </script>
 
-  <!-- 🎨 CSS -->
   <link rel="stylesheet" href="css/main.css" />
 </head>
 
@@ -68,6 +57,7 @@
   <section class="card" data-parallax="true" id="gioi-thieu">
     <h2>🎉 Xin chào!</h2>
     <p>Đây là website cá nhân của tớ – phong cách <b>iOS 26 Liquid Glass</b>.</p>
+    <div id="clock" style="font-size: 1.5rem; font-weight: bold; margin: 10px 0;">00:00:00</div>
     <button class="btn neon" id="openPacman">🟡 Mở PAC-MAN</button>
   </section>
 
@@ -75,184 +65,32 @@
     <div>👁️ Lượt truy cập</div>
     <div id="visit-count">0</div>
     
-<div class="liquid-glass">
-  <h3>🛠 System Tweaker (Beta)</h3>
-  <button onclick="runHack()">Optimize System</button>
-  <p id="status"></p>
-</div>
-
-<script>
-  const { ipcRenderer } = require('electron');
-  function runHack() {
-    document.getElementById('status').innerText = "Đang hack hệ thống...";
-    ipcRenderer.send('run-tweak');
-  }
-
-  ipcRenderer.on('tweak-reply', (event, message) => {
-    document.getElementById('status').innerText = message;
-  });
-</script>
-    
-<script>
-    // 1. Logic chạy đồng hồ thời gian thực
-    function updateClock() {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        
-        // Giả sử ID của phần tử đồng hồ là 'clock'
-        const clockElement = document.getElementById('clock');
-        if (clockElement) {
-            clockElement.innerText = `${hours}:${minutes}:${seconds}`;
-        }
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // 2. Sửa lỗi nút Gửi liên hệ
-    function guiLienHe() {
-        const email = "robertpham8822@gmail.com";
-        const subject = encodeURIComponent("Liên hệ từ Fan của Admin Gia Phúc");
-        window.location.href = `mailto:${email}?subject=${subject}`;
-    }
-</script>
-
-  <section class="card" id="game" data-parallax="true">
-    <h2>🎲 Game Caro & 🔢 Đoán số</h2>
-    <table id="caro-board"></table>
-    <p id="caro-status"></p>
-    <button class="btn small" onclick="resetCaro()">🔄 Chơi lại</button>
-
-    <input id="guess-input" type="number" min="1" max="10" placeholder="Đoán số 1–10">
-    <button class="btn small" onclick="checkGuess()">Đoán</button>
-    <p id="guess-result"></p>
+    <div class="liquid-glass" style="margin-top: 20px;">
+      <h3>🛠 System Tweaker (Beta)</h3>
+      <button class="btn small" onclick="runHack()">Optimize System</button>
+      <p id="status"></p>
+    </div>
   </section>
 
-<script>
-  <section id="gd" class="card" data-parallax="true">
-  <h2>🟦 Geometry Dash Mini</h2>
-  <canvas id="gdCanvas" width="360" height="200"
-    style="background:#111;border-radius:12px;display:block;margin:auto"></canvas>
-  <p style="text-align:center;font-weight:700">
-    Space / Chạm để nhảy — R để chơi lại
-  </p>
-</section>
-/* ===== GEOMETRY DASH MINI ===== */
-const canvas = document.getElementById("gdCanvas");
-const ctx = canvas.getContext("2d");
+  <section class="card" id="game" data-parallax="true">
+    <h2>🎲 Game & Giải trí</h2>
+    
+    <div style="margin-bottom: 30px;">
+        <table id="caro-board" style="margin: auto;"></table>
+        <p id="caro-status"></p>
+        <button class="btn small" onclick="resetCaro()">🔄 Chơi lại Caro</button>
+        <hr>
+        <input id="guess-input" type="number" min="1" max="10" placeholder="Đoán số 1–10">
+        <button class="btn small" onclick="checkGuess()">Đoán</button>
+        <p id="guess-result"></p>
+    </div>
 
-let ground = 170;
-let y = ground - 20;
-let v = 0;
-let gravity = 0.9;
-let alive = true;
-let canJump = true;
-
-let speed = 5;
-let score = 0;
-let obstacles = [];
-
-function resetGD(){
-  y = ground - 20;
-  v = 0;
-  speed = 5;
-  score = 0;
-  obstacles = [];
-  alive = true;
-  canJump = true;
-}
-
-function spawnObstacle(){
-  obstacles.push({ x: canvas.width, w: 20, h: 30 });
-}
-
-function gameOver(){
-  alive = false;
-  document.body.classList.add("shake");
-  setTimeout(()=>document.body.classList.remove("shake"),400);
-}
-
-function loop(){
-  if(!alive) return;
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  // gravity
-  v += gravity;
-  y += v;
-
-  if(y > ground - 20){
-    y = ground - 20;
-    v = 0;
-    canJump = true;
-  }
-
-  // draw ground
-  ctx.fillStyle = "#444";
-  ctx.fillRect(0, ground, canvas.width, 4);
-
-  // draw player (xoay)
-  ctx.save();
-  ctx.translate(60, y + 20);
-  ctx.rotate(Date.now()/180);
-  ctx.fillStyle = "#00eaff";
-  ctx.fillRect(-20,-20,40,40);
-  ctx.restore();
-
-  // obstacles
-  for(let o of obstacles){
-    o.x -= speed;
-    ctx.fillStyle = "#ff4757";
-    ctx.fillRect(o.x, ground - o.h, o.w, o.h);
-
-    // collision
-    if(
-      60 + 20 > o.x &&
-      60 - 20 < o.x + o.w &&
-      y + 40 > ground - o.h
-    ){
-      gameOver();
-    }
-  }
-
-  obstacles = obstacles.filter(o=>o.x+o.w>0);
-
-  if(Math.random() < 0.02) spawnObstacle();
-
-  // score + speed
-  score++;
-  speed += 0.0008;
-
-  ctx.fillStyle = "#fff";
-  ctx.font = "16px Arial";
-  ctx.fillText("Score: " + score, 10, 20);
-
-  requestAnimationFrame(loop);
-}
-
-/* ===== CONTROLS ===== */
-document.addEventListener("keydown", e=>{
-  if(e.code==="Space" && y>=ground-20 && alive && canJump){
-    v = -14;
-    canJump = false;
-  }
-  if(e.key==="r" || e.key==="R"){
-    resetGD();
-    loop();
-  }
-});
-
-document.addEventListener("touchstart", ()=>{
-  if(y>=ground-20 && alive && canJump){
-    v = -14;
-    canJump = false;
-  }
-});
-
-/* START */
-loop();
-</script>
+    <div id="gd-container">
+        <h3>🟦 Geometry Dash Mini</h3>
+        <canvas id="gdCanvas" width="360" height="200" style="background:#111;border-radius:12px;display:block;margin:auto"></canvas>
+        <p style="text-align:center;font-weight:700">Space / Chạm để nhảy — R để chơi lại</p>
+    </div>
+  </section>
 
   <section class="card" id="hoc" data-parallax="true">
     <h2>💻 Góc học lập trình</h2>
@@ -261,75 +99,117 @@ loop();
 
   <section class="card" id="lien-he">
     <h2>✉️ Liên hệ</h2>
- <form action="https://formspree.io/f/robertpham8822@gmail.com" method="POST">
-  <label>Email của bạn:</label>
-  <input type="email" name="email" placeholder="Ví dụ: abc@gmail.com" required>
-  
-  <label>Tin nhắn:</label>
-  <textarea name="message" placeholder="Nhập nội dung liên hệ..." required></textarea>
-  
-  <button type="submit">Gửi</button>
-</form>
+    <form action="https://formspree.io/f/robertpham8822@gmail.com" method="POST">
+      <div style="margin-bottom: 10px;">
+          <label>Email của bạn:</label><br>
+          <input type="email" name="email" placeholder="Ví dụ: abc@gmail.com" required style="width: 80%; padding: 8px; border-radius: 8px; border: 1px solid #ccc;">
+      </div>
+      <div style="margin-bottom: 10px;">
+          <label>Tin nhắn:</label><br>
+          <textarea name="message" placeholder="Nhập nội dung liên hệ..." required style="width: 80%; padding: 8px; border-radius: 8px; border: 1px solid #ccc; height: 80px;"></textarea>
+      </div>
+      <button class="btn neon" type="submit">Gửi tin nhắn</button>
+    </form>
   </section>
-  <section class="card center">
 
 </main>
 
-<!-- 🎮 PAC-MAN -->
-<div id="secretGame">
-  <div class="panel">
+<div id="secretGame" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999;">
+  <div class="panel" style="max-width: 600px; margin: 50px auto; background: #fff; padding: 20px; border-radius: 20px;">
     <button class="btn small" id="closePac">Đóng</button>
-    <iframe src="https://www.retrogames.cc/embed/24344-pac-man.html"
-      width="100%" height="420" style="border:none"></iframe>
+    <iframe src="https://www.retrogames.cc/embed/24344-pac-man.html" width="100%" height="420" style="border:none"></iframe>
   </div>
 </div>
 
-<!-- 🌌 Effects -->
 <canvas id="stars"></canvas>
 
-<!-- 🎵 Music -->
 <audio id="bg-music" loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4ab41ad859.mp3">
 </audio>
 
-// Thử CSS trực tiếp
-function applyCustomCSS() {
-  const css = document.getElementById("customCSS").value;
-  const style = document.createElement("style");
-  style.textContent = css;
-  document.head.appendChild(style);
-}
-<footer>© Phúc — Liquid Glass A1</footer>
-
-<!-- 🚀 JS -->
-<script src="js/app.js" defer></script>
-<script src="js/games.js" defer></script>
-<script src="js/admin.js" defer></script>
-<script src="js/effects.js" defer></script>
-<script src="js/gd.js" defer></script>
+<footer style="text-align:center; padding: 20px;">© Phúc — Liquid Glass A1</footer>
 
 <script>
-  const canvas = document.getElementById("gd");
-  if (canvas) {
-    const ctx = canvas.getContext("2d");
-    let y = 100, vy = 0;
+    // --- 1. Đồng hồ thời gian thực ---
+    function updateClock() {
+        const now = new Date();
+        const clockElement = document.getElementById('clock');
+        if (clockElement) {
+            clockElement.innerText = now.toLocaleTimeString('vi-VN');
+        }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    function loop() {
-      ctx.clearRect(0,0,300,150);
-      vy += 0.4;
-      y += vy;
-      if (y > 100) { y = 100; vy = 0; }
-
-      ctx.fillStyle = "cyan";
-      ctx.fillRect(50, y, 20, 20);
-
-      requestAnimationFrame(loop);
+    // --- 2. System Tweaker (An toàn cho trình duyệt) ---
+    function runHack() {
+        const status = document.getElementById('status');
+        status.innerText = "🚀 Đang tối ưu hóa hệ thống...";
+        
+        // Kiểm tra nếu đang chạy trong Electron
+        if (typeof ipcRenderer !== 'undefined') {
+            ipcRenderer.send('run-tweak');
+        } else {
+            setTimeout(() => {
+                status.innerText = "✅ Hệ thống web đã được tối ưu (Giả lập)!";
+            }, 2000);
+        }
     }
 
-    canvas.onclick = () => vy = -6;
-    loop();
-  }
+    // --- 3. Điều khiển Modal Pacman ---
+    document.getElementById('openPacman').onclick = () => document.getElementById('secretGame').style.display = 'block';
+    document.getElementById('closePac').onclick = () => document.getElementById('secretGame').style.display = 'none';
+
+    // --- 4. GEOMETRY DASH MINI LOGIC ---
+    const canvas = document.getElementById("gdCanvas");
+    const ctx = canvas.getContext("2d");
+    let ground = 170, y = 150, v = 0, gravity = 0.9, alive = true, speed = 5, score = 0, obstacles = [];
+
+    function spawnObstacle(){ obstacles.push({ x: canvas.width, w: 20, h: 30 }); }
+    
+    function resetGD(){
+        y = ground - 20; v = 0; speed = 5; score = 0; obstacles = []; alive = true;
+        loopGD();
+    }
+
+    function loopGD(){
+        if(!alive) return;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        v += gravity; y += v;
+        if(y > ground - 20){ y = ground - 20; v = 0; }
+
+        ctx.fillStyle = "#444"; ctx.fillRect(0, ground, canvas.width, 4); // Ground
+        
+        ctx.save(); // Player
+        ctx.translate(60, y + 10);
+        ctx.rotate(Date.now()/200);
+        ctx.fillStyle = "#00eaff"; ctx.fillRect(-10,-10,20,20);
+        ctx.restore();
+
+        obstacles.forEach((o, index) => {
+            o.x -= speed;
+            ctx.fillStyle = "#ff4757"; ctx.fillRect(o.x, ground - o.h, o.w, o.h);
+            if(60 + 10 > o.x && 60 - 10 < o.x + o.w && y + 20 > ground - o.h) alive = false;
+        });
+        obstacles = obstacles.filter(o => o.x + o.w > 0);
+        if(Math.random() < 0.02) spawnObstacle();
+        score++; speed += 0.001;
+        ctx.fillStyle = "#fff"; ctx.fillText("Score: " + score, 10, 20);
+        if(alive) requestAnimationFrame(loopGD);
+        else { ctx.fillText("GAME OVER - Nhấn R để chơi lại", 100, 100); }
+    }
+
+    window.addEventListener("keydown", e => {
+        if(e.code === "Space" && y >= ground - 20 && alive) v = -12;
+        if(e.key.toLowerCase() === "r") resetGD();
+    });
+    canvas.addEventListener("touchstart", () => { if(y >= ground - 20 && alive) v = -12; });
+    
+    loopGD();
 </script>
+
+<script src="js/app.js" defer></script>
+<script src="js/effects.js" defer></script>
 
 </body>
 </html>
