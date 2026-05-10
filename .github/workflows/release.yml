@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Kiểm tra code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Đóng gói dự án (Zip)
         run: zip -r project.zip . -x "*.git*" # Nén toàn bộ trừ thư mục git
