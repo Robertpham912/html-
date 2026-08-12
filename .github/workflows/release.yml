@@ -18,7 +18,7 @@ jobs:
         run: zip -r project.zip . -x "*.git*" # Nén toàn bộ trừ thư mục git
 
       - name: Tạo Release trên GitHub
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           files: project.zip
           name: Phiên bản ${{ github.ref_name }}
